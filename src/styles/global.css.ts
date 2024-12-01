@@ -17,5 +17,6 @@ export const globalStyles: CssStyles = {
   "pre:has(code)": {
     background: "{theme.altBackground}",
     padding: "16px",
+    overflow: "auto",
   },
 };

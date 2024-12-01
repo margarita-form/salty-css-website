@@ -1,6 +1,7 @@
 import "../styles/index.css";
 import type { Metadata } from "next";
 import { fonts } from "../styles/fonts";
+import { Header } from "../components/header/header";
 
 export const metadata: Metadata = {
   title: "Salty CSS",
@@ -15,7 +16,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={fonts}>
-      <body className="theme-dark theme-current">{children}</body>
+      <body className="theme-dark theme-current">
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }

@@ -11,7 +11,9 @@ import { BodyRegular } from "../components/body.css";
 export default function Home() {
   return (
     <Main>
-      <HeadingLarge>Salty CSS</HeadingLarge>
+      <HeadingLarge>
+        CSS-in-JS library for React, Next.js, Server Components and more
+      </HeadingLarge>
       <Markdown
         components={{
           h2: (props) => <HeadingRegular underlined element="h2" {...props} />,

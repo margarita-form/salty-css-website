@@ -70,16 +70,19 @@ export const config = defineConfig({
           fontSize: "{fontSize.headline.small}",
           fontWeight: "400",
           letterSpacing: "0.0125em",
+          lineHeight: "1.2em",
         },
         regular: {
           fontSize: "{fontSize.headline.regular}",
           fontWeight: "400",
           letterSpacing: "0.0125em",
+          lineHeight: "1.2em",
         },
         large: {
           fontSize: "{fontSize.headline.large}",
           fontWeight: "400",
           letterSpacing: "0.0125em",
+          lineHeight: "1.2em",
         },
       },
       body: {
