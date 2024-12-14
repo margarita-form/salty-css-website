@@ -1,6 +1,6 @@
-import { CssStyles } from "@salty-css/core/types";
+import { GlobalStyles } from "@salty-css/core/config";
 
-export const globalStyles: CssStyles = {
+export const globalStyles: GlobalStyles = {
   body: {
     margin: 0,
     fontFamily: "var(--font-family-main, helvetica, sans-serif)",
