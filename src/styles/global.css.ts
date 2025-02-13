@@ -9,14 +9,19 @@ export const globalStyles: GlobalStyles = {
     color: "currentcolor",
   },
   code: {
-    background: "{theme.altBackground}",
+    background: "{theme.terminalBackground}",
   },
   ":where(p,li) > code": {
-    padding: "1px 2px",
+    padding: "2px 4px",
+    border: "1px solid {theme.altBackground}",
+    color: "{colors.highlight}",
   },
   "pre:has(code)": {
-    background: "{theme.altBackground}",
-    padding: "16px",
+    background: "{theme.terminalBackground}",
+    padding: "20px",
     overflow: "auto",
+    border: "1px solid {theme.altBackground}",
+    fontSize: "{fontSize.body.small}",
+    lineHeight: "1.2em",
   },
 };

@@ -2,9 +2,9 @@ import { defineConfig } from "@salty-css/core/config";
 import { globalStyles } from "./src/styles/global.css";
 
 const clamp = (target: number) => {
-  const min = target * 0.75;
+  const min = Math.max(target * 0.75, 14);
   const mid = Math.round((target / 1920) * 10000) / 100;
-  const max = target * 1.5;
+  const max = target * 1.25;
   return `clamp(${min}px, ${mid}vw, ${max}px)`;
 };
 
@@ -14,8 +14,11 @@ export const config = defineConfig({
     colors: {
       black: "#0a0a0a",
       altBlack: "#222",
+      terminalBlack: "#111",
       white: "#f0f0f0",
       altWhite: "#ddd",
+      terminalWhite: "#eee",
+      highlight: "aqua",
     },
     fontSize: {
       headline: {
@@ -25,9 +28,9 @@ export const config = defineConfig({
         large: clamp(48),
       },
       body: {
-        small: clamp(16),
-        regular: clamp(20),
-        large: clamp(24),
+        small: clamp(12),
+        regular: clamp(16),
+        large: clamp(20),
       },
     },
     spacing: {
@@ -46,12 +49,14 @@ export const config = defineConfig({
       dark: {
         background: "{colors.black}",
         altBackground: "{colors.altBlack}",
+        terminalBackground: "{colors.terminalBlack}",
         color: "{colors.white}",
         altColor: "{colors.altWhite}",
       },
       light: {
         background: "{colors.white}",
         altBackground: "{colors.altWhite}",
+        terminalBackground: "{colors.terminalWhite}",
         color: "{colors.black}",
         altColor: "{colors.altBlack}",
       },

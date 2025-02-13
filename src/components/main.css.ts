@@ -3,8 +3,11 @@ import { styled } from "@salty-css/react/styled";
 export const Main = styled("div", {
   base: {
     padding: "{spacing.screen.medium}",
-    maxWidth: "1100px",
+    maxWidth: "1600px",
     textStyle: "body.regular",
+    display: "flex",
+    flexDirection: "column",
+    gap: "{spacing.large}",
   },
 });
 
