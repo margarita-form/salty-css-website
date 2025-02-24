@@ -13,6 +13,10 @@
         "destination": "/sitemap.xml"
       },
       {
+        "source": "/assets/**",
+        "destination": "/assets/**"
+      },
+      {
         "source": "**",
         "destination": "/index.html"
       }
