@@ -221,4 +221,4 @@ export const IndexPage = () => {
 
 More examples coming soon
 
-![Salty CSS Banner](https://raw.githubusercontent.com/gist/tremppu/ef2b867907cbf262ab7373f41558a403/raw/a2137de136ee2296e386682beb4487bba0f58a2f/salty-logo-svg-dvd.svg)
+![Salty CSS Banner](/assets/banners/dvd.svg)
