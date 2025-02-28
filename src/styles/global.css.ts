@@ -1,6 +1,10 @@
 import { GlobalStyles } from "@salty-css/core/config";
 
 export const globalStyles: GlobalStyles = {
+  html: {
+    scrollBehavior: "smooth",
+    scrollPaddingTop: "5vh",
+  },
   body: {
     margin: 0,
     fontFamily: "var(--font-family-main, helvetica, sans-serif)",

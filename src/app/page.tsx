@@ -7,6 +7,17 @@ import { Main, WarningBox } from "../components/main.css";
 import Markdown from "react-markdown";
 import readme from "../content/readme.md";
 import { BodyRegular } from "../components/body.css";
+import { ReactNode } from "react";
+
+const getID = (children: ReactNode) => {
+  if (typeof children === "string") {
+    return children
+      .replace(/\s+/g, "-")
+      .replace(/[^a-zA-Z0-9-]/g, "")
+      .toLowerCase();
+  }
+  return undefined;
+};
 
 export default function Home() {
   return (
@@ -21,9 +32,22 @@ export default function Home() {
 
       <Markdown
         components={{
-          h2: (props) => <HeadingRegular underlined element="h2" {...props} />,
-          h3: (props) => <HeadingSmall element="h3" {...props} />,
-          h4: (props) => <HeadingSmall element="h4" {...props} />,
+          h1: (props) => {
+            const id = getID(props.children);
+            return <HeadingLarge element="h1" id={id} {...props} />;
+          },
+          h2: (props) => {
+            const id = getID(props.children);
+            return <HeadingRegular element="h2" id={id} {...props} />;
+          },
+          h3: (props) => {
+            const id = getID(props.children);
+            return <HeadingSmall element="h3" id={id} {...props} />;
+          },
+          h4: (props) => {
+            const id = getID(props.children);
+            return <HeadingSmall element="h4" id={id} {...props} />;
+          },
           p: (props) => <BodyRegular element="p" {...props} />,
         }}
       >
