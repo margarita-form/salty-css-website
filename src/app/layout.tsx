@@ -4,9 +4,9 @@ import { fonts } from "../styles/fonts";
 import { Header } from "../components/header/header";
 
 export const metadata: Metadata = {
-  title: "Salty CSS",
+  title: "Salty CSS - CSS-in-JS for React, Next.js, Vite and RSC",
   description:
-    "CSS-in-JS library for React, Next.js, Server Components and more",
+    "Build time CSS-in-JS library compatible with React, Next.js, Vite and React Server Components built with TypeScript.",
 };
 
 export default function RootLayout({
