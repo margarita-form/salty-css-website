@@ -16,6 +16,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={fonts}>
+      <head>
+        <link rel="icon" type="image/png" href="/favicon.png" />
+      </head>
       <body className="theme-dark theme-current">
         <Header />
         {children}
