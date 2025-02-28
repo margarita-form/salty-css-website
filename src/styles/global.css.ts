@@ -1,12 +1,12 @@
-import { GlobalStyles } from "@salty-css/core/config";
+import { defineGlobalStyles } from "@salty-css/core/config";
 
-export const globalStyles: GlobalStyles = {
+export const globalStyles = defineGlobalStyles({
   html: {
     scrollBehavior: "smooth",
     scrollPaddingTop: "5vh",
   },
   body: {
-    margin: 0,
+    margin: "0px",
     fontFamily: "var(--font-family-main, helvetica, sans-serif)",
   },
   a: {
@@ -28,4 +28,4 @@ export const globalStyles: GlobalStyles = {
     fontSize: "{fontSize.body.small}",
     lineHeight: "1.2em",
   },
-};
+});

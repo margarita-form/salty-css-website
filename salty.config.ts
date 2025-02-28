@@ -1,5 +1,4 @@
 import { defineConfig } from "@salty-css/core/config";
-import { globalStyles } from "./src/styles/global.css";
 
 const clamp = (target: number) => {
   const min = Math.max(target * 0.75, 14);
@@ -9,7 +8,6 @@ const clamp = (target: number) => {
 };
 
 export const config = defineConfig({
-  global: globalStyles,
   variables: {
     colors: {
       black: "#0a0a0a",
