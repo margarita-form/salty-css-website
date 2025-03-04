@@ -41,22 +41,22 @@ export const config = defineConfig({
         large: "clamp(48px, 7.5vw, 240px)",
       },
     },
-  },
-  conditionalVariables: {
-    theme: {
-      dark: {
-        background: "{colors.black}",
-        altBackground: "{colors.altBlack}",
-        terminalBackground: "{colors.terminalBlack}",
-        color: "{colors.white}",
-        altColor: "{colors.altWhite}",
-      },
-      light: {
-        background: "{colors.white}",
-        altBackground: "{colors.altWhite}",
-        terminalBackground: "{colors.terminalWhite}",
-        color: "{colors.black}",
-        altColor: "{colors.altBlack}",
+    conditional: {
+      theme: {
+        dark: {
+          background: "{colors.black}",
+          altBackground: "{colors.altBlack}",
+          terminalBackground: "{colors.terminalBlack}",
+          color: "{colors.white}",
+          altColor: "{colors.altWhite}",
+        },
+        light: {
+          background: "{colors.white}",
+          altBackground: "{colors.altWhite}",
+          terminalBackground: "{colors.terminalWhite}",
+          color: "{colors.black}",
+          altColor: "{colors.altBlack}",
+        },
       },
     },
   },
