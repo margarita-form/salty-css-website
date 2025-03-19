@@ -48,7 +48,7 @@ export const Actions = styled("ul", {
 export const HeaderAction = styled(DynamicLink, {
   base: {
     textStyle: "body.regular",
-    padding: "0.6em",
+    padding: "0.5em",
     background: "{theme.altBackground}",
     border: "none",
     borderRadius: "10em",
@@ -66,7 +66,7 @@ export const HeaderAction = styled(DynamicLink, {
 
 export const HeaderActionSvg = styled("svg", {
   base: {
-    width: "1.25em",
-    height: "1.25em",
+    width: "max(20px, 1.42em)",
+    height: "max(20px, 1.42em)",
   },
 });
