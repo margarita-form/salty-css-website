@@ -1,4 +1,4 @@
-import { GitHubIcon, ReactIcon } from "./header-icons";
+import { GitHubIcon, NpmIcon } from "./header-icons";
 import {
   Actions,
   HeaderAction,
@@ -16,8 +16,8 @@ export const Header = () => {
       <Navigation>
         <Actions>
           <NavigationListItem>
-            <HeaderAction href="https://www.npmjs.com/package/@salty-css/react">
-              <ReactIcon />
+            <HeaderAction href="https://www.npmjs.com/package/@salty-css/core">
+              <NpmIcon />
             </HeaderAction>
           </NavigationListItem>
 

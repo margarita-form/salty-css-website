@@ -25,3 +25,17 @@ export const ReactIcon = () => (
     <path d="M256,298.55a43,43,0,1,0-42.86-43A42.91,42.91,0,0,0,256,298.55Z" />
   </HeaderActionSvg>
 );
+
+export const NpmIcon = () => (
+  <HeaderActionSvg
+    stroke="currentColor"
+    fill="currentColor"
+    strokeWidth="0"
+    viewBox="0 0 576 512"
+    height="200px"
+    width="200px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M288 288h-32v-64h32v64zm288-128v192H288v32H160v-32H0V160h576zm-416 32H32v128h64v-96h32v96h32V192zm160 0H192v160h64v-32h64V192zm224 0H352v128h64v-96h32v96h32v-96h32v96h32V192z"></path>
+  </HeaderActionSvg>
+);
