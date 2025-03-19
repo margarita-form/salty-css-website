@@ -16,6 +16,10 @@ export const HeaderLogo = styled("p", {
   base: {
     textStyle: "body.large",
     margin: 0,
+    maxWidth: 150,
+    "@largeMobileDown": {
+      maxWidth: 120,
+    },
   },
 });
 

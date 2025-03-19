@@ -1,3 +1,4 @@
+import { SaltyCssLogo } from "../logos/salty-css-logo";
 import { GitHubIcon, NpmIcon } from "./header-icons";
 import {
   Actions,
@@ -11,7 +12,9 @@ import {
 export const Header = () => {
   return (
     <HeaderWrapper>
-      <HeaderLogo>Salty CSS</HeaderLogo>
+      <HeaderLogo>
+        <SaltyCssLogo />
+      </HeaderLogo>
 
       <Navigation>
         <Actions>
