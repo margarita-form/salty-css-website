@@ -43,3 +43,6 @@ next-env.d.ts
 
 # Salty-CSS
 saltygen
+
+.env
+.env.local
