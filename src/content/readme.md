@@ -1,3 +1,5 @@
+Is there anything saltier than CSS in frontend web development? Salty CSS is built to provide better developer experience for developers looking for performant and feature rich CSS-in-JS solutions.
+
 ## Features
 
 - Build time compilation to achieve awesome runtime performance and minimal size
@@ -8,7 +10,13 @@
 
 ## Get started
 
-Fastest way to get started with any framework is `npx salty-css init [directory]` command
+Fastest way to get started with any framework is
+
+```bash
+npx salty-css init [directory]
+```
+
+Other guides:
 
 - Next.js → [Next.js guide](#nextjs) + [Next.js example app](https://github.com/margarita-form/salty-css-website)
 - React + Vite → [React + Vite guide](#react--vite) + [React example code](#code-examples)
@@ -26,14 +34,14 @@ Fastest way to get started with any framework is `npx salty-css init [directory]
 2. Salty CSS components created with styled function can extend non Salty CSS components (`export const CustomLink = styled(NextJSLink, { ... });`) but those components must take in `className` prop for styles to apply.
 3. Among common types like `string` and `number`, CSS-in-JS properties in Salty CSS do support `functions` and `promises` as values (`styled('span', { base: { color: async () => 'red' } });`) but running asynchronous tasks or importing heavy 3rd party libraries into `*.css.ts` or `*.css.tsx` files can cause longer build times.
 
-## Functions
+## API
 
-### Styling
+### Component styling
 
 - [styled](#styled-function) (react only) - create React components that can be used anywhere easily
 - [className](#class-name-function) (framework agnostic) - create a CSS class string that can be applied to any element
 
-### Global
+### Global styling
 
 - [defineGlobalStyles](#global-styles) - set global styles like `html` and `body`
 - [defineVariables](#variables) - create CSS variables (tokens) that can be used in any styling function
@@ -41,7 +49,7 @@ Fastest way to get started with any framework is `npx salty-css init [directory]
 - [defineTemplates](#templates) - create reusable templates that can be applied when same styles are used over and over again
 - [keyframes](#keyframes-animations) - create CSS keyframes animation that can be used and imported in any styling function
 
-### Helpers & utility
+### Styling helpers & utility
 
 - [defineViewportClamp](#viewport-clamp) - create CSS clamp functions that are based on user's viewport and can calculate relative values easily
 - [color](#color-function) - transform any valid color code or variable to be darker, lighter etc. easily (uses [color library by Qix-](https://github.com/Qix-/color))
@@ -51,13 +59,13 @@ Fastest way to get started with any framework is `npx salty-css init [directory]
 Styled function is the main way to use Salty CSS within React. Styled function creates a React component that then can be used anywhere in your app. All styled functions must be created in `.css.ts` or `.css.tsx` files
 
 ```ts
-// components/my-component.css.ts
+// /components/my-component.css.ts
 import { styled } from "@salty-css/react/styled";
 
 // Define a component with a styled function. First argument is the component name or existing component to extend and second argument is the object containing the styles and other options
 export const Component = styled("div", {
-  className: "wrapper", // Define custom class name that will be included for this component
-  element: "section", // Define the html element that will be rendered for this component, overrides the first 'div' argument
+  className: "wrapper", // Define optional custom class name that will be included for this component
+  element: "section", // Override the html element that will be rendered for this component
   base: {
     // 👉 Add your CSS-in-JS base styles here! 👈
   },
@@ -74,7 +82,18 @@ export const Component = styled("div", {
     // Add additional default props for the component (eg, id and other html element attributes)
   },
   passProps: true, // Pass variant props to the rendered element / parent component (default: false)
+  priority: 1, // Override automatic priotity layer with a custom value (0-8), higher is considered more important
 });
+```
+
+Example usage:
+
+```tsx
+import { Component } from "./my-component.css";
+
+export const Page = () => {
+  return <Component>Hello world</Component>;
+};
 ```
 
 ## Class name function
@@ -82,16 +101,26 @@ export const Component = styled("div", {
 Create CSS class names with possibility to add scope and media queries etc. Function `className` is quite similar to `styled` but does not allow extending components or classes.
 
 ```ts
-// styles/my-class.css.ts
+// /components/my-class.css.ts
 import { className } from "@salty-css/react/class-name";
 
 // Define a CSS class with className function. First and only argument is the object containing the styles and other options
 export const myClass = className({
-  className: "wrapper", // Define custom class name that will be included to the scope
+  className: "wrapper", // Define optional custom class name that will be included to the scope
   base: {
     // 👉 Add your CSS-in-JS base styles here! 👈
   },
 });
+```
+
+Example usage:
+
+```tsx
+import { myClass } from "./my-class.css";
+
+export const Page = () => {
+  return <div className={myClass}>Hello world</div>;
+};
 ```
 
 ## Global styles
@@ -172,7 +201,7 @@ export default defineVariables({
   },
 
   /* 
-  Conditional variables are used to define styles that depend on a class name (e.g. <div className="theme-dark">). or data-attribute (e.g. <div data-theme="dark">).
+  Conditional variables are used to define styles that depend on a class name (e.g. <div className="theme-dark">). or data-attribute (e.g. <div data-theme="dark">). Names for these variables will be "{theme.backgroundColor}" and "{theme.textColor}".
   */
   conditional: {
     theme: {
@@ -185,6 +214,21 @@ export default defineVariables({
         textColor: "{colors.dark}",
       },
     },
+  },
+});
+```
+
+Example usage:
+
+```ts
+styled("span", {
+  base: {
+    // Use of static font family variable
+    fontFamily: "{colors.fontFamily.heading}",
+    // Use of responsive font size variable
+    fontSize: "{fontSize.heading.regular}",
+    // Use of conditional theme text color variable
+    color: "{theme.textColor}",
   },
 });
 ```
