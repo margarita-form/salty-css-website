@@ -1,5 +1,7 @@
 Is there anything saltier than CSS in frontend web development? Salty CSS is built to provide better developer experience for developers looking for performant and feature rich CSS-in-JS solutions.
 
+[Get started](#get-started) | [API](#api) | [Discord](https://discord.gg/R6kr4KxMhP) | [GitHub](https://github.com/margarita-form/salty-css) | [NPM](https://www.npmjs.com/package/@salty-css/core)
+
 ## Features
 
 - Build time compilation to achieve awesome runtime performance and minimal size
@@ -13,7 +15,7 @@ Is there anything saltier than CSS in frontend web development? Salty CSS is bui
 Fastest way to get started with any framework is
 
 ```bash
-npx salty-css init [directory]
+npx salty-css init
 ```
 
 Other guides:
@@ -33,6 +35,10 @@ Other guides:
 1. All Salty CSS functions (`styled`, `classNames`, `keyframes`, etc.) must be created in `*.css.ts` or `*.css.tsx` files. This is to ensure best build performance.
 2. Salty CSS components created with styled function can extend non Salty CSS components (`export const CustomLink = styled(NextJSLink, { ... });`) but those components must take in `className` prop for styles to apply.
 3. Among common types like `string` and `number`, CSS-in-JS properties in Salty CSS do support `functions` and `promises` as values (`styled('span', { base: { color: async () => 'red' } });`) but running asynchronous tasks or importing heavy 3rd party libraries into `*.css.ts` or `*.css.tsx` files can cause longer build times.
+
+## Get support
+
+To get help with problems, [Join Salty CSS Discord server](https://discord.gg/R6kr4KxMhP).
 
 ## API
 

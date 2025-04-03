@@ -22,9 +22,7 @@ const getID = (children: ReactNode) => {
 export default function Home() {
   return (
     <Main>
-      <WarningBox data-nosnippet>
-        ⚠️ Website is still under development
-      </WarningBox>
+      <WarningBox data-nosnippet>⚠️ Website is under construction.</WarningBox>
 
       <HeadingLarge element="h1">
         CSS-in-JS library for React, Next.js, Server Components and more
