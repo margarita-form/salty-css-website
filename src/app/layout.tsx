@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { fonts } from "../styles/fonts";
 import { Header } from "../components/header/header";
 import { PostHogProvider } from "../components/PostHogProvider";
+import { WarningBox } from "../components/main.css";
 
 export const metadata: Metadata = {
   title: "Salty CSS - CSS-in-JS for React, Next.js, Vite and RSC",
@@ -27,6 +28,7 @@ export default function RootLayout({
       </head>
       <body className="theme-dark theme-current">
         <PostHogProvider>
+          <WarningBox data-nosnippet>Website is under construction.</WarningBox>
           <Header />
           {children}
         </PostHogProvider>

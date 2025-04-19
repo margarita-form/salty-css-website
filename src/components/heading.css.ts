@@ -61,6 +61,5 @@ export const HeadingLarge = styled(Heading, {
     textStyle: "headline.large",
     fontFamily: "var(--font-family-logo)",
     animation: animateText,
-    marginBottom: "1em",
   },
 });

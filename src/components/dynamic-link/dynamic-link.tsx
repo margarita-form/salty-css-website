@@ -17,8 +17,9 @@ export const DynamicLink = ({
   if (!href)
     return createElement(element || "span", { className, ...rest }, children);
 
+  const target = href.startsWith("http") ? "_blank" : undefined;
   return (
-    <a href={href} target="_blank" className={className} {...rest}>
+    <a href={href} target={target} className={className} {...rest}>
       {children}
     </a>
   );

@@ -8,6 +8,7 @@ export const globalStyles = defineGlobalStyles({
   body: {
     margin: "0px",
     fontFamily: "var(--font-family-main, helvetica, sans-serif)",
+    overflowY: "scroll",
   },
   a: {
     color: "currentcolor",
