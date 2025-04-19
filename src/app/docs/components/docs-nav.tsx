@@ -36,12 +36,6 @@ export const DocsNavigation = () => {
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href="/docs/usage">Usage</DocsNavigationItem>
             </DocsNavigationItemWrapper>
-            <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/faq">FAQ</DocsNavigationItem>
-            </DocsNavigationItemWrapper>
-            <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli">CLI</DocsNavigationItem>
-            </DocsNavigationItemWrapper>
           </DocsNavigationItems>
         </DocsNavigationGroup>
 
@@ -74,6 +68,35 @@ export const DocsNavigation = () => {
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href="/docs/animations">
                 Animations
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+          </DocsNavigationItems>
+        </DocsNavigationGroup>
+
+        <DocsNavigationGroup>
+          <DocsNavigationGroupTitle>
+            CLI
+            <Icon css-src="url(/icons/chevron-down.svg)" />
+          </DocsNavigationGroupTitle>
+          <DocsNavigationItems>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/cli-intialize">
+                Intialize
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/cli-build">
+                Build
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/cli-generate">
+                Generate
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/cli-update">
+                Update
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>

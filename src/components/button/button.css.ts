@@ -6,8 +6,8 @@ export const Button = styled(DynamicLink, {
     element: "button",
   },
   base: {
-    padding: "0.5em 1.5em",
-    borderRadius: "0.5em",
+    padding: "0.75em 1.5em",
+    borderRadius: "20em",
     textStyle: "body.regular",
     border: "1px solid currentColor",
     backgroundColor: "transparent",

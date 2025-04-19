@@ -1,3 +1,6 @@
+import { Markdown } from "../../../components/markdown/markdown";
+import { DocPageWrapper } from "./doc-page.css";
+
 export const generateStaticParams = async () => {
   return [
     {
@@ -33,11 +36,14 @@ export const generateStaticParams = async () => {
   ];
 };
 
-export const DocsPage = () => {
+const DocsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
+  const { slug } = await params;
+  const { default: content } = await import(`../../../content/${slug}.md`);
+
   return (
-    <div>
-      <p>Coming soon</p>
-    </div>
+    <DocPageWrapper>
+      <Markdown content={content} />
+    </DocPageWrapper>
   );
 };
 

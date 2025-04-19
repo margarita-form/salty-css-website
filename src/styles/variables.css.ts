@@ -47,7 +47,7 @@ export default defineVariables({
         headline: {
           small: HDClamp(24),
           regular: HDClamp(36),
-          large: HDClamp(48),
+          large: HDClamp(64),
         },
         body: {
           small: HDClamp(14),

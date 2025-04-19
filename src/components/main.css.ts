@@ -2,7 +2,6 @@ import { styled } from "@salty-css/react/styled";
 
 export const Main = styled("main", {
   base: {
-    padding: "{spacing.screen.medium}",
     textStyle: "body.regular",
     display: "flex",
     flexDirection: "column",
@@ -47,5 +46,6 @@ export const Centered = styled("div", {
     width: "100%",
     maxWidth: "960px",
     margin: "0 auto",
+    padding: "{spacing.screen.medium}",
   },
 });
