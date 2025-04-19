@@ -5,21 +5,24 @@ export default defineTemplates({
     headline: {
       small: {
         fontSize: "{fontSize.headline.small}",
-        fontWeight: "400",
+        fontWeight: "300",
         letterSpacing: "0.0125em",
         lineHeight: "1.2em",
+        fontFamily: "var(--font-family-logo)",
       },
       regular: {
         fontSize: "{fontSize.headline.regular}",
-        fontWeight: "400",
+        fontWeight: "300",
         letterSpacing: "0.0125em",
         lineHeight: "1.2em",
+        fontFamily: "var(--font-family-logo)",
       },
       large: {
         fontSize: "{fontSize.headline.large}",
-        fontWeight: "400",
+        fontWeight: "300",
         letterSpacing: "0.0125em",
         lineHeight: "1.2em",
+        fontFamily: "var(--font-family-logo)",
       },
     },
     body: {

@@ -31,7 +31,7 @@ export const Header = () => {
             <NavLink href="/next">Next.js</NavLink>
             <NavLink href="https://github.com/margarita-form/salty-css/releases">
               Releases
-              <Icon css-src="/icons/ext-arrow.svg" />
+              <Icon css-src="url(/icons/ext-arrow.svg)" />
             </NavLink>
           </Links>
 

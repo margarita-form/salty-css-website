@@ -18,6 +18,7 @@ export const themes = defineVariables({
         terminalBackground: "{colors.terminalBlack}",
         color: "{colors.white}",
         altColor: "{colors.altWhite}",
+        highlight: "{colors.highlight}",
       },
       light: {
         background: "{colors.white}",
@@ -25,6 +26,7 @@ export const themes = defineVariables({
         terminalBackground: "{colors.terminalWhite}",
         color: "{colors.black}",
         altColor: "{colors.altBlack}",
+        highlight: "{colors.highlight}",
       },
     },
   },
