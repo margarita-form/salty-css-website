@@ -58,7 +58,20 @@ export default defineVariables({
     },
     "@largeMobileDown": {
       spacing: {
-        pageMargin: MobileClamp(60),
+        pageMargin: MobileClamp(30),
+        blockMargin: MobileClamp(80),
+      },
+      fontSize: {
+        headline: {
+          small: MobileClamp(24),
+          regular: MobileClamp(32),
+          large: MobileClamp(42),
+        },
+        body: {
+          small: MobileClamp(16),
+          regular: MobileClamp(20),
+          large: MobileClamp(24),
+        },
       },
     },
   },

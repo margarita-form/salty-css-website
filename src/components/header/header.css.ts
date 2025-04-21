@@ -4,7 +4,7 @@ import { fadeIn } from "../../styles/animations.css";
 
 export const HeaderWrapper = styled("header", {
   base: {
-    padding: "{spacing.large} {spacing.screen.medium}",
+    padding: "{spacing.large} {spacing.pageMargin}",
     borderBottom: "1px solid {theme.altBackground}",
     textStyle: "body.regular",
     display: "flex",
@@ -32,6 +32,9 @@ export const Navigation = styled("nav", {
     gridAutoFlow: "column",
     gap: "{spacing.large}",
     alignItems: "center",
+    "@mediumDesktopDown": {
+      gap: "{spacing.medium}",
+    },
     "@smallDesktopDown": {
       gap: "{spacing.small}",
     },
@@ -116,7 +119,7 @@ export const Links = styled("ul", {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "flex-start",
-        gap: "{spacing.medium}",
+        gap: "{spacing.small}",
         position: "fixed",
         inset: 0,
         width: "100%",
@@ -132,7 +135,7 @@ export const Links = styled("ul", {
 export const NavLink = styled(DynamicLink, {
   base: {
     textStyle: "body.regular",
-    padding: "0.5em",
+    padding: "0.3em 0.1em",
     textDecoration: "underline",
     textDecorationColor: "transparent",
     textDecorationThickness: "1px",
@@ -146,7 +149,7 @@ export const NavLink = styled(DynamicLink, {
     },
     "@smallDesktopDown": {
       textStyle: "headline.large",
-      padding: "0.5em 0",
+      padding: "0.2em 0",
     },
   },
 });

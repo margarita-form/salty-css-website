@@ -31,6 +31,7 @@ export const globalStyles = defineGlobalStyles({
     fontSize: "{fontSize.body.small}",
     lineHeight: "1.2em",
     position: "relative",
+    maxWidth: "100%",
   },
   // Add a language label to code blocks
   "*[class*='language-']::before": {

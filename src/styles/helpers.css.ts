@@ -8,5 +8,6 @@ export const HDClamp = defineViewportClamp({
 
 export const MobileClamp = defineViewportClamp({
   screenSize: 640,
-  minMultiplier: 0.7,
+  minMultiplier: 0.75,
+  maxMultiplier: 1,
 });

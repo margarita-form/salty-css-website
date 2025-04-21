@@ -2,7 +2,7 @@ import { styled } from "@salty-css/react/styled";
 
 export const HeroBlockWrapper = styled("section", {
   base: {
-    padding: "{spacing.blockMargin}",
+    padding: "{spacing.blockMargin} {spacing.pageMargin}",
     width: "100%",
   },
 });

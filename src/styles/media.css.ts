@@ -6,5 +6,5 @@ export const mediumDesktopDown = defineMediaQuery((media) =>
   media.maxWidth(1440)
 );
 export const smallDesktopDown = defineMediaQuery((media) =>
-  media.maxWidth(1024)
+  media.maxWidth(1100)
 );

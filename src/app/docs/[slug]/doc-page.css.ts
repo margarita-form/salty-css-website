@@ -10,5 +10,8 @@ export const DocPageWrapper = styled("div", {
     lineHeight: "1.5em",
     fontStyle: "initial",
     maxWidth: HDClamp(960),
+    "@largeMobileDown": {
+      padding: 0,
+    },
   },
 });
