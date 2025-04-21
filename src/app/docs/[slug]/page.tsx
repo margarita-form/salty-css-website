@@ -38,7 +38,7 @@ export const generateStaticParams = async () => {
 
 const DocsPage = async ({ params }: { params: Promise<{ slug: string }> }) => {
   const { slug } = await params;
-  const { default: content } = await import(`../../../content/${slug}.md`);
+  const { default: content } = await import(`../../../content/docs/${slug}.md`);
 
   return (
     <DocPageWrapper>

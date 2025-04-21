@@ -1,6 +1,8 @@
+# Salty CSS - CSS-in-JS library that is kinda sweet
+
 Is there anything saltier than CSS in frontend web development? Salty CSS is built to provide better developer experience for developers looking for performant and feature rich CSS-in-JS solutions.
 
-[Get started](#get-started) | [API](#api) | [Discord](https://discord.gg/R6kr4KxMhP) | [GitHub](https://github.com/margarita-form/salty-css) | [NPM](https://www.npmjs.com/package/@salty-css/core)
+[Get started](#get-started) | [API](#api) | [Discord](https://discord.gg/R6kr4KxMhP) | [Website](https://salty-css.dev/) | [GitHub](https://github.com/margarita-form/salty-css) | [NPM](https://www.npmjs.com/package/@salty-css/core)
 
 ## Features
 
@@ -59,6 +61,14 @@ To get help with problems, [Join Salty CSS Discord server](https://discord.gg/R6
 
 - [defineViewportClamp](#viewport-clamp) - create CSS clamp functions that are based on user's viewport and can calculate relative values easily
 - [color](#color-function) - transform any valid color code or variable to be darker, lighter etc. easily (uses [color library by Qix-](https://github.com/Qix-/color))
+
+### Salty CSS CLI
+
+In your existing repository you can use `npx salty-css [command]` to initialize a project, generate components, update related packages and build required files.
+
+- Initialize project → `npx salty-css init [directory]` - Installs required packages, detects framework in use and creates project files to the provided directory. Directory can be left blank if you want files to be created to the current directory.
+- Generate component → `npx salty-css update [version]` - Update @salty-css packages in your repository. Default version is "latest". Additional options like `--dir`, `--tag`, `--name` and `--className` are also supported.
+- Build files → `npx salty-css build [directory/filename]` - Compile Salty CSS related files in your project. This should not be needed if you are using tools like Next.js or Vite
 
 ## Styled function
 
@@ -230,7 +240,7 @@ Example usage:
 styled("span", {
   base: {
     // Use of static font family variable
-    fontFamily: "{colors.fontFamily.heading}",
+    fontFamily: "{fontFamily.heading}",
     // Use of responsive font size variable
     fontSize: "{fontSize.heading.regular}",
     // Use of conditional theme text color variable
@@ -380,14 +390,6 @@ export const Wrapper = styled("span", {
 });
 ```
 
-## Salty CSS CLI
-
-In your existing repository you can use `npx salty-css [command]` to initialize a project, generate components, update related packages and build required files.
-
-- Initialize project → `npx salty-css init [directory]` - Installs required packages, detects framework in use and creates project files to the provided directory. Directory can be left blank if you want files to be created to the current directory.
-- Generate component → `npx salty-css update [version]` - Update @salty-css packages in your repository. Default version is "latest". Additional options like `--dir`, `--tag`, `--name` and `--className` are also supported.
-- Build files → `npx salty-css build [directory]` - Compile Salty CSS related files in your project. This should not be needed if you are using tools like Next.js or Vite
-
 ## Usage
 
 ### Next.js
@@ -433,7 +435,13 @@ And note: steps 2 & 3 are just to show how get new components up and running, st
 
 And note: steps 2 & 3 are just to show how get new components up and running, step 1 does all of the important stuff 🤯
 
-#### Manual configuration
+### Test it out
+
+Check out React + Vite + Salty CSS demo repository at https://github.com/margarita-form/salty-css-react-vite-demo or view it in CodeSandbox:
+
+[![Edit margarita-form/salty-css-react-vite-demo/main](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/p/github/margarita-form/salty-css-react-vite-demo/main?import=true&embed=1)
+
+### Manual configuration
 
 1. For Vite support install `npm i @salty-css/vite @salty-css/core`
 2. In `vite.config` add import for salty plugin `import { saltyPlugin } from '@salty-css/vite';` and then add `saltyPlugin(__dirname)` to your vite configuration plugins
