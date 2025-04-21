@@ -16,6 +16,9 @@ export const globalStyles = defineGlobalStyles({
   code: {
     background: "{theme.terminalBackground}",
   },
+  strong: {
+    fontWeight: "500",
+  },
   ":where(p,li) > code": {
     padding: "2px 4px",
     border: "1px solid {theme.altBackground}",
@@ -23,10 +26,25 @@ export const globalStyles = defineGlobalStyles({
   },
   "pre:has(code)": {
     background: "{theme.terminalBackground}",
-    padding: "20px",
     overflow: "auto",
     border: "1px solid {theme.altBackground}",
     fontSize: "{fontSize.body.small}",
     lineHeight: "1.2em",
+    position: "relative",
+  },
+  // Add a language label to code blocks
+  "*[class*='language-']::before": {
+    content: "attr(data-language)",
+    position: "absolute",
+    top: "0",
+    right: "10px",
+    padding: "2px 8px",
+    fontSize: "0.7em",
+    textTransform: "uppercase",
+    background: "{theme.altBackground}",
+    color: "{theme.color}",
+    borderBottomLeftRadius: "4px",
+    borderBottomRightRadius: "4px",
+    opacity: "0.7",
   },
 });
