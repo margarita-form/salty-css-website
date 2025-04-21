@@ -12,8 +12,8 @@
     "prepare": "npx salty-css build"
   },
   "dependencies": {
-    "@salty-css/core": "^0.0.1-alpha.252",
-    "@salty-css/react": "^0.0.1-alpha.252",
+    "@salty-css/core": "^0.0.1-alpha.254",
+    "@salty-css/react": "^0.0.1-alpha.254",
     "@types/react-syntax-highlighter": "^15.5.13",
     "next": "^15.2.4",
     "posthog-js": "^1.234.1",
@@ -25,8 +25,8 @@
     "react-syntax-highlighter": "^15.6.1"
   },
   "devDependencies": {
-    "@salty-css/eslint-config-core": "^0.0.1-alpha.252",
-    "@salty-css/next": "^0.0.1-alpha.252",
+    "@salty-css/eslint-config-core": "^0.0.1-alpha.254",
+    "@salty-css/next": "^0.0.1-alpha.254",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
