@@ -1,9 +1,70 @@
 import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../../../components/dynamic-link/dynamic-link";
+import { Icon } from "../../../components/icon/icon.css";
 
 export const DocsNavClientWrapper = styled("div", {
   base: {
     display: "contents",
+  },
+});
+
+export const DocsNavMobileMenuButton = styled("button", {
+  base: {
+    display: "none",
+    textStyle: "body.regular",
+    "@smallDesktopDown": {
+      display: "flex",
+      alignItems: "center",
+      background: "transparent",
+      color: "white",
+      border: "none",
+      padding: "0.5em 0",
+      marginBottom: "{spacing.medium}",
+      lineHeight: "1em",
+      cursor: "pointer",
+    },
+  },
+});
+
+export const DocsNavMobileMenuButtonIcon = styled(Icon, {
+  base: {
+    "--icon-transform": "none",
+    marginLeft: 0,
+  },
+});
+
+export const DocsNavigationBackdrop = styled("div", {
+  base: {
+    display: "none",
+    position: "fixed",
+    inset: 0,
+    background: "rgba(0, 0, 0, 0.5)",
+    zIndex: 103,
+    "&.open": {
+      display: "block",
+    },
+  },
+});
+
+export const DocsNavigationCloseButton = styled("button", {
+  base: {
+    display: "none",
+    textStyle: "headline.small",
+    "@smallDesktopDown": {
+      display: "flex",
+      alignItems: "center",
+      background: "transparent",
+      color: "white",
+      border: "none",
+      padding: "0.125em",
+      margin: 0,
+      lineHeight: "1em",
+      position: "absolute",
+      top: "{spacing.large}",
+      right: "{spacing.large}",
+      cursor: "pointer",
+      "--icon-size": "0.75em",
+    },
   },
 });
 
@@ -15,7 +76,19 @@ export const DocsNavigationWrapper = styled("nav", {
     borderRight: "1px solid {theme.altBackground}",
     minHeight: "75vh",
     "@smallDesktopDown": {
-      display: "none",
+      "&:not(.open)": {
+        display: "none",
+      },
+      position: "fixed",
+      top: 0,
+      left: 0,
+      bottom: 0,
+      padding: "{spacing.large}",
+      background: "{theme.background}",
+      zIndex: 104,
+      width: "90vw",
+      maxWidth: "350px",
+      overflowY: "auto",
     },
   },
 });
@@ -28,6 +101,9 @@ export const DocsNavigationGroup = styled("div", {
     padding: "{spacing.medium} 0 0",
     borderTop: "1px solid {theme.altBackground}",
     maxWidth: "90%",
+    "@smallDesktopDown": {
+      maxWidth: "100%",
+    },
   },
 });
 
