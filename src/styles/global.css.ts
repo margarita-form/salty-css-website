@@ -34,7 +34,7 @@ export const globalStyles = defineGlobalStyles({
     maxWidth: "100%",
   },
   // Add a language label to code blocks
-  "*[class*='language-']::before": {
+  "*[data-language]::before": {
     content: "attr(data-language)",
     position: "absolute",
     top: "0",
