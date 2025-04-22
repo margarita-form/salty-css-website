@@ -1,8 +1,8 @@
-## Salty CSS CLI
+# Salty CSS CLI
 
 Salty CSS comes with a powerful command-line interface (CLI) that helps you initialize projects, generate components, update packages, and build files.
 
-### Installation
+## Installation
 
 The Salty CSS CLI is bundled with the core package. You can use it with npx without installing it globally:
 
@@ -10,9 +10,9 @@ The Salty CSS CLI is bundled with the core package. You can use it with npx with
 npx salty-css [command]
 ```
 
-### Available Commands
+## Available Commands
 
-#### Initialize a Project
+### Initialize a Project
 
 ```bash
 npx salty-css init [directory]
@@ -32,10 +32,10 @@ Options:
 Example:
 
 ```bash
-npx salty-css init .
+npx salty-css init
 ```
 
-#### Generate Components
+### Generate Components
 
 ```bash
 npx salty-css generate [filePath]
@@ -55,7 +55,7 @@ Example:
 npx salty-css generate src/components/card --name Card
 ```
 
-#### Build Files
+### Build Files
 
 ```bash
 npx salty-css build [directory]
@@ -73,7 +73,7 @@ Example:
 npx salty-css build src
 ```
 
-#### Update Packages
+### Update Packages
 
 ```bash
 npx salty-css up [version]

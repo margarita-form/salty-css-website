@@ -1,12 +1,12 @@
-## Usage
+# Usage
 
 This guide covers the basic usage of Salty CSS components and features across different frameworks.
 
-### Create components
+## Create components
 
 Create salty components with styled only inside files that end with `.css.ts`, `.css.tsx`, `.salty.ts`, `.styled.ts` or `.styles.ts`.
 
-### Basic Component Structure
+## Basic Component Structure
 
 ```ts
 // /components/my-component.css.ts
@@ -43,7 +43,7 @@ export const Component = styled("div", {
 });
 ```
 
-### Using Components in React
+## Using Components in React
 
 ```tsx
 import { Component } from "./my-component.css";
@@ -59,7 +59,7 @@ const MyPage = () => {
 export default MyPage;
 ```
 
-### Demo Projects
+## Demo Projects
 
 - **Next.js Demo Project**: [View on GitHub](https://github.com/margarita-form/salty-css-website)
 - **React + Vite Demo**: [View on GitHub](https://github.com/margarita-form/salty-css-react-vite-demo)

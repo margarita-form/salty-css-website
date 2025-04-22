@@ -1,16 +1,16 @@
-## Frequently Asked Questions
+# Frequently Asked Questions
 
-### General Questions
+## General Questions
 
-#### What is Salty CSS?
+### What is Salty CSS?
 
 Salty CSS is a CSS-in-JS library that provides excellent developer experience with features like build-time compilation, type safety, and token management, all while maintaining great runtime performance.
 
-#### How does Salty CSS compare to other CSS-in-JS solutions?
+### How does Salty CSS compare to other CSS-in-JS solutions?
 
 Salty CSS focuses on build-time compilation to offer better runtime performance than many runtime CSS-in-JS libraries. It's designed to work well with modern frameworks like React, Next.js, and Vite, with full support for server components.
 
-#### Which frameworks are supported?
+### Which frameworks are supported?
 
 Salty CSS works with:
 
@@ -19,9 +19,9 @@ Salty CSS works with:
 - React + Webpack
 - Astro
 
-### Technical Questions
+## Technical Questions
 
-#### Why are my styles not appearing?
+### Why are my styles not appearing?
 
 Ensure that:
 
@@ -29,15 +29,15 @@ Ensure that:
 2. You've imported global styles correctly
 3. The build step has run (`npx salty-css build` or through your framework's plugin)
 
-#### How do I debug Salty CSS?
+### How do I debug Salty CSS?
 
 Look at the generated files in the `saltygen` directory. These files contain the compiled CSS and JavaScript, which can help identify issues.
 
-#### Can I use Salty CSS with TypeScript?
+### Can I use Salty CSS with TypeScript?
 
 Yes! Salty CSS has been built with TypeScript support in mind, providing type safety for props, variants, and style objects.
 
-#### How do I use fonts with Salty CSS?
+### How do I use fonts with Salty CSS?
 
 You can define font families in your variables file and then reference them in your styles:
 
@@ -62,13 +62,13 @@ export const Heading = styled("h1", {
 });
 ```
 
-### Working with Components
+## Working with Components
 
-#### Can I extend non-Salty components?
+### Can I extend non-Salty components?
 
 Yes, but the component must accept a `className` prop for styles to be applied correctly.
 
-#### How do I create responsive styles?
+### How do I create responsive styles?
 
 Use media queries defined with `defineMediaQuery` or responsive variables:
 
@@ -91,7 +91,7 @@ export const Box = styled("div", {
 });
 ```
 
-#### How do I create dynamic styles based on props?
+### How do I create dynamic styles based on props?
 
 Use variants:
 
@@ -109,17 +109,17 @@ export const Button = styled("button", {
 <Button size="small">Small Button</Button>
 ```
 
-### Performance Questions
+## Performance Questions
 
-#### Does Salty CSS affect runtime performance?
+### Does Salty CSS affect runtime performance?
 
 Salty CSS compiles during build time, resulting in minimal runtime overhead. It generates optimized CSS and avoids runtime style calculations.
 
-#### How big is the runtime footprint?
+### How big is the runtime footprint?
 
 The runtime bundle is very small as most of the heavy lifting happens during build time.
 
-### Getting Help
+## Getting Help
 
 If you have questions not covered here, you can:
 

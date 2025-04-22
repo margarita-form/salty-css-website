@@ -12,19 +12,6 @@ export default defineVariables({
     highlight: "aqua",
     success: "#2fdb5a",
   },
-  fontSize: {
-    headline: {
-      // small: "24px",
-      small: HDClamp(24),
-      regular: HDClamp(36),
-      large: HDClamp(48),
-    },
-    body: {
-      small: HDClamp(14),
-      regular: HDClamp(16),
-      large: HDClamp(24),
-    },
-  },
   spacing: {
     small: "8px",
     medium: "16px",

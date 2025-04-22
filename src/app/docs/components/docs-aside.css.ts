@@ -19,6 +19,7 @@ export const DocsAsideLinks = styled("ul", {
   base: {
     display: "flex",
     flexDirection: "column",
+    textStyle: "body.small",
     gap: "{spacing.small}",
     padding: "0",
     listStyle: "none",
@@ -31,12 +32,17 @@ export const DocsAsideLinkWrapper = styled("li", {
 
 export const DocsAsideLink = styled(DynamicLink, {
   base: {
-    textStyle: "body.regular",
-    color: "{theme.text}",
     textDecoration: "none",
     transition: "0.2s ease-out",
     "&:where(:hover, :focus-visible)": {
       opacity: 0.7,
+    },
+    "&:not(.level-H1, .level-H2)": {
+      "&::before": {
+        content: "'- '",
+        marginRight: "0.2em",
+        opacity: 0.8,
+      },
     },
   },
 });

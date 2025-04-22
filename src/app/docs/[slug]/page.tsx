@@ -33,6 +33,18 @@ export const generateStaticParams = async () => {
     {
       slug: "animations",
     },
+    {
+      slug: "color-function",
+    },
+    {
+      slug: "templates",
+    },
+    {
+      slug: "media-queries",
+    },
+    {
+      slug: "viewport-clamp",
+    },
   ];
 };
 

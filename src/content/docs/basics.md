@@ -1,8 +1,8 @@
-## Basic Concepts
+# Basic Concepts
 
 This guide explains the fundamental concepts of styling with Salty CSS.
 
-### Styled Function
+## Styled Function
 
 The `styled` function is the main way to use Salty CSS within React. It creates a React component that can be used anywhere in your app.
 
@@ -21,7 +21,7 @@ export const Component = styled("div", {
 });
 ```
 
-### Class Name Function
+## Class Name Function
 
 The `className` function creates CSS class names with the possibility to add scope and media queries. It's similar to `styled` but doesn't allow extending components or classes.
 
@@ -49,7 +49,7 @@ export const Page = () => {
 };
 ```
 
-### Global Styles
+## Global Styles
 
 Global styles allow you to define styles for HTML elements that apply throughout your application.
 
@@ -69,7 +69,7 @@ export default defineGlobalStyles({
 });
 ```
 
-### CSS Variables (Tokens)
+## CSS Variables (Tokens)
 
 CSS variables create design tokens that can be reused throughout your application.
 

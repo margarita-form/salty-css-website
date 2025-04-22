@@ -3,7 +3,7 @@ import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BodyRegular } from "../body.css";
-import { HeadingLarge, HeadingRegular, HeadingSmall } from "../heading.css";
+import { HeadingRegular, HeadingSmall } from "../heading.css";
 import { CodeBlock } from "./markdown.css";
 import { CopyButton } from "./copy-button";
 
@@ -27,7 +27,7 @@ export const Markdown = ({ content }: MarkdownProps) => {
       components={{
         h1: (props) => {
           const id = getID(props.children);
-          return <HeadingLarge element="h1" id={id} {...props} />;
+          return <HeadingRegular element="h1" id={id} {...props} />;
         },
         h2: (props) => {
           const id = getID(props.children);

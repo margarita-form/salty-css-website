@@ -1,8 +1,8 @@
-## Extending and Overriding
+# Extending and Overriding
 
 Salty CSS offers powerful ways to extend components and override styles, allowing you to build complex component systems while maintaining consistency.
 
-### Extending Components
+## Extending Components
 
 You can extend existing components to create new ones with additional styles or functionality:
 
@@ -33,7 +33,7 @@ export const PrimaryButton = styled(Button, {
 });
 ```
 
-### Extending Third-Party Components
+## Extending Third-Party Components
 
 You can also extend non-Salty CSS components, like those from UI libraries:
 
@@ -55,7 +55,7 @@ export const CustomLink = styled(Link, {
 
 > Note: Third-party components must accept a `className` prop for the styles to be applied correctly.
 
-### Element Override
+## Element Override
 
 You can override the HTML element that's rendered by a styled component:
 
@@ -72,7 +72,7 @@ export const Heading = styled("div", {
 });
 ```
 
-### Overriding Styles with Props
+## Overriding Styles with Props
 
 You can pass CSS styles directly via props to override the base styles:
 
@@ -93,7 +93,7 @@ export const CustomComponent = () => {
 };
 ```
 
-### CSS Custom Properties
+## CSS Custom Properties
 
 Use CSS variables to create components that can be easily themed:
 

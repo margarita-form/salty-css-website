@@ -1,8 +1,8 @@
-## Class Name Function
+# Class Name Function
 
 The `className` function allows you to create reusable CSS classes without creating React components. This approach is framework-agnostic and can be used with any front-end library or vanilla HTML.
 
-### Basic Usage
+## Basic Usage
 
 ```ts
 // /styles/classes.css.ts
@@ -35,7 +35,7 @@ export const content = className({
 });
 ```
 
-### Using in React
+## Using in React
 
 ```tsx
 import { card, header, content } from "./styles/classes.css";
@@ -50,7 +50,7 @@ export const Card = ({ title, children }) => {
 };
 ```
 
-### Conditional Class Names
+## Conditional Class Names
 
 Like the `styled` function, `className` also supports variants for conditional styling with variants:
 
@@ -91,7 +91,7 @@ export const buttonClass = className({
 });
 ```
 
-### Using Conditional Classes
+## Using Conditional Classes
 
 ```tsx
 import { buttonClass } from "./styles/button-class.css";
@@ -104,7 +104,7 @@ export const Button = ({ color, size, children }) => {
 };
 ```
 
-### Combining with Other Classes
+## Combining with Other Classes
 
 You can combine multiple class names:
 

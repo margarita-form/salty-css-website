@@ -1,4 +1,4 @@
-## Installation
+# Installation
 
 Fastest way to get started with any framework is:
 
@@ -6,13 +6,13 @@ Fastest way to get started with any framework is:
 npx salty-css init
 ```
 
-### Next.js
+## Next.js
 
 1. In your existing Next.js repository you can run `npx salty-css init` to automatically configure Salty CSS.
 2. Create your first Salty CSS component with `npx salty-css generate [filePath]` (e.g. src/custom-wrapper)
 3. Import your component for example to `page.tsx` and see it working!
 
-#### Manual configuration
+### Manual configuration
 
 1. For Next.js support install `npm i @salty-css/next @salty-css/core @salty-css/react`
 2. Create `salty.config.ts` to your app directory
@@ -23,13 +23,13 @@ npx salty-css init
 5. Build `saltygen` directory by running your app once or with cli `npx salty-css build [directory]`
 6. Import global styles from `saltygen/index.css` to some global css file with `@import 'insert_path_to_index_css';`.
 
-### React + Vite
+## React + Vite
 
 1. In your existing Vite repository you can run `npx salty-css init` to automatically configure Salty CSS.
 2. Create your first Salty CSS component with `npx salty-css generate [filePath]` (e.g. src/custom-wrapper)
 3. Import your component for example to `main.tsx` and see it working!
 
-#### Manual configuration
+### Manual configuration
 
 1. For Vite support install `npm i @salty-css/vite @salty-css/core`
 2. In `vite.config` add import for salty plugin `import { saltyPlugin } from '@salty-css/vite';` and then add `saltyPlugin(__dirname)` to your vite configuration plugins

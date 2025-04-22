@@ -1,8 +1,8 @@
-## Variant Styles
+# Variant Styles
 
 Variants in Salty CSS allow you to create components with conditional styling based on props. This is a powerful way to build versatile UI components.
 
-### Basic Variant Usage
+## Basic Variant Usage
 
 Variants are defined within the `variants` object of a styled component:
 
@@ -58,7 +58,7 @@ export const Button = styled("button", {
 });
 ```
 
-### Using Variants in React
+## Using Variants in React
 
 ```tsx
 import { Button } from "./button/button.css";
@@ -76,7 +76,7 @@ export const MyComponent = () => {
 };
 ```
 
-### Compound Variants
+## Compound Variants
 
 Compound variants let you apply styles when multiple variant conditions are met simultaneously:
 
@@ -119,7 +119,7 @@ export const Button = styled("button", {
 });
 ```
 
-### Default Variants
+## Default Variants
 
 You can set default values for your variants:
 

@@ -32,10 +32,14 @@ export const DocsAsideClient = ({ children }: DocsAsideClientProps) => {
       {children}
       <DocsAsideLinks>
         {anchors.length > 0 &&
-          anchors.map((anchor) => {
+          anchors.map((anchor, index) => {
+            if (anchor.nodeName === "H1") return null;
             return (
-              <DocsAsideLinkWrapper key={anchor.id}>
-                <DocsAsideLink href={`#${anchor.id}`} className="anchor">
+              <DocsAsideLinkWrapper key={anchor.id + index}>
+                <DocsAsideLink
+                  href={`#${anchor.id}`}
+                  className={`anchor level-${anchor.nodeName}`}
+                >
                   {anchor.innerText}
                 </DocsAsideLink>
               </DocsAsideLinkWrapper>

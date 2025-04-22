@@ -1,8 +1,8 @@
-## Keyframes & Animations
+# Keyframes & Animations
 
 Salty CSS provides a straightforward way to create and use CSS animations through keyframes.
 
-### Creating Keyframes
+## Creating Keyframes
 
 You can define keyframe animations using the `keyframes` function:
 
@@ -36,7 +36,7 @@ export const animateText = keyframes({
 });
 ```
 
-### Using Keyframes in Styled Components
+## Using Keyframes in Styled Components
 
 Once you've defined your keyframes, you can use them in your styled components:
 
@@ -58,7 +58,7 @@ export const AnimatedText = styled("p", {
 });
 ```
 
-### Conditional Animation with Variants
+## Conditional Animation with Variants
 
 You can conditionally apply animations using variants:
 
@@ -85,7 +85,7 @@ export const AnimatedButton = styled("button", {
 });
 ```
 
-### Using Animation Delays
+## Using Animation Delays
 
 You can create staggered animations by combining keyframes with delays:
 
@@ -131,7 +131,7 @@ export const ItemsList = () => {
 };
 ```
 
-### Animation Utilities
+## Animation Utilities
 
 You can also create reusable animation templates:
 

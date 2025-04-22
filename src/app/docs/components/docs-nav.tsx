@@ -54,6 +54,12 @@ export const DocsNavigation = () => {
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href="/docs/usage">Usage</DocsNavigationItem>
             </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/cli">CLI</DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/faq">FAQ</DocsNavigationItem>
+            </DocsNavigationItemWrapper>
           </DocsNavigationItems>
         </DocsNavigationGroup>
 
@@ -84,8 +90,18 @@ export const DocsNavigation = () => {
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/media-queries">
+                Media Queries
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
               <DocsNavigationItem href="/docs/animations">
                 Animations
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/templates">
+                Templates
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>
@@ -93,28 +109,18 @@ export const DocsNavigation = () => {
 
         <DocsNavigationGroup>
           <DocsNavigationGroupTitle>
-            CLI
+            Utilities
             <Icon css-src="url(/icons/chevron-down.svg)" />
           </DocsNavigationGroupTitle>
           <DocsNavigationItems>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli-intialize">
-                Intialize
+              <DocsNavigationItem href="/docs/viewport-clamp">
+                Viewport Clamp
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli-build">
-                Build
-              </DocsNavigationItem>
-            </DocsNavigationItemWrapper>
-            <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli-generate">
-                Generate
-              </DocsNavigationItem>
-            </DocsNavigationItemWrapper>
-            <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli-update">
-                Update
+              <DocsNavigationItem href="/docs/color-function">
+                Color Function
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>
