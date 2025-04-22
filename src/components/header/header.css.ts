@@ -125,7 +125,7 @@ export const Links = styled("ul", {
         width: "100%",
         height: "100%",
         zIndex: 100,
-        padding: "{spacing.screen.medium}",
+        padding: "{spacing.pageMargin}",
         background: "{theme.background}",
       },
     },

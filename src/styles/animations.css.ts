@@ -14,3 +14,18 @@ export const fadeIn = keyframes({
     opacity: 1,
   },
 });
+
+export const fadeInFromLeft = keyframes({
+  animationName: "fadeInFromLeft",
+  appendInitialStyles: true,
+  params: {
+    duration: "300ms",
+    easing: "ease-out",
+  },
+  from: {
+    transform: "translateX(-100%)",
+  },
+  to: {
+    transform: "translateX(0)",
+  },
+});

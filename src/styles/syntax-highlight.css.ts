@@ -5,9 +5,7 @@ export const syntaxHighlightStyles = defineGlobalStyles({
   // Style modifications for code blocks with syntax highlighting
   ".react-syntax-highlighter": {
     borderRadius: "6px !important",
-    overflow: "hidden !important",
     background: "{theme.terminalBackground} !important",
-    // border: "1px solid {theme.altBackground} !important",
   },
 
   // Style inline code

@@ -1,6 +1,7 @@
 import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../../../components/dynamic-link/dynamic-link";
 import { Icon } from "../../../components/icon/icon.css";
+import { fadeInFromLeft } from "../../../styles/animations.css";
 
 export const DocsNavClientWrapper = styled("div", {
   base: {
@@ -18,8 +19,8 @@ export const DocsNavMobileMenuButton = styled("button", {
       background: "transparent",
       color: "white",
       border: "none",
-      padding: "0.5em 0",
-      marginBottom: "{spacing.medium}",
+      padding: "0",
+      marginBottom: "{spacing.large}",
       lineHeight: "1em",
       cursor: "pointer",
     },
@@ -79,6 +80,7 @@ export const DocsNavigationWrapper = styled("nav", {
       "&:not(.open)": {
         display: "none",
       },
+      animation: fadeInFromLeft,
       position: "fixed",
       top: 0,
       left: 0,
