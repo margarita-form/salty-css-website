@@ -34,6 +34,7 @@ export const DocsAsideLink = styled(DynamicLink, {
     textStyle: "body.regular",
     color: "{theme.text}",
     textDecoration: "none",
+    transition: "0.2s ease-out",
     "&:where(:hover, :focus-visible)": {
       opacity: 0.7,
     },
