@@ -16,10 +16,7 @@ export const StyledCopyButton = styled("button", {
     background: "transparent",
     border: "none",
     cursor: "pointer",
-    "--icon-size": "1em",
     padding: 0,
-    "@largeMobileDown": {
-      display: "none",
-    },
+    "--icon-size": "1em",
   },
 });
