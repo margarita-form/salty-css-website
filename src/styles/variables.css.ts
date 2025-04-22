@@ -10,6 +10,7 @@ export default defineVariables({
     altWhite: "#ddd",
     terminalWhite: "#eee",
     highlight: "aqua",
+    success: "#2fdb5a",
   },
   fontSize: {
     headline: {

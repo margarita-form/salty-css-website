@@ -5,6 +5,7 @@ import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BodyRegular } from "../body.css";
 import { HeadingLarge, HeadingRegular, HeadingSmall } from "../heading.css";
 import { CodeBlock } from "./markdown.css";
+import { CopyButton } from "./copy-button";
 
 const getID = (children: ReactNode) => {
   if (typeof children === "string") {
@@ -61,6 +62,7 @@ export const Markdown = ({ content }: MarkdownProps) => {
               data-language={language}
               className={`language-${language}`}
             >
+              <CopyButton textToCopy={String(children)} />
               <SyntaxHighlighter
                 style={atomDark}
                 language={language}
