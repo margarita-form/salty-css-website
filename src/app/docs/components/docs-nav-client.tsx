@@ -3,6 +3,7 @@
 import { usePathname } from "next/navigation";
 import { useRef, useEffect } from "react";
 import { DocsNavClientWrapper } from "./docs-nav.css";
+import { lockScroll, unlockScroll } from "../../../lib/scroll-lock";
 
 interface DocsNavClientProps {
   children: React.ReactNode;
@@ -59,9 +60,13 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     if (!closeButton) throw new Error("Close button not found");
 
     const handleClick = () => {
-      const isOpen = mobileMenuButton.classList.toggle("open");
-      docsNav.classList.toggle("open", isOpen);
-      backdrop.classList.toggle("open", isOpen);
+      const isMenuOpen = mobileMenuButton.classList.toggle("open");
+      docsNav.classList.toggle("open", isMenuOpen);
+      backdrop.classList.toggle("open", isMenuOpen);
+
+      // Toggle scroll lock
+      if (isMenuOpen) lockScroll();
+      else unlockScroll();
     };
     mobileMenuButton.addEventListener("click", handleClick);
     backdrop.addEventListener("click", handleClick);
