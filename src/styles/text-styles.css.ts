@@ -26,6 +26,12 @@ export default defineTemplates({
       },
     },
     body: {
+      xs: {
+        fontSize: "{fontSize.body.xs}",
+        fontWeight: "300",
+        letterSpacing: "0.0125em",
+        lineHeight: "1.5em",
+      },
       small: {
         fontSize: "{fontSize.body.small}",
         fontWeight: "300",

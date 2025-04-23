@@ -38,6 +38,7 @@ export default defineVariables({
           large: HDClamp(64),
         },
         body: {
+          xs: HDClamp(12),
           small: HDClamp(14),
           regular: HDClamp(16),
           large: HDClamp(24),
@@ -56,6 +57,7 @@ export default defineVariables({
           large: MobileClamp(42),
         },
         body: {
+          xs: MobileClamp(12),
           small: MobileClamp(16),
           regular: MobileClamp(20),
           large: MobileClamp(24),

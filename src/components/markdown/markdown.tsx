@@ -1,10 +1,11 @@
 import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { atomDark } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { BodyRegular } from "../body.css";
 import { HeadingRegular, HeadingSmall } from "../heading.css";
-import { CodeBlock } from "./markdown.css";
+import { CodeBlock, MarkdownTable, TableWrapper } from "./markdown.css";
 import { CopyButton } from "./copy-button";
 
 const getID = (children: ReactNode) => {
@@ -24,6 +25,7 @@ interface MarkdownProps {
 export const Markdown = ({ content }: MarkdownProps) => {
   return (
     <ReactMarkdown
+      remarkPlugins={[remarkGfm]}
       components={{
         h1: (props) => {
           const id = getID(props.children);
@@ -42,6 +44,19 @@ export const Markdown = ({ content }: MarkdownProps) => {
           return <HeadingSmall element="h4" id={id} {...props} />;
         },
         p: (props) => <BodyRegular element="p" {...props} />,
+
+        // Table components
+        table: (props) => (
+          <TableWrapper>
+            <MarkdownTable {...props} />
+          </TableWrapper>
+        ),
+        thead: (props) => <thead {...props} />,
+        tbody: (props) => <tbody {...props} />,
+        tr: (props) => <tr {...props} />,
+        th: (props) => <th {...props} />,
+        td: (props) => <td {...props} />,
+
         code: ({ className, children, ...props }) => {
           // Extracting the language from className (format: "language-javascript", "language-tsx", etc.)
           const match = /language-(\w+)/.exec(className || "");
