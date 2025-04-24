@@ -13,6 +13,8 @@ import {
   DocsNavMobileMenuButton,
   DocsNavMobileMenuButtonIcon,
 } from "./docs-nav.css";
+import { SearchButton } from "./search/search-button";
+import { SearchButtonWrapper } from "./search/search-button.css";
 
 export const DocsNavigation = () => {
   return (
@@ -26,6 +28,10 @@ export const DocsNavigation = () => {
 
       <DocsNavigationWrapper id="docs-nav">
         <HeadingSmall element="h2">Documentation</HeadingSmall>
+
+        <SearchButtonWrapper>
+          <SearchButton />
+        </SearchButtonWrapper>
 
         <DocsNavigationCloseButton
           id="docs-nav-close-button"

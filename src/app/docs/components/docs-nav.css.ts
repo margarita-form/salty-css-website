@@ -1,7 +1,7 @@
 import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../../../components/dynamic-link/dynamic-link";
 import { Icon } from "../../../components/icon/icon.css";
-import { fadeInFromLeft } from "../../../styles/animations.css";
+import { fadeIn, fadeInFromLeft } from "../../../styles/animations.css";
 
 export const DocsNavClientWrapper = styled("div", {
   base: {
@@ -40,7 +40,10 @@ export const DocsNavigationBackdrop = styled("div", {
     position: "fixed",
     inset: 0,
     background: "rgba(0, 0, 0, 0.5)",
+    backdropFilter: "blur(4px)",
     zIndex: 103,
+    animation: fadeIn,
+
     "&.open": {
       display: "block",
     },
@@ -76,6 +79,7 @@ export const DocsNavigationWrapper = styled("nav", {
     gap: "{spacing.medium}",
     borderRight: "1px solid {theme.altBackground}",
     minHeight: "75vh",
+    padding: "0 {spacing.medium} 0 0",
     "@smallDesktopDown": {
       "&:not(.open)": {
         display: "none",
@@ -102,7 +106,6 @@ export const DocsNavigationGroup = styled("div", {
     gap: "{spacing.small}",
     padding: "{spacing.medium} 0 0",
     borderTop: "1px solid {theme.altBackground}",
-    maxWidth: "90%",
     "@smallDesktopDown": {
       maxWidth: "100%",
     },
@@ -166,10 +169,8 @@ export const DocsNavigationItem = styled(DynamicLink, {
       color: "{theme.highlight} !important",
     },
     "&.active": {
-      // padding: "0.3em 0.5em",
       opacity: 1,
       color: "{theme.color}",
-      // background: "{theme.highlight}",
       "&::after": {
         content: '""',
         display: "block",

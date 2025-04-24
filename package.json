@@ -15,6 +15,7 @@
     "@salty-css/core": "^0.0.1-alpha.254",
     "@salty-css/react": "^0.0.1-alpha.254",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "fuse.js": "^7.1.0",
     "next": "^15.2.4",
     "posthog-js": "^1.234.1",
     "posthog-node": "^4.11.1",

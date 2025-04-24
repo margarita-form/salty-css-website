@@ -29,3 +29,20 @@ export const fadeInFromLeft = keyframes({
     transform: "translateX(0)",
   },
 });
+
+export const slideDown = keyframes({
+  animationName: "slideDown",
+  appendInitialStyles: true,
+  params: {
+    duration: "200ms",
+    easing: "cubic-bezier(0.16, 1, 0.3, 1)",
+  },
+  from: {
+    transform: "translateY(-10px)",
+    opacity: 0,
+  },
+  to: {
+    transform: "translateY(0)",
+    opacity: 1,
+  },
+});
