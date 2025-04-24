@@ -30,7 +30,7 @@ export const SearchModalContainer = styled("div", {
     flexDirection: "column",
     overflow: "hidden",
     border: "1px solid {theme.altBackground}",
-    animationName: slideDown,
+    animation: slideDown,
     textStyle: "body.small",
   },
 });
