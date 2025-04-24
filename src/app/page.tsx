@@ -1,8 +1,22 @@
+import { Metadata } from "next";
 import { HeroBlock } from "../blocks/hero-block/hero-block";
 import { BodyLarge } from "../components/body.css";
 import { Button } from "../components/button/button.css";
 import { HeadingLarge } from "../components/heading.css";
 import { Main } from "../components/main.css";
+
+export const metadata: Metadata = {
+  title: "Salty CSS - CSS-in-JS for React, Next.js, Vite and RSC",
+  description:
+    "Build time CSS-in-JS library compatible with React, Next.js, Vite and React Server Components built with TypeScript.",
+  openGraph: {
+    images: [
+      {
+        url: "https://salty-css.dev/assets/banners/salty-css-meta-default.jpg",
+      },
+    ],
+  },
+};
 
 export default async function Home() {
   return (
