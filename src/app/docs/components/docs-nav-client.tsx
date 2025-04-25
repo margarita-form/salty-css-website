@@ -21,6 +21,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
       const href = link.getAttribute("href");
       if (!href) return;
       if (pathname.includes(href)) link.classList.add("active");
+      else link.classList.remove("active");
     });
   }, [pathname]);
 
