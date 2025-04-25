@@ -60,8 +60,8 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     );
     if (!closeButton) throw new Error("Close button not found");
 
-    const handleClick = () => {
-      const isMenuOpen = mobileMenuButton.classList.toggle("open");
+    const setNavState = (isOpen?: boolean) => {
+      const isMenuOpen = mobileMenuButton.classList.toggle("open", isOpen);
       docsNav.classList.toggle("open", isMenuOpen);
       backdrop.classList.toggle("open", isMenuOpen);
 
@@ -69,6 +69,11 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
       if (isMenuOpen) lockScroll();
       else unlockScroll();
     };
+
+    document.addEventListener("closeDocsNav", () => setNavState(false));
+
+    const handleClick = () => setNavState();
+
     mobileMenuButton.addEventListener("click", handleClick);
     backdrop.addEventListener("click", handleClick);
     closeButton.addEventListener("click", handleClick);

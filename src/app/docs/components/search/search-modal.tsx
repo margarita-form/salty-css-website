@@ -41,7 +41,7 @@ export const SearchModal = () => {
   const navigateToResult = useCallback(
     (doc: DocPage) => {
       router.push(`/docs/${doc.slug}`);
-      closeSearch();
+      closeSearch(true);
     },
     [closeSearch, router]
   );
@@ -105,7 +105,7 @@ export const SearchModal = () => {
 
   return (
     <Portal>
-      <SearchModalBackdrop onClick={closeSearch} />
+      <SearchModalBackdrop onClick={() => closeSearch()} />
       <SearchModalContainer onClick={(e) => e.stopPropagation()}>
         <SearchInputContainer>
           <SearchInput

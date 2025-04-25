@@ -121,21 +121,24 @@ export const KeyboardShortcut = styled("kbd", {
 export const SearchCloseButton = styled("button", {
   base: {
     display: "none",
-    textStyle: "body.regular",
     "@media (pointer: coarse)": {
       display: "flex",
       alignItems: "center",
       background: "transparent",
       color: "white",
       border: "none",
-      padding: "0.125em",
+      top: "0.75em",
+      right: "1em",
+      padding: "0.5em",
       margin: 0,
       lineHeight: "1em",
       position: "absolute",
-      top: "1.25em",
-      right: "1em",
       cursor: "pointer",
       "--icon-size": "1em",
+      "--icon-transform": "translateY(-0.05em)",
+      span: {
+        margin: 0,
+      },
     },
   },
 });

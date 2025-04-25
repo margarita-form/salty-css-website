@@ -12,7 +12,7 @@ import React, {
 interface SearchContextProps {
   isSearchOpen: boolean;
   openSearch: () => void;
-  closeSearch: () => void;
+  closeSearch: (closeDocsNav?: boolean) => void;
   searchTerm: string;
   setSearchTerm: (term: string) => void;
 }
@@ -39,9 +39,14 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     setIsSearchOpen(true);
   }, []);
 
-  const closeSearch = useCallback(() => {
+  const closeSearch = useCallback((closeDocsNav?: boolean) => {
     setIsSearchOpen(false);
     setSearchTerm("");
+    if (closeDocsNav) {
+      // push custom event to close search
+      const event = new CustomEvent("closeDocsNav");
+      document.dispatchEvent(event);
+    }
   }, []);
 
   // Handle keyboard shortcuts
