@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { AllHTMLAttributes, createElement } from "react";
 
 interface DynamicLinkProps extends AllHTMLAttributes<HTMLElement> {
@@ -19,8 +20,8 @@ export const DynamicLink = ({
 
   const target = href.startsWith("http") ? "_blank" : undefined;
   return (
-    <a href={href} target={target} className={className} {...rest}>
+    <Link href={href} target={target} className={className} prefetch {...rest}>
       {children}
-    </a>
+    </Link>
   );
 };

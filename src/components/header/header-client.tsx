@@ -20,6 +20,7 @@ export const HeaderClient = ({ children }: HeaderClientProps) => {
       const href = link.getAttribute("href");
       if (!href) return;
       if (pathname.startsWith(href)) link.classList.add("active");
+      else link.classList.remove("active");
     });
   }, [pathname]);
 

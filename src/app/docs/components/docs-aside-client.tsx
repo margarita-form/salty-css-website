@@ -7,6 +7,7 @@ import {
   DocsAsideLinkWrapper,
   DocsAsideWrapper,
 } from "./docs-aside.css";
+import { usePathname } from "next/navigation";
 
 interface DocsAsideClientProps {
   children: React.ReactNode;
@@ -14,6 +15,7 @@ interface DocsAsideClientProps {
 
 export const DocsAsideClient = ({ children }: DocsAsideClientProps) => {
   const ref = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
   const [anchors, setAnchors] = useState<HTMLElement[]>([]);
 
   useEffect(() => {
@@ -25,7 +27,7 @@ export const DocsAsideClient = ({ children }: DocsAsideClientProps) => {
     const anchors = previousElement.querySelectorAll<HTMLElement>("[id]");
     const anchorsArray = Array.from(anchors);
     setAnchors(anchorsArray);
-  }, []);
+  }, [pathname]);
 
   return (
     <DocsAsideWrapper ref={ref}>
