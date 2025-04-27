@@ -12,8 +12,8 @@
     "prepare": "npx salty-css build"
   },
   "dependencies": {
-    "@salty-css/core": "^0.0.1-alpha.254",
-    "@salty-css/react": "^0.0.1-alpha.254",
+    "@salty-css/core": "^0.0.1-alpha.276",
+    "@salty-css/react": "^0.0.1-alpha.276",
     "@types/react-syntax-highlighter": "^15.5.13",
     "fuse.js": "^7.1.0",
     "next": "^15.2.4",
@@ -27,8 +27,8 @@
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@salty-css/eslint-config-core": "^0.0.1-alpha.254",
-    "@salty-css/next": "^0.0.1-alpha.254",
+    "@salty-css/eslint-config-core": "^0.0.1-alpha.276",
+    "@salty-css/next": "^0.0.1-alpha.276",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
