@@ -27,6 +27,35 @@ export const DocsAsideClient = ({ children }: DocsAsideClientProps) => {
     const anchors = previousElement.querySelectorAll<HTMLElement>("[id]");
     const anchorsArray = Array.from(anchors);
     setAnchors(anchorsArray);
+
+    // Highlight the first anchor that is in the viewport
+    const handleScroll = () => {
+      let found = false;
+      for (const anchor of anchorsArray) {
+        const linkElement = wrapper.querySelector(`a[href="#${anchor.id}"]`);
+        if (!linkElement) continue;
+        if (found) {
+          linkElement.classList.remove("active");
+          continue;
+        }
+        const rect = anchor.getBoundingClientRect();
+        if (rect.top < 0) {
+          linkElement.classList.remove("active");
+          continue;
+        }
+
+        linkElement.classList.add("active");
+        found = true;
+      }
+    };
+
+    const timeout = setTimeout(() => handleScroll(), 10);
+    document.addEventListener("scroll", handleScroll);
+
+    return () => {
+      if (timeout) clearTimeout(timeout);
+      document.removeEventListener("scroll", handleScroll);
+    };
   }, [pathname]);
 
   return (
