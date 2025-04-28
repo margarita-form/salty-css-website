@@ -23,6 +23,10 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
       if (pathname.includes(href)) link.classList.add("active");
       else link.classList.remove("active");
     });
+
+    // Close docs nav on route change
+    const event = new CustomEvent("closeDocsNav");
+    document.dispatchEvent(event);
   }, [pathname]);
 
   useEffect(() => {
