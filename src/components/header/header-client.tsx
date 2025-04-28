@@ -3,6 +3,7 @@ import { useEffect, useRef } from "react";
 import { HeaderClientWrapper } from "./header.css";
 import { usePathname } from "next/navigation";
 import { lockScroll, unlockScroll } from "../../lib/scroll-lock";
+import { closeMainNav } from "./header-helpers";
 
 interface HeaderClientProps {
   children: React.ReactNode;
@@ -22,6 +23,9 @@ export const HeaderClient = ({ children }: HeaderClientProps) => {
       if (pathname.startsWith(href)) link.classList.add("active");
       else link.classList.remove("active");
     });
+
+    // Close main nav on route change
+    closeMainNav();
   }, [pathname]);
 
   useEffect(() => {
@@ -34,14 +38,21 @@ export const HeaderClient = ({ children }: HeaderClientProps) => {
     const mainLinks = wrapper.querySelector<HTMLElement>("#main-links");
     if (!mainLinks) throw new Error("Main links not found");
 
-    const handleClick = () => {
-      mobileMenuButton.classList.toggle("open");
-      const isMenuOpen = mainLinks.classList.toggle("open");
+    const updateMobileNavState = (isOpen?: boolean) => {
+      const isMenuOpen = mainLinks.classList.toggle("open", isOpen);
+      mobileMenuButton.classList.toggle("open", isMenuOpen);
 
       // Toggle scroll lock
       if (isMenuOpen) lockScroll();
       else unlockScroll();
     };
+
+    document.addEventListener("closeMainNav", () =>
+      updateMobileNavState(false)
+    );
+
+    const handleClick = () => updateMobileNavState();
+
     mobileMenuButton.addEventListener("click", handleClick);
 
     // Cleanup function

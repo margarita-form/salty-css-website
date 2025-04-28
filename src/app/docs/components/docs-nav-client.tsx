@@ -4,6 +4,7 @@ import { usePathname } from "next/navigation";
 import { useRef, useEffect } from "react";
 import { DocsNavClientWrapper } from "./docs-nav.css";
 import { lockScroll, unlockScroll } from "../../../lib/scroll-lock";
+import { closeDocsNav } from "./docs-nav-helpers";
 
 interface DocsNavClientProps {
   children: React.ReactNode;
@@ -25,8 +26,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     });
 
     // Close docs nav on route change
-    const event = new CustomEvent("closeDocsNav");
-    document.dispatchEvent(event);
+    closeDocsNav();
   }, [pathname]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     );
     if (!closeButton) throw new Error("Close button not found");
 
-    const setNavState = (isOpen?: boolean) => {
+    const updateMobileNavState = (isOpen?: boolean) => {
       const isMenuOpen = mobileMenuButton.classList.toggle("open", isOpen);
       docsNav.classList.toggle("open", isMenuOpen);
       backdrop.classList.toggle("open", isMenuOpen);
@@ -74,9 +74,11 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
       else unlockScroll();
     };
 
-    document.addEventListener("closeDocsNav", () => setNavState(false));
+    document.addEventListener("closeDocsNav", () =>
+      updateMobileNavState(false)
+    );
 
-    const handleClick = () => setNavState();
+    const handleClick = () => updateMobileNavState();
 
     mobileMenuButton.addEventListener("click", handleClick);
     backdrop.addEventListener("click", handleClick);

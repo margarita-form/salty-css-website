@@ -8,6 +8,7 @@ import React, {
   useEffect,
   useCallback,
 } from "react";
+import { closeDocsNav } from "../docs-nav-helpers";
 
 interface SearchContextProps {
   isSearchOpen: boolean;
@@ -39,14 +40,10 @@ export const SearchProvider = ({ children }: SearchProviderProps) => {
     setIsSearchOpen(true);
   }, []);
 
-  const closeSearch = useCallback((closeDocsNav?: boolean) => {
+  const closeSearch = useCallback((shouldCloseDocsNav?: boolean) => {
     setIsSearchOpen(false);
     setSearchTerm("");
-    if (closeDocsNav) {
-      // push custom event to close search
-      const event = new CustomEvent("closeDocsNav");
-      document.dispatchEvent(event);
-    }
+    if (shouldCloseDocsNav) closeDocsNav();
   }, []);
 
   // Handle keyboard shortcuts
