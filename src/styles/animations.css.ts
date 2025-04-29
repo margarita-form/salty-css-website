@@ -46,3 +46,19 @@ export const slideDown = keyframes({
     opacity: 1,
   },
 });
+
+export const rotateInfinite = keyframes({
+  animationName: "rotateInfinite",
+  appendInitialStyles: true,
+  params: {
+    duration: "30s",
+    easing: "linear",
+    iterationCount: "infinite",
+  },
+  from: {
+    transform: "rotate(0deg)",
+  },
+  to: {
+    transform: "rotate(360deg)",
+  },
+});

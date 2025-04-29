@@ -29,6 +29,7 @@ export const Header = () => {
             <NavLink href="/docs">Docs</NavLink>
             <NavLink href="/react">React</NavLink>
             <NavLink href="/next">Next.js</NavLink>
+            <NavLink href="/astro">Astro</NavLink>
             <NavLink href="https://github.com/margarita-form/salty-css/releases">
               Releases
               <Icon css-src="url(/icons/ext-arrow.svg)" />

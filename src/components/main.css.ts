@@ -7,6 +7,7 @@ export const Main = styled("main", {
     flexDirection: "column",
     gap: "{spacing.large}",
     alignItems: "flex-start",
+    minHeight: "75vh",
   },
 });
 
@@ -44,7 +45,7 @@ export const Centered = styled("div", {
     justifyContent: "center",
     textAlign: "center",
     width: "100%",
-    maxWidth: "960px",
+    maxWidth: "1200px",
     margin: "0 auto",
     padding: "{spacing.screen.medium}",
   },

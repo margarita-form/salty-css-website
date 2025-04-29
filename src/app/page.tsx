@@ -4,6 +4,7 @@ import { BodyLarge } from "../components/body.css";
 import { Button } from "../components/button/button.css";
 import { HeadingLarge } from "../components/heading.css";
 import { Main } from "../components/main.css";
+import { Icon } from "../components/icon/icon.css";
 
 export const metadata: Metadata = {
   title: "Salty CSS - CSS-in-JS for React, Next.js, Vite and RSC",
@@ -29,7 +30,10 @@ export default async function Home() {
           Start by adding a pintch of Salty CSS to your app.
         </BodyLarge>
 
-        <Button href="/docs">Read the docs</Button>
+        <Button href="/docs">
+          Read the docs
+          <Icon css-src="url(/icons/arrow-to-right.svg)" />
+        </Button>
       </HeroBlock>
     </Main>
   );

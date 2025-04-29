@@ -28,6 +28,7 @@ export default defineVariables({
         small: HDClamp(8),
         medium: HDClamp(20),
         large: HDClamp(36),
+        xLarge: HDClamp(64),
         pageMargin: HDClamp(120),
         blockMargin: HDClamp(160),
       },

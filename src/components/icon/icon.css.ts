@@ -9,7 +9,7 @@ export const Icon = styled("span", {
     height: "var(--icon-size, 0.7em)",
     transition: "0.2s ease-out",
     transform: "var(--icon-transform, translateY(0.05em))",
-    marginInline: "0.33em",
+    marginInline: "var(--icon-margin-inline, 0.33em)",
     background: "currentColor",
     mask: "{props.src} no-repeat center / contain",
   },

@@ -60,7 +60,7 @@ export const DocsAsideClient = ({ children }: DocsAsideClientProps) => {
 
   return (
     <DocsAsideWrapper ref={ref}>
-      {children}
+      {anchors.length > 0 && children}
       <DocsAsideLinks>
         {anchors.length > 0 &&
           anchors.map((anchor, index) => {

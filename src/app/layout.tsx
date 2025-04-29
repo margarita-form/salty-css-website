@@ -3,6 +3,7 @@ import { fonts } from "../styles/fonts";
 import { Header } from "../components/header/header";
 import { PostHogProvider } from "../components/PostHogProvider";
 import { WarningBox } from "../components/main.css";
+import { Footer } from "../components/footer/footer";
 
 export default function RootLayout({
   children,
@@ -14,9 +15,12 @@ export default function RootLayout({
       </head>
       <body className="theme-dark theme-current">
         <PostHogProvider>
-          <WarningBox data-nosnippet>Website is under construction.</WarningBox>
+          <WarningBox data-nosnippet>
+            Website is still under construction.
+          </WarningBox>
           <Header />
           {children}
+          <Footer />
         </PostHogProvider>
       </body>
     </html>
