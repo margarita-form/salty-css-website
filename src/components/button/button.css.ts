@@ -1,6 +1,5 @@
 import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../dynamic-link/dynamic-link";
-import { Icon } from "../icon/icon.css";
 
 export const Button = styled(DynamicLink, {
   defaultProps: {

@@ -1,4 +1,4 @@
-import { BodyLarge, BodyRegular } from "../../components/body.css";
+import { BodyLarge } from "../../components/body.css";
 import { DynamicLink } from "../../components/dynamic-link/dynamic-link";
 import { HeadingLarge } from "../../components/heading.css";
 import { Centered, Main } from "../../components/main.css";
