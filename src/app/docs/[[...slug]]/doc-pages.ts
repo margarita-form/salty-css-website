@@ -1,7 +1,12 @@
 export const docPages = [
   {
+    slug: "",
+    title: "Documentation ~ Salty CSS",
+    description: "Documentation for Salty CSS.",
+  },
+  {
     slug: "quick-start",
-    title: "Salty CSS Quick Start",
+    title: "Quick Start ~ Salty CSS",
     description: "Get to know the basics of Salty CSS.",
   },
   {
@@ -16,57 +21,68 @@ export const docPages = [
   },
   {
     slug: "faq",
-    title: "Salty CSS Frequently Asked Questions",
+    title: "Frequently Asked Questions ~ Salty CSS",
     description: "Find answers to common questions about Salty CSS.",
   },
   {
     slug: "cli",
-    title: "Salty CSS CLI",
+    title: "CLI ~ Salty CSS",
     description: "Learn how to use the Salty CSS in the command line.",
   },
   {
     slug: "basics",
-    title: "Salty CSS Styling Basics",
+    title: "Styling Basics ~ Salty CSS",
     description: "Learn the basics of styling components with Salty CSS.",
   },
   {
     slug: "variants",
-    title: "Salty CSS Variants",
+    title: "Variants ~ Salty CSS",
     description: "Learn how to use variants in Salty CSS components.",
   },
   {
     slug: "classnames",
-    title: "Salty CSS Classnames",
+    title: "Classnames ~ Salty CSS",
     description: "Learn how to use classnames function in Salty CSS.",
   },
   {
     slug: "overrides",
-    title: "Salty CSS Overrides",
+    title: "Overrides ~ Salty CSS",
     description: "Learn how to override component styles in Salty CSS.",
   },
   {
     slug: "animations",
-    title: "Salty CSS Animations",
+    title: "Animations ~ Salty CSS",
     description: "Learn how to use animations in Salty CSS.",
   },
   {
     slug: "color-function",
-    title: "Salty CSS Color Function",
+    title: "Color Function ~ Salty CSS",
     description: "Learn how to use the color function in Salty CSS.",
   },
   {
     slug: "templates",
-    title: "Salty CSS Templates",
+    title: "Templates ~ Salty CSS",
     description: "Learn how to use templates for reusable styles in Salty CSS.",
   },
   {
     slug: "media-queries",
-    title: "Salty CSS Media Queries",
+    title: "Media Queries ~ Salty CSS",
     description: "Learn how to use media queries and breakpoints in Salty CSS.",
   },
   {
     slug: "viewport-clamp",
-    title: "Salty CSS Viewport Clamp",
+    title: "Viewport Clamp ~ Salty CSS",
     description: "Learn how to add a viewport clamp to your Salty CSS project.",
+  },
+  // API pages
+  {
+    slug: "api/styled",
+    title: "Styled Function ~ Salty CSS",
+    description: "Learn how to use the styled function for components",
+  },
+  {
+    slug: "api/classname",
+    title: "Class Name Function ~ Salty CSS",
+    description: "Learn how to use the class name function for components",
   },
 ];

@@ -17,7 +17,7 @@ import {
   KeyboardShortcut,
   SearchCloseButton,
 } from "./search-modal.css";
-import { docPages } from "../../[slug]/doc-pages";
+import { docPages } from "../../[[...slug]]/doc-pages";
 import { Icon } from "../../../../components/icon/icon.css";
 
 // Define the document structure

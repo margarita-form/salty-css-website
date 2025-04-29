@@ -3,13 +3,16 @@ import { DocPageWrapper } from "./doc-page.css";
 import { docPages } from "./doc-pages";
 
 export const generateStaticParams = async () => {
-  return docPages;
+  return docPages.map(({ slug }) => ({
+    slug: slug.split("/"),
+  }));
 };
 
-type DocsPageProps = { params: Promise<{ slug: string }> };
+type DocsPageProps = { params: Promise<{ slug: string[] }> };
 
 export async function generateMetadata({ params }: DocsPageProps) {
-  const { slug } = await params;
+  const { slug: slugArray } = await params;
+  const slug = slugArray ? slugArray.join("/") : "";
   const page = docPages.find((page) => page.slug === slug);
   if (!page) throw new Error("Page not in available docs");
   const { title, description } = page;
@@ -28,7 +31,8 @@ export async function generateMetadata({ params }: DocsPageProps) {
 }
 
 const DocsPage = async ({ params }: DocsPageProps) => {
-  const { slug } = await params;
+  const { slug: slugArray } = await params;
+  const slug = slugArray ? slugArray.join("-") : "temp";
   const { default: content } = await import(`../../../content/docs/${slug}.md`);
 
   return (

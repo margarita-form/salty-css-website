@@ -131,7 +131,10 @@ export const DocsNavigationGroupTitle = styled("button", {
       opacity: 0.7,
     },
     "&.closed": {
-      "--icon-transform": "rotate(180deg) translateY(0.05em)",
+      "--icon-transform": "rotate(-90deg) translateY(0.05em)",
+    },
+    "&:has(+ ul a.active)": {
+      "--icon-transform": "rotate(0deg) translateY(0.05em)",
     },
   },
 });
@@ -146,6 +149,9 @@ export const DocsNavigationItems = styled("ul", {
     margin: 0,
     "&.closed": {
       display: "none",
+    },
+    "&:has(a.active)": {
+      display: "flex",
     },
   },
 });

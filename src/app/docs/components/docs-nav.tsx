@@ -131,6 +131,25 @@ export const DocsNavigation = () => {
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>
         </DocsNavigationGroup>
+
+        <DocsNavigationGroup>
+          <DocsNavigationGroupTitle className="closed">
+            API
+            <Icon css-src="url(/icons/chevron-down.svg)" />
+          </DocsNavigationGroupTitle>
+          <DocsNavigationItems className="closed">
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/api/styled">
+                Styled Function
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href="/docs/api/classname">
+                Class Name Function
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+          </DocsNavigationItems>
+        </DocsNavigationGroup>
       </DocsNavigationWrapper>
     </DocsNavClient>
   );

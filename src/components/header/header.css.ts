@@ -19,8 +19,12 @@ export const HeaderLogo = styled(DynamicLink, {
     margin: 0,
     maxWidth: 150,
     zIndex: 101,
+    transition: "0.2s ease-out",
     "@smallDesktopDown": {
       maxWidth: 120,
+    },
+    "&:hover": {
+      opacity: 0.8,
     },
   },
 });
