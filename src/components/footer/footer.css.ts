@@ -37,6 +37,13 @@ export const FooterContainer = styled("div", {
       maxHeight: "100%",
       animation: "fadeIn 2s ease-out",
     },
+    "@largeMobileDown": {
+      gridTemplateColumns: "1fr",
+      padding: "{spacing.large} {spacing.large} 0",
+      "&::before": {
+        opacity: 0.5,
+      },
+    },
   },
 });
 
@@ -45,7 +52,7 @@ export const FooterLogo = styled(DynamicLink, {
     margin: 0,
     maxWidth: HDClamp(300),
     "@smallDesktopDown": {
-      maxWidth: 75,
+      display: "none",
     },
   },
 });
@@ -56,6 +63,10 @@ export const FooterLinkGroups = styled("div", {
     flexDirection: "row",
     gap: "{spacing.xLarge}",
     textStyle: "body.small",
+    "@largeMobileDown": {
+      flexDirection: "column",
+      gap: "{spacing.large}",
+    },
   },
 });
 
@@ -102,6 +113,10 @@ export const FooterMentions = styled("div", {
     marginTop: "{spacing.large}",
     textStyle: "body.small",
     fontWeight: "200",
+    gap: "{spacing.small}",
+    "@largeMobileDown": {
+      flexDirection: "column-reverse",
+    },
   },
 });
 
