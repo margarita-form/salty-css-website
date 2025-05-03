@@ -9,7 +9,7 @@ export const DocsNavClientWrapper = styled("div", {
   },
 });
 
-export const DocsNavMobileMenuButton = styled("button", {
+export const DocsNavMobileMenuButtonWrapper = styled("button", {
   base: {
     display: "none",
     textStyle: "body.regular",
@@ -19,11 +19,30 @@ export const DocsNavMobileMenuButton = styled("button", {
       background: "transparent",
       color: "white",
       border: "none",
-      padding: "0",
+      width: "100%",
+      padding: "0 0 {spacing.medium}",
       marginBottom: "{spacing.large}",
       lineHeight: "1em",
       cursor: "pointer",
+      borderBottom: "1px solid {theme.altBackground}",
     },
+  },
+});
+
+export const DocsNavMobileMenuButton = styled("span", {
+  base: {
+    padding: "0.65em 0.7em 0.7em",
+    border: "1px solid {theme.altBackground}",
+    borderRadius: "0.25em",
+  },
+});
+
+export const DocsNavMobileMenuButtonCurrent = styled("span", {
+  base: {
+    padding: "0.65em 0.7em 0.7em",
+    opacity: 0.5,
+    marginLeft: "1em",
+    fontWeight: "200",
   },
 });
 

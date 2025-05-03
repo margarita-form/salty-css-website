@@ -21,8 +21,18 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     links.forEach((link) => {
       const href = link.getAttribute("href");
       if (!href) return;
-      if (pathname.includes(href)) link.classList.add("active");
-      else link.classList.remove("active");
+      if (pathname.includes(href)) {
+        link.classList.add("active");
+
+        const currentPageElement = wrapper.querySelector<HTMLButtonElement>(
+          "#docs-nav-mobile-menu-button-current"
+        );
+
+        if (currentPageElement) {
+          currentPageElement.innerText = link.innerText;
+          currentPageElement.setAttribute("aria-label", link.innerText);
+        }
+      } else link.classList.remove("active");
     });
 
     // Close docs nav on route change

@@ -10,8 +10,10 @@ import {
   DocsNavigationItems,
   DocsNavigationItemWrapper,
   DocsNavigationWrapper,
-  DocsNavMobileMenuButton,
+  DocsNavMobileMenuButtonWrapper,
   DocsNavMobileMenuButtonIcon,
+  DocsNavMobileMenuButton,
+  DocsNavMobileMenuButtonCurrent,
 } from "./docs-nav.css";
 import { SearchButton } from "./search/search-button";
 import { SearchButtonWrapper } from "./search/search-button.css";
@@ -19,10 +21,14 @@ import { SearchButtonWrapper } from "./search/search-button.css";
 export const DocsNavigation = () => {
   return (
     <DocsNavClient>
-      <DocsNavMobileMenuButton id="docs-nav-mobile-menu-button">
-        <DocsNavMobileMenuButtonIcon css-src="url(/icons/chevron-right.svg)" />
-        Menu
-      </DocsNavMobileMenuButton>
+      <DocsNavMobileMenuButtonWrapper id="docs-nav-mobile-menu-button">
+        <DocsNavMobileMenuButton>
+          <DocsNavMobileMenuButtonIcon css-src="url(/icons/chevron-right.svg)" />
+          Menu
+        </DocsNavMobileMenuButton>
+
+        <DocsNavMobileMenuButtonCurrent id="docs-nav-mobile-menu-button-current" />
+      </DocsNavMobileMenuButtonWrapper>
 
       <DocsNavigationBackdrop id="docs-nav-backdrop" />
 

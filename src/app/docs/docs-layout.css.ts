@@ -10,6 +10,7 @@ export const DocsLayoutWrapper = styled("div", {
     padding: "{spacing.large} {spacing.pageMargin}",
     "@mediumDesktopDown": {
       gridTemplateColumns: "{side-size} 1fr",
+      paddingTop: "{spacing.medium}",
     },
     "@smallDesktopDown": {
       display: "block",
