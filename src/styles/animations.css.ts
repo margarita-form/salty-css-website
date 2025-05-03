@@ -15,6 +15,21 @@ export const fadeIn = keyframes({
   },
 });
 
+export const fadeInHalf = keyframes({
+  animationName: "fadeInHalf",
+  appendInitialStyles: true,
+  params: {
+    delay: "50ms",
+    duration: "2s",
+  },
+  from: {
+    opacity: 0,
+  },
+  to: {
+    opacity: 0.5,
+  },
+});
+
 export const fadeInFromLeft = keyframes({
   animationName: "fadeInFromLeft",
   appendInitialStyles: true,

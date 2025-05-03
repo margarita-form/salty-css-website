@@ -1,6 +1,7 @@
 import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../dynamic-link/dynamic-link";
 import { HDClamp } from "../../styles/helpers.css";
+import { fadeInHalf } from "../../styles/animations.css";
 
 export const FooterWrapper = styled("footer", {
   base: {
@@ -41,7 +42,7 @@ export const FooterContainer = styled("div", {
       gridTemplateColumns: "1fr",
       padding: "{spacing.large} {spacing.large} 0",
       "&::before": {
-        opacity: 0.5,
+        animation: fadeInHalf,
       },
     },
   },
