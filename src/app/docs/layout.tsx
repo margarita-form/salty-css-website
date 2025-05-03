@@ -1,7 +1,7 @@
 import { DocsAside } from "./components/docs-aside";
 import { DocsNavigation } from "./components/docs-nav";
 import { SearchProvider } from "./components/search/search-provider";
-import { DocsLayoutWrapper } from "./docs-layout.css";
+import { DocsLayoutArticle, DocsLayoutWrapper } from "./docs-layout.css";
 
 export default function DocsLayout({
   children,
@@ -10,7 +10,7 @@ export default function DocsLayout({
     <SearchProvider>
       <DocsLayoutWrapper>
         <DocsNavigation />
-        <article>{children}</article>
+        <DocsLayoutArticle>{children}</DocsLayoutArticle>
         <DocsAside />
       </DocsLayoutWrapper>
     </SearchProvider>

@@ -9,39 +9,44 @@ export const DocsNavClientWrapper = styled("div", {
   },
 });
 
-export const DocsNavMobileMenuButtonWrapper = styled("button", {
+export const DocsNavMobileMenuHeader = styled("div", {
   base: {
     display: "none",
-    textStyle: "body.regular",
+    textStyle: "body.small",
     "@smallDesktopDown": {
-      display: "flex",
+      display: "grid",
+      gridTemplateColumns: "max-content 1fr max-content",
+      gap: "{spacing.medium}",
       alignItems: "center",
-      background: "transparent",
-      color: "white",
-      border: "none",
       width: "100%",
       padding: "0 0 {spacing.medium}",
       marginBottom: "{spacing.large}",
       lineHeight: "1em",
-      cursor: "pointer",
       borderBottom: "1px solid {theme.altBackground}",
     },
   },
 });
 
-export const DocsNavMobileMenuButton = styled("span", {
+export const DocsNavMobileMenuButton = styled("button", {
   base: {
-    padding: "0.65em 0.7em 0.7em",
+    display: "flex",
+    alignItems: "center",
+    cursor: "pointer",
+    padding: "0.65em 1em 0.7em",
     border: "1px solid {theme.altBackground}",
-    borderRadius: "0.25em",
+    borderRadius: "0.33em",
+    background: "transparent",
+    transition: "0.2s ease-out",
+    textStyle: "body.small",
+    "&:where(:hover, :focus-visible)": {
+      opacity: 0.7,
+    },
   },
 });
 
 export const DocsNavMobileMenuButtonCurrent = styled("span", {
   base: {
-    padding: "0.65em 0.7em 0.7em",
     opacity: 0.5,
-    marginLeft: "1em",
     fontWeight: "200",
   },
 });

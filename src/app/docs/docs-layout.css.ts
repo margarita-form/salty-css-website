@@ -17,3 +17,9 @@ export const DocsLayoutWrapper = styled("div", {
     },
   },
 });
+
+export const DocsLayoutArticle = styled("article", {
+  base: {
+    minHeight: "60vh",
+  },
+});
