@@ -63,15 +63,23 @@ export const ResponsiveText = styled("div", {
 
 The viewport clamp function creates a CSS `clamp()` function that:
 
-1. Sets a minimum size based on the `minMultiplier`
+1. Sets a minimum size based on the `minMultiplier` or min value provided as second argument
 2. Applies a fluid formula that scales linearly with the viewport width
-3. Sets a maximum size based on the `maxMultiplier`
+3. Sets a maximum size based on the `maxMultiplier` or max value provided as third argument
 
-For example, a call to `fhdClamp(96)` with `minMultiplier: 1` and `maxMultiplier: 1.25` would ensure that:
+For example, a call to `fhdClamp(96)` with `screenSize:1920`, `minMultiplier: 1` and `maxMultiplier: 1.25` would ensure that:
 
-- The value will be at least 96px (or the specified value)
+- The value will be 96px when screen is at 1920px wide
 - The value can grow up to 120px (96px × 1.25) on larger screens
 - The value scales proportionally with the screen width between these bounds
+
+As another example, `fhdClamp(96, 42, 240)` with `42` as min override and `240` as max override will:
+
+- The value will be 96px when screen is at 1920px wide
+- The value can shrink down to 42px as defined to be custom min value
+- The value can grow up to 240px as defined to be custom max value
+
+Hint: If you want to override `max` but not `min` you can pass `undefined` for the min value like this: `fhdClamp(96, undefined, 240)`
 
 ## Configuration Options
 
@@ -83,6 +91,14 @@ When creating a viewport clamp with `defineViewportClamp`, you can provide sever
 | `minMultiplier` | Multiplier for minimum output size (e.g., 0.75 = 75% of value)  | Optional     |
 | `maxMultiplier` | Multiplier for maximum output size (e.g., 1.25 = 125% of value) | Optional     |
 | `axis`          | Axis to use for responsive scaling ('horizontal' or 'vertical') | 'horizontal' |
+
+When using a viewport clamp function you can provide:
+
+| Argument index | Description                                             | Default  |
+| -------------- | ------------------------------------------------------- | -------- |
+| `0`            | Value that should be used in the specified `screenSize` | Required |
+| `1`            | Minimum value override                                  | Optional |
+| `2`            | Maximum value override                                  | Optional |
 
 ## Best Practices
 
