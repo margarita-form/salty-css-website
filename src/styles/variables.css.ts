@@ -1,6 +1,8 @@
 import { defineVariables } from "@salty-css/core/factories";
 import { HDClamp, MobileClamp } from "./helpers.css";
 
+const columnBase = 142;
+
 export default defineVariables({
   colors: {
     black: "#0a0a0a",
@@ -44,6 +46,20 @@ export default defineVariables({
           regular: HDClamp(16),
           large: HDClamp(24),
         },
+      },
+      width: {
+        "cols-1": HDClamp(columnBase),
+        "cols-2": HDClamp(columnBase * 2),
+        "cols-3": HDClamp(columnBase * 3),
+        "cols-4": HDClamp(columnBase * 4),
+        "cols-5": HDClamp(columnBase * 5),
+        "cols-6": HDClamp(columnBase * 6),
+        "cols-7": HDClamp(columnBase * 7),
+        "cols-8": HDClamp(columnBase * 8),
+        "cols-9": HDClamp(columnBase * 9),
+        "cols-10": HDClamp(columnBase * 10),
+        "cols-11": HDClamp(columnBase * 11),
+        "cols-12": HDClamp(columnBase * 12),
       },
     },
     "@largeMobileDown": {

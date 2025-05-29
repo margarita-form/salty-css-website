@@ -1,6 +1,9 @@
 import { defineMediaQuery } from "@salty-css/react/config";
 
 export const largeMobileDown = defineMediaQuery((media) => media.maxWidth(900));
+export const mediumMobileDown = defineMediaQuery((media) =>
+  media.maxWidth(640)
+);
 export const smallMobileDown = defineMediaQuery((media) => media.maxWidth(400));
 export const mediumDesktopDown = defineMediaQuery((media) =>
   media.maxWidth(1440)
