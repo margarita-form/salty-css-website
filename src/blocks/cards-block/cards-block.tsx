@@ -38,14 +38,13 @@ export const CardsBlock: React.FC<CardsBlockProps> = ({
   title,
   cards,
   children,
-  columns = "three",
 }) => {
   return (
     <CardsBlockWrapper>
       <CardsBlockContainer>
         {title}
         {children}
-        <CardsGrid columns={columns}>
+        <CardsGrid>
           {cards.map((card, index) => {
             const theme = card.theme;
 

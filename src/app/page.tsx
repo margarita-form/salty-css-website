@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import { HeroBlock } from "../blocks/hero-block/hero-block";
-import { CardsBlock, CardTheme } from "../blocks/cards-block/cards-block";
+import { CardsBlock } from "../blocks/cards-block/cards-block";
 import { BodyLarge } from "../components/body.css";
 import { Button } from "../components/button/button.css";
 import { HeadingLarge, HeadingRegular } from "../components/heading.css";
