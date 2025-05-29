@@ -7,6 +7,7 @@ import { HeadingLarge, HeadingRegular } from "../components/heading.css";
 import { Main } from "../components/main.css";
 import { Icon } from "../components/icon/icon.css";
 import { Wrapper } from "../components/wrapper.css";
+import { Divider } from "../components/divider/divider.css";
 
 export const metadata: Metadata = {
   title: "Salty CSS - CSS-in-JS for React, Next.js, Vite and RSC",
@@ -27,7 +28,7 @@ export default async function Home() {
       icon: "url(/icons/flash.svg)",
       title: "Enhanced Developer Experience with a Feature-Rich API",
       description:
-        "Carefully crafted after years of tackling CSS challenges in modern applications. Our comprehensive API brings joy back to styling while delivering the power and flexibility needed for complex UI development.",
+        "Carefully crafted after years of tackling styling challenges in modern applications. Our comprehensive CSS-in-JS API brings joy back to styling while delivering the power and flexibility needed for complex UI development.",
       theme: {
         color: "#0088FF", // Futuristic Blue
         glowColor: "rgba(0, 136, 255, 0.3)",
@@ -82,12 +83,15 @@ export default async function Home() {
 
       <CardsBlock
         title={
-          <Wrapper width="large">
-            <HeadingRegular>
-              Create CSS-in-JS that doesn&apos;t overcomplicate things or bloat
-              your runtime and tank your performance scores.
-            </HeadingRegular>
-          </Wrapper>
+          <>
+            <Divider variant="simple" width="full" />
+            <Wrapper width="large">
+              <HeadingRegular>
+                CSS-in-JS that doesn&apos;t overcomplicate classes or bloat your
+                runtime and tank your performance scores.
+              </HeadingRegular>
+            </Wrapper>
+          </>
         }
         cards={featureCards}
       />

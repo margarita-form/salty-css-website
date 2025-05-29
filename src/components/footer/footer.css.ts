@@ -2,6 +2,7 @@ import { styled } from "@salty-css/react/styled";
 import { DynamicLink } from "../dynamic-link/dynamic-link";
 import { HDClamp } from "../../styles/helpers.css";
 import { fadeIn, fadeInHalf } from "../../styles/animations.css";
+import { Divider } from "../divider/divider.css";
 
 export const FooterWrapper = styled("footer", {
   base: {
@@ -104,14 +105,20 @@ export const FooterLink = styled(DynamicLink, {
   },
 });
 
+export const FooterDivider = styled(Divider, {
+  defaultProps: { variant: "saas" },
+  base: {
+    marginTop: "{spacing.large}",
+    gridColumn: "1 / -1",
+  },
+});
+
 export const FooterMentions = styled("div", {
   base: {
     display: "flex",
     justifyContent: "space-between",
     gridColumn: "1 / -1",
     padding: "{spacing.medium} 0",
-    borderTop: "1px solid {theme.altBackground}",
-    marginTop: "{spacing.large}",
     textStyle: "body.small",
     fontWeight: "200",
     gap: "{spacing.small}",

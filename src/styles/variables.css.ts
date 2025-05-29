@@ -2,6 +2,9 @@ import { defineVariables } from "@salty-css/core/factories";
 import { HDClamp, MobileClamp } from "./helpers.css";
 
 const columnBase = 142;
+const columnGap = 20;
+const getColumns = (cols: number) =>
+  HDClamp(columnBase * cols + columnGap * (cols - 1), 100);
 
 export default defineVariables({
   colors: {
@@ -48,18 +51,18 @@ export default defineVariables({
         },
       },
       width: {
-        "cols-1": HDClamp(columnBase),
-        "cols-2": HDClamp(columnBase * 2),
-        "cols-3": HDClamp(columnBase * 3),
-        "cols-4": HDClamp(columnBase * 4),
-        "cols-5": HDClamp(columnBase * 5),
-        "cols-6": HDClamp(columnBase * 6),
-        "cols-7": HDClamp(columnBase * 7),
-        "cols-8": HDClamp(columnBase * 8),
-        "cols-9": HDClamp(columnBase * 9),
-        "cols-10": HDClamp(columnBase * 10),
-        "cols-11": HDClamp(columnBase * 11),
-        "cols-12": HDClamp(columnBase * 12),
+        "cols-1": getColumns(1),
+        "cols-2": getColumns(2),
+        "cols-3": getColumns(3),
+        "cols-4": getColumns(4),
+        "cols-5": getColumns(5),
+        "cols-6": getColumns(6),
+        "cols-7": getColumns(7),
+        "cols-8": getColumns(8),
+        "cols-9": getColumns(9),
+        "cols-10": getColumns(10),
+        "cols-11": getColumns(11),
+        "cols-12": getColumns(12),
       },
     },
     "@largeMobileDown": {

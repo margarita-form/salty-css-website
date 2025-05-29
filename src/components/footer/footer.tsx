@@ -2,6 +2,7 @@ import { DynamicLink } from "../dynamic-link/dynamic-link";
 import { SaltyCssLogo } from "../logos/salty-css-logo";
 import {
   FooterContainer,
+  FooterDivider,
   FooterLink,
   FooterLinkGroups,
   FooterLinksColumn,
@@ -48,6 +49,8 @@ export const Footer = () => {
         <FooterLogo title="Salty CSS" href="/">
           <SaltyCssLogo />
         </FooterLogo>
+
+        <FooterDivider variant="pixelated" />
 
         <FooterMentions>
           <FooterMention>
