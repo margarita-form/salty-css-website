@@ -1,7 +1,6 @@
 import "../styles/index.css";
 import { fonts } from "../styles/fonts";
 import { Header } from "../components/header/header";
-import { PostHogProvider } from "../components/PostHogProvider";
 import { WarningBox } from "../components/main.css";
 import { Footer } from "../components/footer/footer";
 
@@ -14,14 +13,12 @@ export default function RootLayout({
         <link rel="icon" type="image/png" href="/favicon.png" />
       </head>
       <body className="theme-dark theme-current">
-        <PostHogProvider>
-          <WarningBox data-nosnippet>
-            Website is still under construction.
-          </WarningBox>
-          <Header />
-          {children}
-          <Footer />
-        </PostHogProvider>
+        <WarningBox data-nosnippet>
+          Website is still under construction.
+        </WarningBox>
+        <Header />
+        {children}
+        <Footer />
       </body>
     </html>
   );
