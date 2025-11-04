@@ -12,29 +12,27 @@
     "prepare": "npx salty-css build"
   },
   "dependencies": {
-    "@salty-css/core": "^0.0.1-alpha.296",
-    "@salty-css/react": "^0.0.1-alpha.296",
+    "@salty-css/core": "^0.0.1-alpha.300",
+    "@salty-css/react": "^0.0.1-alpha.300",
     "@types/react-syntax-highlighter": "^15.5.13",
     "fuse.js": "^7.1.0",
-    "next": "^15.2.4",
-    "posthog-js": "^1.234.1",
-    "posthog-node": "^4.11.1",
+    "next": "^15.5.6",
     "raw-loader": "^4.0.2",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-markdown": "^9.0.1",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-markdown": "^9.1.0",
+    "react-syntax-highlighter": "^15.6.6",
     "remark-gfm": "^4.0.1"
   },
   "devDependencies": {
-    "@salty-css/eslint-config-core": "^0.0.1-alpha.296",
-    "@salty-css/next": "^0.0.1-alpha.296",
-    "@types/node": "^20",
-    "@types/react": "^18",
-    "@types/react-dom": "^18",
+    "@salty-css/eslint-config-core": "^0.0.1-alpha.300",
+    "@salty-css/next": "^0.0.1-alpha.300",
+    "@types/node": "^20.19.24",
+    "@types/react": "^18.3.26",
+    "@types/react-dom": "^18.3.7",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
-    "prettier": "^3.4.1",
-    "typescript": "^5"
+    "prettier": "^3.6.2",
+    "typescript": "^5.9.3"
   }
 }
