@@ -16,10 +16,10 @@
     "@salty-css/react": "^0.0.1-alpha.300",
     "@types/react-syntax-highlighter": "^15.5.13",
     "fuse.js": "^7.1.0",
-    "next": "^16.0.1",
+    "next": "^16.0.7",
     "raw-loader": "^4.0.2",
-    "react": "^19.2.0",
-    "react-dom": "^19.2.0",
+    "react": "^19.2.1",
+    "react-dom": "^19.2.1",
     "react-markdown": "^10.1.0",
     "react-syntax-highlighter": "^16.1.0",
     "remark-gfm": "^4.0.1"
@@ -27,12 +27,12 @@
   "devDependencies": {
     "@salty-css/eslint-config-core": "^0.0.1-alpha.300",
     "@salty-css/next": "^0.0.1-alpha.300",
-    "@types/node": "^20.19.24",
-    "@types/react": "^19.2.2",
-    "@types/react-dom": "^19.2.2",
+    "@types/node": "^20.19.25",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
     "eslint": "^8",
     "eslint-config-next": "15.0.3",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.4",
     "typescript": "^5.9.3"
   }
 }
