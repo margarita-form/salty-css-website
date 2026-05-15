@@ -48,7 +48,7 @@
     </url>
     <url>
         <loc>https://salty-css.dev/docs/classnames/</loc>
-        <lastmod>2025-04-23T00:00:00Z</lastmod>
+        <lastmod>2026-05-15T00:00:00Z</lastmod>
         <priority>0.7</priority>
     </url>
     <url>
@@ -79,6 +79,16 @@
     <url>
         <loc>https://salty-css.dev/docs/viewport-clamp/</loc>
         <lastmod>2025-04-23T00:00:00Z</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://salty-css.dev/docs/api/styled/</loc>
+        <lastmod>2026-05-15T00:00:00Z</lastmod>
+        <priority>0.7</priority>
+    </url>
+    <url>
+        <loc>https://salty-css.dev/docs/api/classname/</loc>
+        <lastmod>2026-05-15T00:00:00Z</lastmod>
         <priority>0.7</priority>
     </url>
 </urlset>
