@@ -32,7 +32,7 @@ export async function generateMetadata({ params }: DocsPageProps) {
 
 const DocsPage = async ({ params }: DocsPageProps) => {
   const { slug: slugArray } = await params;
-  const slug = slugArray ? slugArray.join("-") : "temp";
+  const slug = slugArray ? slugArray.join("-") : "index";
   const { default: content } = await import(`../../../content/docs/${slug}.md`);
 
   return (
