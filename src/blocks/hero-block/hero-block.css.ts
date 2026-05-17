@@ -4,7 +4,6 @@ export const HeroBlockWrapper = styled("section", {
   base: {
     padding: "{spacing.blockMargin} {spacing.pageMargin}",
     width: "100%",
-    background: "{theme.background}",
   },
 });
 
