@@ -1,3 +1,15 @@
+---
+title: Color Function
+description: Chain color transforms — lighten, darken, alpha, mix — with the Salty CSS color helper.
+topic: Color Function
+category: utility
+schemaType: TechArticle
+keywords: [color, lighten, darken, alpha, color manipulation]
+intent: Manipulate colors with the chainable color helper — lighten, darken, alpha, mix, and more.
+proficiencyLevel: Intermediate
+priority: 0.6
+---
+
 # Color Function
 
 The Color utility provides a powerful way to manipulate colors in your Salty CSS styles. It allows you to transform, adjust, and derive new colors from existing ones without having to calculate color values manually.
@@ -12,7 +24,7 @@ The `color` function provides a chainable API for color manipulation:
 
 ```ts
 // /components/my-component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { color } from "@salty-css/core/helpers";
 
 export const Card = styled("div", {
@@ -144,7 +156,7 @@ color("#ff0000").alpha(0.5).hsla(); // Returns "hsla(0, 100%, 50%, 0.5)"
 ### Creating a Color Palette
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { color } from "@salty-css/core/helpers";
 
 // Define a single brand color and derive a palette
@@ -175,7 +187,7 @@ export const ColorPalette = styled("div", {
 ### Interactive Element States
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { color } from "@salty-css/core/helpers";
 
 export const Button = styled("button", {

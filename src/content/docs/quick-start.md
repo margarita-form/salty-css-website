@@ -1,3 +1,15 @@
+---
+title: Quick Start
+description: Bootstrap a Salty CSS project in one command and ship your first styled component.
+topic: Quick Start
+category: tutorial
+schemaType: TechArticle
+keywords: [quick start, getting started, install, cli, first component]
+intent: Bootstrap a Salty CSS project with the CLI and create your first styled component in minutes.
+proficiencyLevel: Beginner
+priority: 0.9
+---
+
 # Get started
 
 Fastest way to get started with any framework is
@@ -10,13 +22,13 @@ npx salty-css init
 
 ### Styled function
 
-Styled function is the main way to use Salty CSS within React. Styled function creates a React component that then can be used anywhere in your app. All styled functions must be created in `.css.ts` or `.css.tsx` files.
+Styled function is the main way to use Salty CSS in {{frameworkRuntime}}. Styled function creates a {{componentNoun}} that then can be used {{usageContext}}. All styled functions must be created in `.css.ts` or `.css.tsx` files.
 
 → [Read more about styled function](/docs/api/styled/)
 
 ```ts
 // /components/my-component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Component = styled("div", {
   base: {
@@ -49,19 +61,7 @@ export const Component = styled("div", {
 
 ## Using Components
 
-```tsx
-import { Component } from "./my-component.css";
-
-const MyPage = () => {
-  return (
-    <Component size="small" color="primary">
-      This is a Salty CSS component
-    </Component>
-  );
-};
-
-export default MyPage;
-```
+{{fw-snippet:component-render}}
 
 ## Use the CLI
 
@@ -72,7 +72,7 @@ export default MyPage;
 ## Good to know
 
 1. All Salty CSS functions (`styled`, `classNames`, `keyframes`, etc.) must be created in `*.css.ts` or `*.css.tsx` files. This is to ensure best build performance.
-2. Salty CSS components created with styled function can extend non Salty CSS components (`export const CustomLink = styled(NextJSLink, { ... });`) but those components must take in `className` prop for styles to apply.
+2. Salty CSS components created with styled function can extend non Salty CSS components (`export const CustomLink = styled(ThirdPartyLink, { ... });`) but those components must take in `className` prop for styles to apply. See [Overrides](/docs/overrides/) for framework-specific examples.
 3. Among common types like `string` and `number`, CSS-in-JS properties in Salty CSS do support `functions` and `promises` as values (`styled('span', { base: { color: async () => 'red' } });`) but running asynchronous tasks or importing heavy 3rd party libraries into `*.css.ts` or `*.css.tsx` files can cause longer build times.
 
 ## Get support

@@ -1,3 +1,15 @@
+---
+title: Animations
+description: Define typed @keyframes and stagger sequences with the keyframes() function in Salty CSS.
+topic: Animations
+category: guide
+schemaType: TechArticle
+keywords: [animations, keyframes, stagger, transitions]
+intent: Define typed @keyframes and stagger animations using Salty CSS's build-time keyframes() function.
+proficiencyLevel: Intermediate
+priority: 0.7
+---
+
 # Keyframes & Animations
 
 Salty CSS provides a typed, ergonomic way to author CSS `@keyframes` and reuse them across styled components. Keyframes are defined with the `keyframes` function, which returns a value you can drop directly into the `animation` property of any styled component, class name, or `css` block.
@@ -8,7 +20,7 @@ Define an animation with the `keyframes` function. The keys of the object are st
 
 ```ts
 // /styles/animations.css.ts
-import { keyframes } from "@salty-css/react/keyframes";
+import { keyframes } from "{{keyframesImport}}";
 
 // Simple from/to animation
 export const fadeIn = keyframes({
@@ -47,7 +59,7 @@ Alongside the keyframe selectors, the `keyframes` function accepts three configu
 
 ```ts
 // /styles/animations.css.ts
-import { keyframes } from "@salty-css/react/keyframes";
+import { keyframes } from "{{keyframesImport}}";
 
 export const fadeIn = keyframes({
   // 1. Give the @keyframes rule a stable, readable name in the CSS output.
@@ -82,7 +94,7 @@ A keyframe value works as a drop-in for the CSS `animation` shorthand. When Salt
 
 ```ts
 // /components/wrapper/wrapper.styled.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fadeIn, animateText } from "../../styles/animations.css";
 
 export const Wrapper = styled("div", {
@@ -107,7 +119,7 @@ The value returned by `keyframes` is callable. Call it with a `KeyframesParams` 
 
 ```ts
 // /components/list-item/list-item.styled.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fadeIn } from "../../styles/animations.css";
 
 export const FastFadeIn = styled("div", {
@@ -133,7 +145,7 @@ Animations compose cleanly with variants — toggle them on, swap them out, or l
 
 ```ts
 // /components/animated-button.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fadeIn, pulse } from "../styles/animations.css";
 
 export const AnimatedButton = styled("button", {
@@ -163,7 +175,7 @@ To stagger a list, combine a single keyframe with per-index `animationDelay` var
 
 ```ts
 // /components/staggered-items.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fadeIn } from "../styles/animations.css";
 
 export const StaggeredItem = styled("li", {
@@ -182,23 +194,7 @@ export const StaggeredItem = styled("li", {
 });
 ```
 
-```tsx
-import { StaggeredItem } from "./staggered-items.css";
-
-export const ItemsList = () => {
-  const items = ["Item 1", "Item 2", "Item 3", "Item 4", "Item 5"];
-
-  return (
-    <ul>
-      {items.map((item, index) => (
-        <StaggeredItem key={item} index={Math.min(index, 4)}>
-          {item}
-        </StaggeredItem>
-      ))}
-    </ul>
-  );
-};
-```
+{{fw-snippet:animations-stagger}}
 
 > **Tip**: For the cleanest result, set `appendInitialStyles: true` on `fadeIn` so each item stays in its starting state until its delayed animation begins.
 
@@ -210,7 +206,7 @@ That said, you can still use a local helper function to factor out shared keyfra
 
 ```ts
 // /styles/animation-templates.css.ts
-import { keyframes } from "@salty-css/react/keyframes";
+import { keyframes } from "{{keyframesImport}}";
 
 // Helper kept private to this file — not exported.
 const buildPulse = (scale: number) =>
@@ -236,7 +232,7 @@ If you only need a few variants of the same animation, prefer overriding `params
 Defines a CSS `@keyframes` rule and returns a callable value usable as the `animation` property in any Salty CSS styles.
 
 ```ts
-import { keyframes } from "@salty-css/react/keyframes";
+import { keyframes } from "{{keyframesImport}}";
 
 const myAnimation = keyframes({
   animationName?: string;

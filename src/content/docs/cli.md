@@ -1,3 +1,15 @@
+---
+title: CLI
+description: Use the salty-css command-line interface to scaffold, generate, and build your project.
+topic: CLI
+category: tutorial
+schemaType: TechArticle
+keywords: [cli, commands, init, generate, build, up]
+intent: Drive Salty CSS from the command line with the init, generate, build, and up commands.
+proficiencyLevel: Beginner
+priority: 0.7
+---
+
 # Salty CSS CLI
 
 Salty CSS comes with a powerful command-line interface (CLI) that helps you initialize projects, generate components, update packages, and build files.
@@ -21,7 +33,7 @@ npx salty-css init [directory]
 This command:
 
 - Installs required packages
-- Detects the framework in use (Next.js, Vite, etc.)
+- Detects the framework in use (Next.js, Vite, Astro, etc.)
 - Creates necessary config files
 - Sets up the project structure
 
@@ -61,7 +73,7 @@ npx salty-css generate src/components/card --name Card
 npx salty-css build [directory]
 ```
 
-This command compiles Salty CSS files in your project. It's usually not needed if you're using Next.js or Vite with the proper plugin, but it can be useful for debugging or advanced scenarios.
+This command compiles Salty CSS files in your project. It's usually not needed if you're using Next.js, Vite, or Astro with the proper plugin, but it can be useful for debugging or advanced scenarios.
 
 Options:
 

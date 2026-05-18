@@ -51,5 +51,13 @@ export default defineTemplates({
         lineHeight: "1.3em",
       },
     },
+    code: {
+      regular: {
+        fontSize: "{fontSize.code.regular}",
+        fontWeight: "300",
+        letterSpacing: "0.025em",
+        lineHeight: "1.66em",
+      },
+    },
   },
 });

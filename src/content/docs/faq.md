@@ -1,3 +1,15 @@
+---
+title: Frequently Asked Questions
+description: Common questions about Salty CSS — its build pipeline, runtime, and framework support.
+topic: FAQ
+category: faq
+schemaType: FAQPage
+keywords: [faq, questions, troubleshooting, performance, typescript]
+intent: Read the most common questions about Salty CSS — what it is, how it compiles, and how it fits your framework.
+proficiencyLevel: Beginner
+priority: 0.7
+---
+
 # Frequently Asked Questions
 
 ## General Questions
@@ -8,7 +20,7 @@ Salty CSS is a CSS-in-JS library that provides excellent developer experience wi
 
 ### How does Salty CSS compare to other CSS-in-JS solutions?
 
-Salty CSS focuses on build-time compilation to offer better runtime performance than many runtime CSS-in-JS libraries. It's designed to work well with modern frameworks like React, Next.js, and Vite, with full support for server components.
+Salty CSS focuses on build-time compilation to offer better runtime performance than many runtime CSS-in-JS libraries. It's designed to work well with modern frameworks like React, Next.js, Astro, and Vite, with full support for server components.
 
 ### Which frameworks are supported?
 
@@ -53,7 +65,7 @@ export default defineVariables({
 });
 
 // component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Heading = styled("h1", {
   base: {
@@ -74,12 +86,12 @@ Use media queries defined with `defineMediaQuery` or responsive variables:
 
 ```ts
 // media.css.ts
-import { defineMediaQuery } from "@salty-css/react/config";
+import { defineMediaQuery } from "{{configImport}}";
 
 export const mobile = defineMediaQuery((media) => media.maxWidth(640));
 
 // component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Box = styled("div", {
   base: {

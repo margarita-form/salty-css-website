@@ -1,3 +1,15 @@
+---
+title: Overrides
+description: Extend styled components, swap elements, and override styles with props in Salty CSS.
+topic: Overrides
+category: guide
+schemaType: TechArticle
+keywords: [overrides, extend, style props, third-party]
+intent: Extend Salty CSS components, override styles, integrate third-party components, and use style props.
+proficiencyLevel: Intermediate
+priority: 0.7
+---
+
 # Extending and Overriding
 
 Salty CSS offers powerful ways to extend components and override styles, allowing you to build complex component systems while maintaining consistency.
@@ -8,7 +20,7 @@ You can extend existing components to create new ones with additional styles or 
 
 ```ts
 // /components/button.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Button = styled("button", {
   base: {
@@ -20,7 +32,7 @@ export const Button = styled("button", {
 });
 
 // /components/primary-button.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { Button } from "./button.css";
 
 // Extend the Button component with new styles
@@ -37,21 +49,7 @@ export const PrimaryButton = styled(Button, {
 
 You can also extend non-Salty CSS components, like those from UI libraries:
 
-```ts
-// /components/custom-link.css.ts
-import { styled } from "@salty-css/react/styled";
-import { Link } from "next/link"; // Or any other component library
-
-export const CustomLink = styled(Link, {
-  base: {
-    color: "blue",
-    textDecoration: "none",
-    "&:hover": {
-      textDecoration: "underline",
-    },
-  },
-});
-```
+{{fw-snippet:overrides-link}}
 
 > Note: Third-party components must accept a `className` prop for the styles to be applied correctly.
 
@@ -60,7 +58,7 @@ export const CustomLink = styled(Link, {
 You can override the HTML element that's rendered by a styled component:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Heading = styled("div", {
   element: "h2", // This will render as an h2 instead of a div
@@ -76,22 +74,7 @@ export const Heading = styled("div", {
 
 You can pass CSS styles directly via props to override the base styles:
 
-```tsx
-import { Button } from "./button.css";
-
-export const CustomComponent = () => {
-  return (
-    <Button
-      style={{
-        backgroundColor: "purple",
-        padding: "1rem 2rem",
-      }}
-    >
-      Custom Button
-    </Button>
-  );
-};
-```
+{{fw-snippet:overrides-style-prop}}
 
 ## CSS Custom Properties
 
@@ -99,7 +82,7 @@ Use CSS variables to create components that can be easily themed:
 
 ```ts
 // /components/themed-box.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const ThemedBox = styled("div", {
   base: {
@@ -113,22 +96,4 @@ export const ThemedBox = styled("div", {
 
 Usage with CSS custom properties:
 
-```tsx
-import { ThemedBox } from "./themed-box.css";
-
-export const ThemeExample = () => {
-  return (
-    <div
-      style={
-        {
-          "--box-bg": "navy",
-          "--box-text": "white",
-          "--box-radius": "8px",
-        } as React.CSSProperties
-      }
-    >
-      <ThemedBox>This box uses the parent's custom properties</ThemedBox>
-    </div>
-  );
-};
-```
+{{fw-snippet:overrides-css-vars}}

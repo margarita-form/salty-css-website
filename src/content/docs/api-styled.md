@@ -1,10 +1,22 @@
+---
+title: Styled Function API
+description: Full API reference for the styled() function in Salty CSS — signature, options, and examples.
+topic: Styled Function
+category: api-reference
+schemaType: APIReference
+keywords: [styled, api reference, function signature, options]
+intent: Reference for the styled() function — signature, options, variants, and usage examples.
+proficiencyLevel: Expert
+priority: 0.7
+---
+
 # Styled function
 
-Styled function is the main way to use Salty CSS within React. Styled function creates a React component that then can be used anywhere in your app. All styled functions must be created in `.css.ts` or `.css.tsx` files
+Styled function is the main way to use Salty CSS in {{frameworkRuntime}}. Styled function creates a {{componentNoun}} that then can be used {{usageContext}}. All styled functions must be created in `.css.ts` or `.css.tsx` files
 
 ```ts
 // /components/my-component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 // Define a component with a styled function. First argument is the component name or existing component to extend and second argument is the object containing the styles and other options
 export const Component = styled("div", {
@@ -32,10 +44,4 @@ export const Component = styled("div", {
 
 ## Example usage:
 
-```tsx
-import { Component } from "./my-component.css";
-
-export const Page = () => {
-  return <Component>Hello world</Component>;
-};
-```
+{{fw-snippet:styled-hello}}

@@ -1,3 +1,4 @@
+import { FrameworkSwitcher } from "../../../components/framework-switcher/framework-switcher";
 import { HeadingSmall } from "../../../components/heading.css";
 import { Icon } from "../../../components/icon/icon.css";
 import { DocsNavClient } from "./docs-nav-client";
@@ -18,7 +19,12 @@ import {
 import { SearchButton } from "./search/search-button";
 import { SearchButtonWrapper } from "./search/search-button.css";
 
-export const DocsNavigation = () => {
+interface DocsNavProps {
+  framework: string;
+}
+
+export const DocsNavigation = ({ framework }: DocsNavProps) => {
+  const prefix = `/docs/${framework}`;
   return (
     <DocsNavClient>
       <DocsNavMobileMenuHeader>
@@ -34,6 +40,8 @@ export const DocsNavigation = () => {
 
       <DocsNavigationWrapper id="docs-nav">
         <HeadingSmall element="h2">Documentation</HeadingSmall>
+
+        <FrameworkSwitcher />
 
         <SearchButtonWrapper>
           <SearchButton />
@@ -54,23 +62,29 @@ export const DocsNavigation = () => {
 
           <DocsNavigationItems>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/quick-start">
+              <DocsNavigationItem href={`${prefix}/quick-start`}>
                 Quick Start
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/installation">
+              <DocsNavigationItem href={`${prefix}/installation`}>
                 Installation
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/usage">Usage</DocsNavigationItem>
+              <DocsNavigationItem href={`${prefix}/usage`}>
+                Usage
+              </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/cli">CLI</DocsNavigationItem>
+              <DocsNavigationItem href={`${prefix}/cli`}>
+                CLI
+              </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/faq">FAQ</DocsNavigationItem>
+              <DocsNavigationItem href={`${prefix}/faq`}>
+                FAQ
+              </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>
         </DocsNavigationGroup>
@@ -82,37 +96,37 @@ export const DocsNavigation = () => {
           </DocsNavigationGroupTitle>
           <DocsNavigationItems>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/basics">
+              <DocsNavigationItem href={`${prefix}/basics`}>
                 Component styles
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/classnames">
+              <DocsNavigationItem href={`${prefix}/classnames`}>
                 Class styles
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/variants">
+              <DocsNavigationItem href={`${prefix}/variants`}>
                 Variants
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/overrides">
+              <DocsNavigationItem href={`${prefix}/overrides`}>
                 Overrides
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/media-queries">
+              <DocsNavigationItem href={`${prefix}/media-queries`}>
                 Media Queries
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/animations">
+              <DocsNavigationItem href={`${prefix}/animations`}>
                 Animations
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/templates">
+              <DocsNavigationItem href={`${prefix}/templates`}>
                 Templates
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
@@ -126,12 +140,12 @@ export const DocsNavigation = () => {
           </DocsNavigationGroupTitle>
           <DocsNavigationItems>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/viewport-clamp">
+              <DocsNavigationItem href={`${prefix}/viewport-clamp`}>
                 Viewport Clamp
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/color-function">
+              <DocsNavigationItem href={`${prefix}/color-function`}>
                 Color Function
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
@@ -145,12 +159,12 @@ export const DocsNavigation = () => {
           </DocsNavigationGroupTitle>
           <DocsNavigationItems className="closed">
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/api/styled">
+              <DocsNavigationItem href={`${prefix}/api/styled`}>
                 Styled Function
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
-              <DocsNavigationItem href="/docs/api/classname">
+              <DocsNavigationItem href={`${prefix}/api/classname`}>
                 Class Name Function
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>

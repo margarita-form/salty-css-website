@@ -1,3 +1,15 @@
+---
+title: Documentation
+description: Overview of the Salty CSS documentation — installation, styling APIs, and CLI tooling.
+topic: Documentation
+category: overview
+schemaType: TechArticle
+keywords: [documentation, overview, css-in-ts, getting started]
+intent: Find everything you need to ship Salty CSS in your project — installation, styled APIs, variants, templates, and CLI tooling.
+proficiencyLevel: Beginner
+priority: 0.9
+---
+
 # Documentation
 
 Salty CSS is a zero-runtime, build-time CSS-in-TS library for React, Next.js and Astro. These docs cover everything from a one-minute install to the full styling API.
@@ -14,7 +26,7 @@ Then create a component in a `*.css.ts` file:
 
 ```ts
 // /components/my-button.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Button = styled("button", {
   base: {
@@ -26,7 +38,7 @@ export const Button = styled("button", {
 });
 ```
 
-…and use it like any other React component. For the full walkthrough see [Quick Start](/docs/quick-start/) and [Installation](/docs/installation/).
+…and use it like any other {{componentNoun}}. For the full walkthrough see [Quick Start](/docs/quick-start/) and [Installation](/docs/installation/).
 
 ## Search the docs
 

@@ -1,3 +1,15 @@
+---
+title: Viewport Clamp
+description: Generate fluid responsive sizes with defineViewportClamp in Salty CSS — no media-query stair-steps.
+topic: Viewport Clamp
+category: utility
+schemaType: TechArticle
+keywords: [viewport, clamp, fluid, responsive, defineViewportClamp]
+intent: Generate fluid responsive sizes that scale with the viewport using defineViewportClamp.
+proficiencyLevel: Intermediate
+priority: 0.7
+---
+
 # Viewport Clamp
 
 The Viewport Clamp utility creates responsive sizing values that scale smoothly with the viewport size, producing more fluid responsive designs without requiring multiple breakpoints.
@@ -38,7 +50,7 @@ export const mobilePortraitClamp = defineViewportClamp({
 Once defined, you can use clamp functions in your component styles to create fluid typography and spacing:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fhdClamp, mobileClamp } from "../styles/helpers.css";
 
 export const ResponsiveText = styled("div", {
@@ -120,7 +132,7 @@ In the website's styles, viewport clamps are used for typography scales:
 ### Responsive Spacing
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { fhdClamp, mobileClamp } from "../styles/helpers.css";
 
 export const Container = styled("div", {
@@ -191,7 +203,7 @@ export default defineVariables({
 Then use these tokens directly in your component styles:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Card = styled("header", {
   base: {

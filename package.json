@@ -5,28 +5,31 @@
   "type": "module",
   "scripts": {
     "pretty": "prettier --write .",
+    "predev": "node scripts/build-docs-index.mjs",
     "dev": "next dev --webpack",
+    "prebuild": "node scripts/build-docs-index.mjs",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "next lint",
-    "prepare": "npx salty-css build"
+    "prepare": "npx salty-css build",
+    "docs:index": "node scripts/build-docs-index.mjs"
   },
   "dependencies": {
-    "@salty-css/core": "^0.0.1",
-    "@salty-css/react": "^0.0.1",
-    "@types/react-syntax-highlighter": "^15.5.13",
+    "@salty-css/core": "^0.1.0-alpha.25",
+    "@salty-css/react": "^0.1.0-alpha.25",
     "fuse.js": "^7.3.0",
+    "hast-util-to-jsx-runtime": "^2.3.6",
     "next": "^16.2.6",
     "raw-loader": "^4.0.2",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
     "react-markdown": "^10.1.0",
-    "react-syntax-highlighter": "^16.1.1",
-    "remark-gfm": "^4.0.1"
+    "remark-gfm": "^4.0.1",
+    "shiki": "^4.0.2"
   },
   "devDependencies": {
-    "@salty-css/eslint-config-core": "^0.0.1",
-    "@salty-css/next": "^0.0.1",
+    "@salty-css/eslint-config-core": "^0.1.0-alpha.25",
+    "@salty-css/next": "^0.1.0-alpha.25",
     "@types/node": "^20.19.25",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",

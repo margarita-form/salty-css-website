@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef, useCallback, useMemo } from "react";
 import Fuse from "fuse.js";
 import { useRouter } from "next/navigation";
 import { useSearch } from "./search-context";
@@ -17,54 +17,71 @@ import {
   KeyboardShortcut,
   SearchCloseButton,
 } from "./search-modal.css";
-import { docPages } from "../../[[...slug]]/doc-pages";
+import docsIndex from "../../data/docs-index.json";
+import { useFramework } from "../framework-context";
 import { Icon } from "../../../../components/icon/icon.css";
 
-// Define the document structure
-interface DocPage {
-  title: string;
+interface IndexEntry {
+  framework: string;
   slug: string;
+  title: string;
   description: string;
+  headings: string[];
+  body: string;
 }
+
+const INDEX = docsIndex as IndexEntry[];
 
 export const SearchModal = () => {
   const { isSearchOpen, closeSearch, searchTerm, setSearchTerm } = useSearch();
+  const { framework } = useFramework();
   const [activeIndex, setActiveIndex] = useState(0);
-  const [results, setResults] = useState<DocPage[]>([]);
+  const [results, setResults] = useState<IndexEntry[]>([]);
   const router = useRouter();
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const showResults = results.length ? results : docPages.slice(0, 5);
-
-  // Navigate to selected result
-  const navigateToResult = useCallback(
-    (doc: DocPage) => {
-      router.push(`/docs/${doc.slug}`);
-      closeSearch(true);
-    },
-    [closeSearch, router]
+  const corpus = useMemo(
+    () => INDEX.filter((entry) => entry.framework === framework),
+    [framework],
   );
 
-  // Initialize Fuse.js search
+  const fuse = useMemo(
+    () =>
+      new Fuse(corpus, {
+        keys: [
+          { name: "title", weight: 0.4 },
+          { name: "headings", weight: 0.3 },
+          { name: "description", weight: 0.2 },
+          { name: "body", weight: 0.1 },
+        ],
+        includeScore: true,
+        threshold: 0.4,
+        ignoreLocation: true,
+      }),
+    [corpus],
+  );
+
+  const showResults = results.length ? results : corpus.slice(0, 5);
+
+  const navigateToResult = useCallback(
+    (doc: IndexEntry) => {
+      router.push(`/docs/${framework}/${doc.slug}`);
+      closeSearch(true);
+    },
+    [closeSearch, router, framework],
+  );
+
   useEffect(() => {
     if (searchTerm.trim() === "") {
       setResults([]);
       return;
     }
-
-    const fuse = new Fuse(docPages, {
-      keys: ["title", "description", "slug"],
-      includeScore: true,
-      threshold: 0.4,
-    });
-
     const searchResults = fuse.search(searchTerm);
     setResults(searchResults.map((result) => result.item));
-    setActiveIndex(0); // Reset active index when results change
-  }, [searchTerm]);
+    setActiveIndex(0);
+  }, [searchTerm, fuse]);
 
-  // Handle keyboard navigation
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (!isSearchOpen) return;
@@ -72,8 +89,6 @@ export const SearchModal = () => {
       switch (e.key) {
         case "ArrowDown":
           e.preventDefault();
-          console.log(1);
-
           setActiveIndex(Math.min(activeIndex + 1, showResults.length));
           break;
         case "ArrowUp":
@@ -93,7 +108,6 @@ export const SearchModal = () => {
     return () => document.removeEventListener("keydown", handleKeyDown);
   }, [isSearchOpen, showResults, activeIndex, navigateToResult]);
 
-  // Scroll active result into view
   useEffect(() => {
     if (resultsRef.current) {
       const activeElement = resultsRef.current.querySelector(`.active`);
@@ -139,7 +153,7 @@ export const SearchModal = () => {
             showResults.map((doc, index) => (
               <SearchResultItem
                 key={doc.slug}
-                href={`/docs/${doc.slug}`}
+                href={`/docs/${framework}/${doc.slug}`}
                 onClick={(e) => {
                   e.preventDefault();
                   navigateToResult(doc);

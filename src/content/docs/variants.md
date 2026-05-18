@@ -1,3 +1,15 @@
+---
+title: Variants
+description: Compose variant, compound, and default styles to build adaptable components in Salty CSS.
+topic: Variants
+category: guide
+schemaType: TechArticle
+keywords: [variants, compound variants, default variants, props]
+intent: Add prop-driven variants, compound variants, and default variants to your styled components.
+proficiencyLevel: Intermediate
+priority: 0.7
+---
+
 # Variant Styles
 
 Variants in Salty CSS allow you to create components with conditional styling based on props. This is a powerful way to build versatile UI components.
@@ -8,7 +20,7 @@ Variants are defined within the `variants` object of a styled component:
 
 ```ts
 // /components/button/button.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Button = styled("button", {
   base: {
@@ -58,30 +70,16 @@ export const Button = styled("button", {
 });
 ```
 
-## Using Variants in React
+## Using Variants
 
-```tsx
-import { Button } from "./button/button.css";
-
-export const MyComponent = () => {
-  return (
-    <div>
-      <Button>Default Button</Button>
-      <Button variant="solid">Solid Button</Button>
-      <Button variant="outlined" size="large">
-        Large Outlined Button
-      </Button>
-    </div>
-  );
-};
-```
+{{fw-snippet:variants-render}}
 
 ## Compound Variants
 
 Compound variants let you apply styles when multiple variant conditions are met simultaneously:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Button = styled("button", {
   base: {
@@ -124,7 +122,7 @@ export const Button = styled("button", {
 You can set default values for your variants:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Button = styled("button", {
   base: {

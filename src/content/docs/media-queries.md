@@ -1,3 +1,15 @@
+---
+title: Media Queries
+description: Use defineMediaQuery to author responsive styles and breakpoints in Salty CSS.
+topic: Media Queries
+category: guide
+schemaType: TechArticle
+keywords: [media queries, breakpoints, responsive, defineMediaQuery]
+intent: Author responsive styles with the defineMediaQuery helper and combine queries for breakpoints.
+proficiencyLevel: Beginner
+priority: 0.8
+---
+
 # Media Queries
 
 Media queries allow you to apply different styles based on device characteristics like screen size, device type, or orientation. Salty CSS provides a powerful and intuitive API for creating and using media queries.
@@ -8,7 +20,7 @@ With Salty CSS, you can define reusable media queries using the `defineMediaQuer
 
 ```ts
 // /styles/media.css.ts
-import { defineMediaQuery } from "@salty-css/react/config";
+import { defineMediaQuery } from "{{configImport}}";
 
 // Mobile breakpoints
 export const largeMobileDown = defineMediaQuery((media) => media.maxWidth(900));
@@ -36,7 +48,7 @@ export const lightMode = defineMediaQuery((media) =>
 Once defined, you can use these media queries directly in your component styles:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const ResponsiveBox = styled("div", {
   base: {
@@ -158,7 +170,7 @@ export const darkOrMobile = defineMediaQuery((media) =>
 Media queries work exceptionally well with viewport clamps for fully responsive designs:
 
 ```ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 import { HDClamp, MobileClamp } from "../styles/helpers.css";
 
 export const ResponsiveText = styled("h1", {

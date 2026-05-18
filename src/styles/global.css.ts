@@ -24,14 +24,18 @@ export const globalStyles = defineGlobalStyles({
     border: "1px solid {theme.altBackground}",
     color: "{colors.highlight}",
   },
-  "pre:has(code)": {
+  "pre:has(code):has(pre)": {
     background: "{theme.terminalBackground}",
     overflow: "auto",
     border: "1px solid {theme.altBackground}",
-    fontSize: "{fontSize.body.small}",
-    lineHeight: "1.2em",
+    fontSize: "{fontSize.code.regular}",
+    lineHeight: "1.5em",
     position: "relative",
     maxWidth: "100%",
+    "& pre": {
+      padding: "0 1em",
+      border: "none",
+    },
   },
   // Add a language label to code blocks
   "*[data-language]::before": {

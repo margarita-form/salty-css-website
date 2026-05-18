@@ -21,11 +21,12 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     links.forEach((link) => {
       const href = link.getAttribute("href");
       if (!href) return;
+
       if (pathname.includes(href)) {
         link.classList.add("active");
 
         const currentPageElement = wrapper.querySelector<HTMLButtonElement>(
-          "#docs-nav-mobile-menu-button-current"
+          "#docs-nav-mobile-menu-button-current",
         );
 
         if (currentPageElement) {
@@ -44,7 +45,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     const wrapper = ref.current;
 
     const titleButtons = wrapper.querySelectorAll<HTMLButtonElement>(
-      "[data-type='group-title']"
+      "[data-type='group-title']",
     );
 
     titleButtons.forEach((button) => {
@@ -62,7 +63,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     if (!ref.current) return;
     const wrapper = ref.current;
     const mobileMenuButton = wrapper.querySelector<HTMLButtonElement>(
-      "#docs-nav-mobile-menu-button"
+      "#docs-nav-mobile-menu-button",
     );
     if (!mobileMenuButton) throw new Error("Mobile menu button not found");
     const docsNav = wrapper.querySelector<HTMLElement>("#docs-nav");
@@ -70,7 +71,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     const backdrop = wrapper.querySelector<HTMLElement>("#docs-nav-backdrop");
     if (!backdrop) throw new Error("Docs nav backdrop not found");
     const closeButton = wrapper.querySelector<HTMLButtonElement>(
-      "#docs-nav-close-button"
+      "#docs-nav-close-button",
     );
     if (!closeButton) throw new Error("Close button not found");
 
@@ -85,7 +86,7 @@ export const DocsNavClient = ({ children }: DocsNavClientProps) => {
     };
 
     document.addEventListener("closeDocsNav", () =>
-      updateMobileNavState(false)
+      updateMobileNavState(false),
     );
 
     const handleClick = () => updateMobileNavState();

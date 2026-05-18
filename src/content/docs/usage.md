@@ -1,3 +1,15 @@
+---
+title: Usage
+description: Build and consume Salty CSS components inside your application code.
+topic: Usage
+category: guide
+schemaType: TechArticle
+keywords: [usage, components, styled, css.ts]
+intent: Author components in .css.ts files with Salty CSS and use them across your app.
+proficiencyLevel: Beginner
+priority: 0.8
+---
+
 # Usage
 
 This guide covers the basic usage of Salty CSS components and features across different frameworks.
@@ -10,7 +22,7 @@ Create salty components with styled only inside files that end with `.css.ts`, `
 
 ```ts
 // /components/my-component.css.ts
-import { styled } from "@salty-css/react/styled";
+import { styled } from "{{styledImport}}";
 
 export const Component = styled("div", {
   className: "wrapper", // Optional custom class name
@@ -43,21 +55,9 @@ export const Component = styled("div", {
 });
 ```
 
-## Using Components in React
+## Using Components
 
-```tsx
-import { Component } from "./my-component.css";
-
-const MyPage = () => {
-  return (
-    <Component size="small" color="primary">
-      This is a Salty CSS component
-    </Component>
-  );
-};
-
-export default MyPage;
-```
+{{fw-snippet:component-render}}
 
 ## Demo Projects
 

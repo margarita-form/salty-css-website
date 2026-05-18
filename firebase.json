@@ -3,6 +3,89 @@
     "public": "out",
     "site": "salty-css",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "redirects": [
+      { "source": "/docs/", "destination": "/docs/react/", "type": 301 },
+      {
+        "source": "/docs/quick-start/",
+        "destination": "/docs/react/quick-start/",
+        "type": 301
+      },
+      {
+        "source": "/docs/installation/",
+        "destination": "/docs/react/installation/",
+        "type": 301
+      },
+      {
+        "source": "/docs/usage/",
+        "destination": "/docs/react/usage/",
+        "type": 301
+      },
+      {
+        "source": "/docs/faq/",
+        "destination": "/docs/react/faq/",
+        "type": 301
+      },
+      {
+        "source": "/docs/cli/",
+        "destination": "/docs/react/cli/",
+        "type": 301
+      },
+      {
+        "source": "/docs/basics/",
+        "destination": "/docs/react/basics/",
+        "type": 301
+      },
+      {
+        "source": "/docs/variants/",
+        "destination": "/docs/react/variants/",
+        "type": 301
+      },
+      {
+        "source": "/docs/classnames/",
+        "destination": "/docs/react/classnames/",
+        "type": 301
+      },
+      {
+        "source": "/docs/overrides/",
+        "destination": "/docs/react/overrides/",
+        "type": 301
+      },
+      {
+        "source": "/docs/animations/",
+        "destination": "/docs/react/animations/",
+        "type": 301
+      },
+      {
+        "source": "/docs/color-function/",
+        "destination": "/docs/react/color-function/",
+        "type": 301
+      },
+      {
+        "source": "/docs/templates/",
+        "destination": "/docs/react/templates/",
+        "type": 301
+      },
+      {
+        "source": "/docs/media-queries/",
+        "destination": "/docs/react/media-queries/",
+        "type": 301
+      },
+      {
+        "source": "/docs/viewport-clamp/",
+        "destination": "/docs/react/viewport-clamp/",
+        "type": 301
+      },
+      {
+        "source": "/docs/api/styled/",
+        "destination": "/docs/react/api/styled/",
+        "type": 301
+      },
+      {
+        "source": "/docs/api/classname/",
+        "destination": "/docs/react/api/classname/",
+        "type": 301
+      }
+    ],
     "rewrites": [
       {
         "source": "/robots.txt",

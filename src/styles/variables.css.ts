@@ -49,6 +49,9 @@ export default defineVariables({
           regular: HDClamp(16),
           large: HDClamp(24),
         },
+        code: {
+          regular: HDClamp(14, 14, 16),
+        },
       },
       width: {
         "cols-1": getColumns(1),
@@ -81,6 +84,9 @@ export default defineVariables({
           small: MobileClamp(16),
           regular: MobileClamp(20),
           large: MobileClamp(24),
+        },
+        code: {
+          regular: MobileClamp(12, 12, 14),
         },
       },
     },

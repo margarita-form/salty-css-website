@@ -1,6 +1,18 @@
+---
+title: Classnames
+description: Generate reusable Salty CSS class strings with the className function for any element.
+topic: Classnames
+category: guide
+schemaType: TechArticle
+keywords: [classname, class names, classes, clsx, composition]
+intent: Use the className function to generate reusable CSS classes without wrapping elements in styled components.
+proficiencyLevel: Beginner
+priority: 0.7
+---
+
 # Class Name Function
 
-The `className` function creates a reusable CSS class without rendering a React component. It's the right tool when you want Salty CSS's variant system, nesting, tokens, and media queries, but you'd rather attach the class to your own JSX than wrap an element with `styled`. The result behaves like a string, so it composes with `clsx`, template literals, or any class-combining utility you already use.
+The `className` function creates a reusable CSS class without rendering a {{componentNoun}}. It's the right tool when you want Salty CSS's variant system, nesting, tokens, and media queries, but you'd rather attach the class to your own markup than wrap an element with `styled`. The result behaves like a string, so it composes with `clsx`, template literals, or any class-combining utility you already use.
 
 For the full options table and return-value reference, see [`Classname API`](/docs/api/classname/).
 
@@ -10,7 +22,7 @@ Define a class in a `*.css.ts` file:
 
 ```ts
 // /styles/card.css.ts
-import { className } from "@salty-css/react/class-name";
+import { className } from "{{classNameImport}}";
 
 export const card = className({
   base: {
@@ -38,7 +50,7 @@ Declare named variants under `variants`, then activate them at the call site wit
 
 ```ts
 // /styles/button.css.ts
-import { className } from "@salty-css/react/class-name";
+import { className } from "{{classNameImport}}";
 
 export const buttonClass = className({
   base: {
@@ -67,20 +79,7 @@ export const buttonClass = className({
 
 `.variant()` returns a **new** instance with `"<name>-<value>"` appended to the class string, so it's safe to chain:
 
-```tsx
-import { buttonClass } from "./styles/button.css";
-
-type Props = {
-  color: "primary" | "secondary" | "danger";
-  size: "small" | "large";
-  children: React.ReactNode;
-};
-
-export const Button = ({ color, size, children }: Props) => {
-  const cls = buttonClass.variant("color", color).variant("size", size);
-  return <button className={cls}>{children}</button>;
-};
-```
+{{fw-snippet:classname-typed-props}}
 
 ## Boolean variants
 
@@ -327,7 +326,7 @@ export const errorOutline = className({
 `className` is intentionally smaller than `styled`. It cannot:
 
 - extend another component or another Salty class (no `styled(MyComponent, ...)` equivalent),
-- render a React element (no element override via `element`, no `passProps`, no `defaultProps`),
+- render a {{componentNoun}} (no element override via `element`, no `passProps`, no `defaultProps`),
 - auto-apply `defaultVariants` at runtime — chain `.variant()` yourself or wrap in a helper as shown above.
 
 If you need any of these, reach for [`styled`](https://github.com/margarita-form/salty-css) instead.

@@ -1,13 +1,25 @@
+---
+title: Classname Function API
+description: Full API reference for the className() function in Salty CSS — signature, options, and variants.
+topic: Classname Function
+category: api-reference
+schemaType: APIReference
+keywords: [className, api reference, variants, css class]
+intent: Reference for the className() function — signature, options, and the .variant() chaining API.
+proficiencyLevel: Expert
+priority: 0.7
+---
+
 # `className` API reference
 
-`className` produces a reusable, build-time-generated CSS class for use with any element. It is a lightweight alternative to `styled` when you don't need a React component wrapper — you just want a class string with variants, nesting, tokens, and the rest of Salty CSS's style features. The returned value behaves like a `string` (so it slots straight into a JSX `className` attribute) but also exposes a `.variant()` method for chaining variant classes onto it.
+`className` produces a reusable, build-time-generated CSS class for use with any element. It is a lightweight alternative to `styled` when you don't need a {{componentNoun}} wrapper — you just want a class string with variants, nesting, tokens, and the rest of Salty CSS's style features. The returned value behaves like a `string` (so it slots straight into a {{jsxClassAttr}}) but also exposes a `.variant()` method for chaining variant classes onto it.
 
 For runnable examples and patterns, see [`classnames`](/docs/classnames/).
 
 ## Import
 
 ```ts
-import { className } from "@salty-css/react/class-name";
+import { className } from "{{classNameImport}}";
 ```
 
 All Salty CSS style definitions must live in `*.css.ts` (or `*.css.tsx`) files so the build-time compiler can pick them up.
@@ -43,7 +55,7 @@ type ClassNameFunction = string & {
 
 ### Ignored on `className`
 
-`StyledParams` also defines `element`, `passProps`, and `defaultProps`. These are only meaningful for `styled`, which renders an actual React component. `className` returns a class string, so it has no element to override and no props to pass through — these keys are accepted by the type but have no effect.
+`StyledParams` also defines `element`, `passProps`, and `defaultProps`. These are only meaningful for `styled`, which renders an actual {{componentNoun}}. `className` returns a class string, so it has no element to override and no props to pass through — these keys are accepted by the type but have no effect.
 
 ## Returned value
 

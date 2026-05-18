@@ -1,5 +1,6 @@
 import { DynamicLink } from "../dynamic-link/dynamic-link";
 import { SaltyCssLogo } from "../logos/salty-css-logo";
+import { FooterClient } from "./footer-client";
 import {
   FooterContainer,
   FooterDivider,
@@ -25,13 +26,19 @@ export const Footer = () => {
             <FooterLink href="/react">React</FooterLink>
           </FooterLinksColumn>
 
-          <FooterLinksColumn>
-            <FooterLinksTitle>Documentation</FooterLinksTitle>
-            <FooterLink href="/docs/quick-start">Get Started</FooterLink>
-            <FooterLink href="/docs/installation">Installation</FooterLink>
-            <FooterLink href="/docs/usage">Usage</FooterLink>
-            <FooterLink href="/docs/faq">FAQ</FooterLink>
-          </FooterLinksColumn>
+          <FooterClient>
+            <FooterLinksColumn>
+              <FooterLinksTitle>Documentation</FooterLinksTitle>
+              <FooterLink href="/docs/react/quick-start">
+                Get Started
+              </FooterLink>
+              <FooterLink href="/docs/react/installation">
+                Installation
+              </FooterLink>
+              <FooterLink href="/docs/react/usage">Usage</FooterLink>
+              <FooterLink href="/docs/react/faq">FAQ</FooterLink>
+            </FooterLinksColumn>
+          </FooterClient>
           <FooterLinksColumn>
             <FooterLinksTitle>Interwebs</FooterLinksTitle>
             <FooterLink href="https://discord.gg/R6kr4KxMhP>">

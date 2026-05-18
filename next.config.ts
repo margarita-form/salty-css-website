@@ -11,6 +11,15 @@ const nextConfig: NextConfig = {
     });
     return config;
   },
+  async redirects() {
+    return [
+      {
+        source: "/docs",
+        destination: "/docs/react",
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withSaltyCss(nextConfig);

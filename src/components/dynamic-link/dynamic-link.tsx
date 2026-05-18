@@ -20,7 +20,7 @@ export const DynamicLink = ({
 
   const target = href.startsWith("http") ? "_blank" : undefined;
   return (
-    <Link href={href} target={target} className={className} prefetch {...rest}>
+    <Link href={href} target={target} className={className} {...rest}>
       {children}
     </Link>
   );

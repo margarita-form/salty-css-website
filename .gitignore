@@ -44,5 +44,9 @@ next-env.d.ts
 # Salty-CSS
 saltygen
 
+# generated docs artifacts (built by scripts/build-docs-index.mjs)
+public/sitemap.xml
+src/app/docs/data/docs-index.json
+
 .env
 .env.local

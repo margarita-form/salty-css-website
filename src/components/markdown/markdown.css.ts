@@ -1,6 +1,14 @@
 import { styled } from "@salty-css/react/styled";
 
-export const CodeBlock = styled("div", {
+export const CodeBlockWrapper = styled("pre", {
+  base: {
+    pre: {
+      paddingBlock: "0.5em",
+    },
+  },
+});
+
+export const CodeBlockContainer = styled("div", {
   base: {
     padding: ".5em",
     position: "relative",

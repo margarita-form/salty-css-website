@@ -22,8 +22,11 @@ export const DocPageWrapper = styled("div", {
     p: {
       marginBlock: "1em",
     },
-    pre: {
+    "pre:has(pre)": {
       marginBlock: "2em",
+      pre: {
+        paddingBlock: "1em",
+      },
     },
     "*:is(p,pre,ul,ol) + h3": {
       marginTop: "1.5em",
