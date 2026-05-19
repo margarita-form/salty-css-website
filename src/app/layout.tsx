@@ -27,7 +27,8 @@ export default function RootLayout({
         />
         <FrameworkProvider>
           <WarningBox data-nosnippet>
-            Website is still under construction.
+            Some features documented here might be available only with `dev`
+            version tag in NPM
           </WarningBox>
           <Header />
           {children}
