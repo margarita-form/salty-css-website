@@ -3,51 +3,40 @@ import { defineTemplates } from "@salty-css/core/factories";
 export default defineTemplates({
   textStyle: {
     headline: {
-      small: {
-        fontSize: "{fontSize.headline.small}",
+      base: {
         fontWeight: "300",
         letterSpacing: "0.0125em",
         lineHeight: "1.2em",
         fontFamily: "var(--font-family-logo)",
+      },
+      small: {
+        fontSize: "{fontSize.headline.small}",
       },
       regular: {
         fontSize: "{fontSize.headline.regular}",
-        fontWeight: "300",
-        letterSpacing: "0.0125em",
-        lineHeight: "1.2em",
-        fontFamily: "var(--font-family-logo)",
       },
       large: {
         fontSize: "{fontSize.headline.large}",
-        fontWeight: "300",
-        letterSpacing: "0.0125em",
-        lineHeight: "1.2em",
-        fontFamily: "var(--font-family-logo)",
       },
     },
     body: {
-      xs: {
-        fontSize: "{fontSize.body.xs}",
+      base: {
         fontWeight: "300",
         letterSpacing: "0.0125em",
         lineHeight: "1.5em",
+      },
+      xs: {
+        fontSize: "{fontSize.body.xs}",
       },
       small: {
         fontSize: "{fontSize.body.small}",
-        fontWeight: "300",
-        letterSpacing: "0.0125em",
-        lineHeight: "1.5em",
       },
       regular: {
         fontSize: "{fontSize.body.regular}",
-        fontWeight: "300",
-        letterSpacing: "0.0125em",
         lineHeight: "1.4em",
       },
       large: {
         fontSize: "{fontSize.body.large}",
-        fontWeight: "300",
-        letterSpacing: "0.0125em",
         lineHeight: "1.3em",
       },
     },
