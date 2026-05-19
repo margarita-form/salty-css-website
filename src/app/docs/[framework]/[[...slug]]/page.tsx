@@ -17,6 +17,7 @@ import {
 } from "@/lib/frameworks";
 import { DocsAside } from "../../components/docs-aside";
 import { DocsNavigation } from "../../components/docs-nav";
+import { Breadcrumbs } from "../../components/breadcrumbs";
 import { DocsLayoutArticle } from "../../docs-layout.css";
 import {
   DEFAULT_OG_IMAGE,
@@ -160,6 +161,7 @@ const DocsPage = async ({ params }: DocsPageProps) => {
       <DocsNavigation framework={framework} />
       <DocsLayoutArticle>
         <DocPageWrapper>
+          <Breadcrumbs framework={fw} slug={slug} topic={topic} />
           <Markdown content={rendered} />
         </DocPageWrapper>
       </DocsLayoutArticle>

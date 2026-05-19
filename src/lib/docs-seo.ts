@@ -10,6 +10,7 @@ import type {
   ProficiencyLevel,
   SchemaType,
 } from "./docs-content";
+import { findDocGroup } from "@/app/docs/data/docs-groups";
 
 export const SITE_ORIGIN = "https://salty-css.dev";
 export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/banners/salty-css-meta-default.jpg`;
@@ -466,13 +467,14 @@ export const buildBreadcrumbJsonLd = ({
   topic: string;
 }): Record<string, unknown> => {
   const label = frameworkLabel(framework);
-  const items: Array<{ name: string; item: string }> = [
+  const docsUrl = `${SITE_ORIGIN}/docs/${framework}/`;
+  const group = slug ? findDocGroup(slug) : undefined;
+  const items: Array<{ name: string; item?: string }> = [
     { name: "Home", item: `${SITE_ORIGIN}/` },
-    {
-      name: `Docs (${label})`,
-      item: `${SITE_ORIGIN}/docs/${framework}/`,
-    },
+    { name: "Docs", item: docsUrl },
+    { name: label, item: docsUrl },
   ];
+  if (group) items.push({ name: group.label });
   if (slug) {
     items.push({ name: topic, item: canonicalUrlFor(framework, slug) });
   }
@@ -483,7 +485,7 @@ export const buildBreadcrumbJsonLd = ({
       "@type": "ListItem",
       position: idx + 1,
       name: it.name,
-      item: it.item,
+      ...(it.item ? { item: it.item } : {}),
     })),
   };
 };
