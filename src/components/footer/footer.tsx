@@ -15,6 +15,7 @@ import {
 } from "./footer.css";
 
 export const Footer = () => {
+  const year = new Date().getFullYear();
   return (
     <FooterWrapper>
       <FooterContainer>
@@ -67,7 +68,7 @@ export const Footer = () => {
             </DynamicLink>
           </FooterMention>
 
-          <FooterMention>© 2025 Salty CSS</FooterMention>
+          <FooterMention>© {year} Salty CSS</FooterMention>
         </FooterMentions>
       </FooterContainer>
     </FooterWrapper>
