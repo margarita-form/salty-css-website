@@ -42,7 +42,7 @@ export const Footer = () => {
           </FooterClient>
           <FooterLinksColumn>
             <FooterLinksTitle>Interwebs</FooterLinksTitle>
-            <FooterLink href="https://discord.gg/R6kr4KxMhP>">
+            <FooterLink href="https://discord.gg/R6kr4KxMhP">
               Discord
             </FooterLink>
             <FooterLink href="https://github.com/margarita-form/salty-css">
@@ -51,6 +51,7 @@ export const Footer = () => {
             <FooterLink href="https://www.npmjs.com/package/@salty-css/core">
               NPM
             </FooterLink>
+            <FooterLink href="/llms.txt">llms.txt</FooterLink>
           </FooterLinksColumn>
         </FooterLinkGroups>
 

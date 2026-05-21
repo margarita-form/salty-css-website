@@ -114,13 +114,11 @@ export const parseFrontmatter = (raw: string): ParsedDoc => {
       if (!Number.isNaN(num)) data.priority = num;
     } else if (key === "category") {
       const v = stripQuotes(rawValue);
-      if (!isDocCategory(v))
-        throw new Error(`Unknown doc category: ${v}`);
+      if (!isDocCategory(v)) throw new Error(`Unknown doc category: ${v}`);
       data.category = v;
     } else if (key === "schemaType") {
       const v = stripQuotes(rawValue);
-      if (!isSchemaType(v))
-        throw new Error(`Unknown schemaType: ${v}`);
+      if (!isSchemaType(v)) throw new Error(`Unknown schemaType: ${v}`);
       data.schemaType = v;
     } else if (key === "proficiencyLevel") {
       const v = stripQuotes(rawValue);

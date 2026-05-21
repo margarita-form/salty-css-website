@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 // Walks src/content/docs, runs each (framework, slug) through the same
-// templating engine the page route uses, and emits two artifacts:
+// templating engine the page route uses, and emits three artifacts:
 //
 //   src/app/docs/data/docs-index.json   -> consumed by the search modal
 //   public/sitemap.xml                  -> sitemap derived from the same matrix
+//   public/llms.txt                     -> llms.txt summary for AI agents
 //
-// Both outputs are gitignored. The script is invoked via `predev` and
+// All outputs are gitignored. The script is invoked via `predev` and
 // `prebuild`. It does not watch — restart dev to refresh.
 
 import { readFile, writeFile, mkdir, stat } from "node:fs/promises";
@@ -19,7 +20,62 @@ const CONTENT_DIR = join(REPO_ROOT, "src/content/docs");
 const SNIPPETS_DIR = join(CONTENT_DIR, "snippets");
 const INDEX_OUT = join(REPO_ROOT, "src/app/docs/data/docs-index.json");
 const SITEMAP_OUT = join(REPO_ROOT, "public/sitemap.xml");
+const LLMS_OUT = join(REPO_ROOT, "public/llms.txt");
 const SITE_ORIGIN = "https://salty-css.dev";
+
+// Mirrors `export const metadata` in src/app/{,react,next,astro}/page.tsx.
+// Kept here so the build script stays standalone (no TS evaluation step).
+const TOP_LEVEL_PAGES = [
+  {
+    path: "/",
+    title: "Salty CSS",
+    description:
+      "Build time CSS-in-JS library compatible with React, Next.js, Vite and React Server Components built with TypeScript.",
+  },
+  {
+    path: "/react/",
+    title: "Salty CSS for React",
+    description:
+      "Sprinkle Salty CSS on your React app — build-time CSS-in-TS that ships zero runtime.",
+  },
+  {
+    path: "/next/",
+    title: "Salty CSS for Next.js",
+    description:
+      "Salty CSS served fresh from the App Router — zero-runtime styles that work with React Server Components.",
+  },
+  {
+    path: "/astro/",
+    title: "Salty CSS for Astro",
+    description:
+      "Astro plus a pinch of salt — the same styled API in .astro files and React islands, extracted to plain CSS at build time.",
+  },
+];
+
+const LLMS_EXTERNAL_LINKS = [
+  {
+    title: "Source on GitHub",
+    url: "https://github.com/margarita-form/salty-css",
+    description:
+      "Monorepo for @salty-css/* packages — file issues, browse source, follow the alpha changelog.",
+  },
+  {
+    title: "Community Discord",
+    url: "https://discord.gg/R6kr4KxMhP",
+    description: "Chat with maintainers and other Salty CSS users.",
+  },
+  {
+    title: "@salty-css/core on npm",
+    url: "https://www.npmjs.com/package/@salty-css/core",
+    description: "The compiler package — published as alpha (^0.1.0-alpha.0).",
+  },
+];
+
+const FRAMEWORK_LABEL = {
+  react: "React",
+  next: "Next.js",
+  astro: "Astro",
+};
 
 // --- duplicated runtime state -------------------------------------------------
 // Kept in sync with src/lib/frameworks.ts and src/app/docs/data/docs-order.ts.
@@ -361,6 +417,100 @@ const gitLastMod = async (files) => {
   return latest > 0 ? new Date(latest).toISOString() : new Date().toISOString();
 };
 
+// --- llms.txt rendering -------------------------------------------------------
+
+const LLMS_OPTIONAL_THRESHOLD = 0.7;
+
+const llmsBullet = ({ title, url, description }) =>
+  description
+    ? `- [${title}](${url}): ${description}`
+    : `- [${title}](${url})`;
+
+const renderLlmsTxt = (topLevel, docsByFramework) => {
+  const out = [];
+  out.push("# Salty CSS");
+  out.push("");
+  out.push(
+    "> Build-time CSS-in-TS for React, Next.js and Astro. Compiles `styled(...)` calls",
+  );
+  out.push(
+    "> in `*.css.ts` files to plain CSS at build time — zero runtime cost, with full",
+  );
+  out.push(
+    "> TypeScript autocomplete on design tokens, themes, variants and media queries.",
+  );
+  out.push("> Works with React Server Components.");
+  out.push("");
+  out.push(
+    "Salty CSS is currently in public alpha (`@salty-css/* ^0.1.0-alpha.0`); expect",
+  );
+  out.push(
+    "minor breaking changes between releases. It is not a fork of vanilla-extract,",
+  );
+  out.push("stitches or Linaria — it has its own compiler and API.");
+  out.push("");
+  out.push(
+    "The documentation set is mirrored across the React, Next.js and Astro sections",
+  );
+  out.push(
+    "below. The three are translations of the same content with framework-specific",
+  );
+  out.push("install steps and code snippets — pick the section that matches your stack.");
+  out.push("");
+
+  out.push("## Overview");
+  for (const page of topLevel) {
+    out.push(
+      llmsBullet({
+        title: page.title,
+        url: `${SITE_ORIGIN}${page.path}`,
+        description: page.description,
+      }),
+    );
+  }
+  out.push("");
+
+  const optionalDocs = [];
+  for (const fwId of FRAMEWORK_IDS) {
+    const docs = docsByFramework[fwId] ?? [];
+    const main = [];
+    for (const doc of docs) {
+      if (doc.priority < LLMS_OPTIONAL_THRESHOLD) {
+        optionalDocs.push({ ...doc, fwLabel: FRAMEWORK_LABEL[fwId] });
+      } else {
+        main.push(doc);
+      }
+    }
+    out.push(`## Documentation (${FRAMEWORK_LABEL[fwId]})`);
+    for (const doc of main) {
+      out.push(
+        llmsBullet({
+          title: doc.title,
+          url: doc.url,
+          description: doc.description,
+        }),
+      );
+    }
+    out.push("");
+  }
+
+  out.push("## Optional");
+  for (const doc of optionalDocs) {
+    out.push(
+      llmsBullet({
+        title: `${doc.title} (${doc.fwLabel})`,
+        url: doc.url,
+        description: doc.description,
+      }),
+    );
+  }
+  for (const link of LLMS_EXTERNAL_LINKS) {
+    out.push(llmsBullet(link));
+  }
+  out.push("");
+  return out.join("\n");
+};
+
 // --- sitemap rendering --------------------------------------------------------
 
 const renderSitemap = (urls) => {
@@ -377,6 +527,7 @@ const renderSitemap = (urls) => {
 
 const main = async () => {
   const entries = [];
+  const docsByFramework = Object.fromEntries(FRAMEWORK_IDS.map((id) => [id, []]));
   const urls = [
     {
       loc: `${SITE_ORIGIN}/`,
@@ -415,21 +566,33 @@ const main = async () => {
       });
 
       const url = `${SITE_ORIGIN}/docs/${fw}/${slug ? `${slug}/` : ""}`;
+      const priority = data.priority ?? DEFAULT_PRIORITIES[slug] ?? 0.5;
       urls.push({
         loc: url,
         lastmod: await gitLastMod([...files, ...snippetFiles]),
-        priority: data.priority ?? DEFAULT_PRIORITIES[slug] ?? 0.5,
+        priority,
+      });
+      docsByFramework[fw].push({
+        slug,
+        title: data.title,
+        description: data.description,
+        priority,
+        url,
       });
     }
   }
 
   await mkdir(dirname(INDEX_OUT), { recursive: true });
   await mkdir(dirname(SITEMAP_OUT), { recursive: true });
+  await mkdir(dirname(LLMS_OUT), { recursive: true });
   await writeFile(INDEX_OUT, JSON.stringify(entries));
   await writeFile(SITEMAP_OUT, renderSitemap(urls));
+  const llmsTxt = renderLlmsTxt(TOP_LEVEL_PAGES, docsByFramework);
+  await writeFile(LLMS_OUT, llmsTxt);
 
+  const llmsLinkCount = (llmsTxt.match(/^- \[/gm) ?? []).length;
   console.log(
-    `docs-index: ${entries.length} entries -> ${INDEX_OUT}\nsitemap:    ${urls.length} urls    -> ${SITEMAP_OUT}`,
+    `docs-index: ${entries.length} entries -> ${INDEX_OUT}\nsitemap:    ${urls.length} urls    -> ${SITEMAP_OUT}\nllms.txt:   ${llmsLinkCount} links   -> ${LLMS_OUT}`,
   );
 };
 
