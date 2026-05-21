@@ -87,6 +87,11 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/eslint`}>
+                ESLint
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/faq`}>
                 FAQ
               </DocsNavigationItem>

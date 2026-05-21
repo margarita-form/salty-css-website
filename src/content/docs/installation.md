@@ -70,3 +70,5 @@ After running the dev server (or `npx salty-css build`), confirm:
 4. **No build warnings about missing plugin.** Salty CSS logs a warning at build time if the plugin didn't load — search your terminal output for `salty-css`.
 
 If any step fails, jump to [Troubleshooting](/docs/troubleshooting/).
+
+Want the linter to catch missing `export`s and misplaced `variants` before they reach the compiler? See [ESLint setup](/docs/eslint/).

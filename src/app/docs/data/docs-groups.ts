@@ -11,6 +11,7 @@ export const DOC_GROUPS = [
       "usage",
       "troubleshooting",
       "cli",
+      "eslint",
       "faq",
     ],
   },
