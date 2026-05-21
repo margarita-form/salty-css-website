@@ -5,13 +5,24 @@ export const DOC_GROUPS = [
   {
     id: "getting-started",
     label: "Getting Started",
-    slugs: ["quick-start", "installation", "usage", "cli", "faq"],
+    slugs: [
+      "quick-start",
+      "installation",
+      "usage",
+      "troubleshooting",
+      "cli",
+      "faq",
+    ],
   },
   {
     id: "styling",
     label: "Styling",
     slugs: [
       "basics",
+      "variables",
+      "theming",
+      "fonts",
+      "imports",
       "classnames",
       "variants",
       "overrides",
@@ -23,12 +34,17 @@ export const DOC_GROUPS = [
   {
     id: "utilities",
     label: "Utilities",
-    slugs: ["viewport-clamp", "color-function"],
+    slugs: ["viewport-clamp", "color-function", "modifiers"],
   },
   {
     id: "api",
     label: "API",
-    slugs: ["api/styled", "api/classname"],
+    slugs: [
+      "api/styled",
+      "api/classname",
+      "api/config",
+      "api/define-factories",
+    ],
   },
 ] as const;
 

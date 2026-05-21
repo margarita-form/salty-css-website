@@ -89,6 +89,17 @@ export const renderTemplate = async (
   return current;
 };
 
+// Rewrites bare /docs/<slug> markdown links to /docs/<frameworkId>/<slug>.
+// Protects against double-insertion by skipping links that already carry a
+// known framework segment (react | next | astro).
+const FRAMEWORK_LINK_RE = /\(\/docs\/(?!(?:react|next|astro)\/)([^)]*)\)/g;
+
+const rewriteDocLinks = (body: string, frameworkId: string): string =>
+  body.replace(
+    FRAMEWORK_LINK_RE,
+    (_, path) => `(/docs/${frameworkId}/${path})`,
+  );
+
 // Convenience wrapper that mirrors the parsing-config style intended by
 // the original plan: docsParser({ body }, { variables }) -> { body }.
 export const docsParser = async (
@@ -99,5 +110,10 @@ export const docsParser = async (
     variables: options.variables,
     loadSnippet: options.loadSnippet,
   });
-  return { body: rendered };
+  const frameworkId =
+    typeof options.variables.frameworkId === "string"
+      ? options.variables.frameworkId
+      : null;
+  const body = frameworkId ? rewriteDocLinks(rendered, frameworkId) : rendered;
+  return { body };
 };

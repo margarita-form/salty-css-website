@@ -132,6 +132,57 @@ export default defineTemplates({
 });
 ```
 
+## A real-world text-style template
+
+Here's the text-style template this very website uses. It shows how `base` + per-key styles compose into a reusable typography system, with the actual font-size values pulled from responsive tokens:
+
+{{snippet:template-text-styles}}
+
+## Function templates: dynamic parameters
+
+Function templates accept a value at the call site and return a style object. The argument can be a scalar (`"2rem"` above) or any shape you find useful — an options object, a token name, anything:
+
+{{snippet:template-dynamic}}
+
+Use function templates when the same pattern needs slightly different values each time (padding, color, an entire variant object) and you don't want to materialise every combination as a static template.
+
+## Runtime style injection with `{props.X}`
+
+Inside a template (or any Salty style object), the parser recognises `{props.X}` and `{-props.X}` placeholders and rewrites them into CSS custom properties. Salty CSS reads matching values from the rendered component's props at runtime and sets the custom property — so a single static rule can take dynamic per-instance values without becoming a new variant.
+
+```ts
+// /styles/templates.css.ts
+import { defineTemplates } from "@salty-css/core/factories";
+
+export default defineTemplates({
+  highlight: {
+    base: {
+      // The `{props.tint}` placeholder maps to a CSS variable on the element.
+      background: "{props.tint}",
+      color: "{props.fg}",
+    },
+  },
+});
+```
+
+```ts
+import { styled } from "{{styledImport}}";
+
+export const Pill = styled("span", {
+  base: {
+    highlight: true, // pull in the template
+    padding: "2px 8px",
+    borderRadius: "999px",
+  },
+});
+```
+
+{{fw-snippet:template-props-render}}
+
+Use the dash form (`{-props.X}`) when the prop name should be dash-cased in the generated CSS variable.
+
+> `{props.X}` is a runtime escape hatch — every prop you reference becomes a tiny extra inline style. Prefer variants for closed sets of values; reach for `{props.X}` when the value is genuinely open-ended (a user-picked color, an animation duration computed at runtime, etc.).
+
 ## Template variants
 
 Template nodes can declare named variant bundles — the same ergonomic as `styled({ variants })`, but reusable across components. A node becomes "rich" the moment it has a `base` or `variants` key; otherwise the existing flat shape (above) keeps working untouched.

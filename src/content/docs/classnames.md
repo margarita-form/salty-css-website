@@ -38,11 +38,7 @@ export const card = className({
 
 Use it like any other class string:
 
-```tsx
-import { card } from "./styles/card.css";
-
-export const Card = ({ children }) => <div className={card}>{children}</div>;
-```
+{{fw-snippet:classname-card-render}}
 
 ## Variants
 
@@ -105,7 +101,7 @@ export const buttonClass = className({
 
 Activate it by passing the value as a string:
 
-```tsx
+```ts
 buttonClass.variant("warning", "true");
 ```
 
@@ -136,10 +132,7 @@ export const button = ({
 } = {}) => buttonClass.variant("color", color).variant("size", size);
 ```
 
-```tsx
-<button className={button()}>Default</button>
-<button className={button({ color: "danger" })}>Danger</button>
-```
+{{fw-snippet:classname-defaults}}
 
 ## Compound variants
 
@@ -269,25 +262,7 @@ export const heading = className({
 
 Because the value is a string, you can combine it with any class-combining utility:
 
-```tsx
-import { card } from "./styles/card.css";
-import { buttonClass } from "./styles/button.css";
-import clsx from "clsx";
-
-export const CardWithButton = ({ children }) => (
-  <div className={card}>
-    {children}
-    <button
-      className={clsx(
-        buttonClass.variant("color", "primary"),
-        "my-other-class",
-      )}
-    >
-      Click me
-    </button>
-  </div>
-);
-```
+{{fw-snippet:classname-combine}}
 
 ## Custom `className` option
 
@@ -317,9 +292,7 @@ export const errorOutline = className({
 });
 ```
 
-```tsx
-<input className={`${baseInput} ${errorOutline}`} />
-```
+{{fw-snippet:classname-multi}}
 
 ## Limitations vs `styled`
 

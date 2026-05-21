@@ -198,6 +198,44 @@ export const StaggeredItem = styled("li", {
 
 > **Tip**: For the cleanest result, set `appendInitialStyles: true` on `fadeIn` so each item stays in its starting state until its delayed animation begins.
 
+## Pausing and resuming with `playState`
+
+Every `keyframes` value accepts a `playState` override (mapped to CSS `animation-play-state`). Use it to pause an animation declaratively — useful for hover-pausing carousels, scrubbing through a state machine, or freezing things when the user prefers reduced motion:
+
+```ts
+// /components/marquee.css.ts
+import { styled } from "{{styledImport}}";
+import { fadeIn } from "../styles/animations.css";
+
+export const Marquee = styled("div", {
+  base: {
+    animation: fadeIn({ iterationCount: "infinite", duration: "10s" }),
+
+    // Stop the animation when the user hovers the element.
+    "&:hover": {
+      animation: fadeIn({
+        iterationCount: "infinite",
+        duration: "10s",
+        playState: "paused",
+      }),
+    },
+  },
+});
+```
+
+Pair this with [`prefers-reduced-motion`](/docs/media-queries/) — and with [theming](/docs/theming/) generally — to avoid animations that surprise users who've opted out of motion:
+
+```ts
+styled("div", {
+  base: {
+    animation: fadeIn,
+    "@media (prefers-reduced-motion: reduce)": {
+      animation: "none",
+    },
+  },
+});
+```
+
 ## Sharing Keyframe Definitions
 
 Because Salty CSS extracts styles at build time, **every keyframe must be a top-level export of a `*.css.ts` (or `*.css.tsx`) file**. Calling `keyframes(...)` lazily at runtime from a non-`.css.ts` file won't produce a `@keyframes` rule in the generated CSS.

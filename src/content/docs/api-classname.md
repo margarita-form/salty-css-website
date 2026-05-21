@@ -46,12 +46,12 @@ type ClassNameFunction = string & {
 | ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | `base`             | `CSSinJS`                                | Base styles applied to every use of the class. Supports the full Salty style-object syntax (see [Style features](#style-features)).                                                                                |
 | `className`        | `string \| string[]`                     | One or more custom class names appended to the generated hash. Useful for stable selectors you can target from external CSS or DevTools.                                                                           |
-| `variants`         | `{ [name]: { [value]: CSSinJS } }`       | Named style variants. Activated at runtime by chaining `.variant(name, value)`.                                                                                                                                    |
-| `defaultVariants`  | `{ [name]: value }`                      | Declarative defaults consumed by `styled`. With `className`, defaults **do not auto-apply** at runtime — you must chain `.variant()` yourself. See the guide for the recommended helper pattern.                   |
-| `compoundVariants` | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied only when **all** of the listed variant values are active.                                                                                                                                    |
-| `anyOfVariants`    | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied when **any** of the listed variant values is active. Generated with `:where()`, so the rule has zero specificity and loses to a regular variant rule on the same property.                    |
+| `variants`         | `{ [name: string]: { [value: string]: CSSinJS } }` | Named style variants. Activated at runtime by chaining `.variant(name, value)`. Each axis maps `name → value → CSS-in-JS block`.                                                                         |
+| `defaultVariants`  | `{ [name: string]: string }`             | Declarative defaults consumed by `styled`. With `className`, defaults **do not auto-apply** at runtime — you must chain `.variant()` yourself. See the guide for the recommended helper pattern.                   |
+| `compoundVariants` | `Array<{ [variantName: string]: string; css: CSSinJS }>` | Extra styles applied only when **all** of the listed variant values are active.                                                                                                                |
+| `anyOfVariants`    | `Array<{ [variantName: string]: string; css: CSSinJS }>` | Extra styles applied when **any** of the listed variant values is active. Generated with `:where()`, so the rule has zero specificity and loses to a regular variant rule on the same property. |
 | `displayName`      | `string`                                 | Label used by the build output for debugging.                                                                                                                                                                      |
-| `priority`         | `number`                                 | CSS layer priority used to order rules in the cascade. Defaults to `0` for `className` (lower than `styled`'s default). Higher numbers come later in the cascade and therefore win conflicts at equal specificity. |
+| `priority`         | `number` (0–8)                           | CSS layer priority used to order rules in the cascade. Defaults to `0` (lower than the auto-bumped priority of an extending `styled` component). Higher numbers come later in the cascade and therefore win conflicts at equal specificity. |
 
 ### Ignored on `className`
 
@@ -63,9 +63,9 @@ The result of `className({ ... })` exposes:
 
 | Member                  | Description                                                                                                                                                  |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| string coercion         | Produces the generated hash class (e.g. `"s_1a2b3c4"`), so `<div className={myClass} />` and `` `my-prefix ${myClass}` `` both work.                         |
+| string coercion         | Produces the generated hash class (e.g. `"s_1a2b3c4"`), so it works in a {{jsxClassAttr}} or in a template literal (`` `my-prefix ${myClass}` ``).           |
 | `.variant(name, value)` | Returns a **new** `ClassNameFunction` with `"name-value"` appended. Immutable: the original is unchanged. Chainable: `.variant("a", "1").variant("b", "2")`. |
-| `.generator`            | The underlying `ClassNameGenerator`. Used by Salty's build tooling — not intended for app code.                                                              |
+| `.generator`            | The underlying `ClassNameGenerator` (the object that produces CSS at build time). Exposed for tooling — e.g. an external code generator that wants to read the resolved variant axes or recompute the hash. Not intended for app code. |
 | `.isClassName`          | Always `true`. Useful for runtime detection (e.g. when writing a helper that accepts either a raw string or a Salty class).                                  |
 
 ## Style features

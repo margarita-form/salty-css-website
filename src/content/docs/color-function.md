@@ -18,6 +18,22 @@ The Color utility provides a powerful way to manipulate colors in your Salty CSS
 
 The Salty CSS color function is built on top of the [color](https://github.com/Qix-/color) library by Qix, providing a robust and well-tested foundation for color manipulation.
 
+### When transformations happen
+
+`color()` runs at **build time**. The transformed value (e.g. `rgba(0, 0, 0, 0.5)`) lands in the generated CSS as a static string — there is no runtime cost and no JS bundle bloat at render time. The trade-off: you can only transform values that are knowable at build time, which includes raw colors and **static** token references like `{colors.brand.primary}`. Values that change at runtime (responsive or conditional tokens, plus anything computed via `{props.X}`) are passed through unchanged because there's no way to derive a shade from a value that doesn't exist yet.
+
+For runtime-derived shades on themed tokens, declare the shade variants directly under [`conditional` variables](/docs/theming/) instead.
+
+### Color spaces and inputs
+
+`color()` parses sRGB by default — the same color space the browser uses for `#rrggbb`, `rgb()`, `hsl()`, and named CSS colors. Transformations are computed in HSL space internally, which is why `.lighten()` / `.darken()` / `.saturate()` operate on perceptual axes rather than raw channels. The output is always returned as a CSS-compatible string in the format you asked for (`.hex()`, `.rgb()`, etc.) — default is `rgb()` / `rgba()`.
+
+Wide-gamut color (P3, oklch, etc.) is **not** part of the input parser today; if you need it, ship the wide-gamut value as a raw string and gate it behind `@supports (color(display-p3 1 1 1))`.
+
+### Errors and invalid input
+
+If `color()` can't parse the input (e.g. you reference a token path that doesn't exist, or pass a malformed string), the call throws at build time. With `defineConfig({ strict: 'warn' })` you'll get a warning instead and the original value passes through. Either way, the failure surfaces in your terminal — it doesn't reach the browser as silent fallback.
+
 ## Basic Usage
 
 The `color` function provides a chainable API for color manipulation:
@@ -54,9 +70,10 @@ color("#f00");
 color("rgb(255, 0, 0)");
 color("rgba(255, 0, 0, 0.5)");
 
-// HSL/HSLA strings
+// HSL/HSLA strings — useful when you want predictable lighten/darken behaviour.
 color("hsl(0, 100%, 50%)");
 color("hsla(0, 100%, 50%, 0.5)");
+color("hsl(210, 60%, 45%)").darken(0.1); // → hsl(210, 60%, ~40%)
 
 // Named CSS colors
 color("red");

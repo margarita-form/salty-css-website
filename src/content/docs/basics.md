@@ -57,27 +57,45 @@ Usage example:
 
 ## Global Styles
 
-Global styles allow you to define styles for HTML elements that apply throughout your application.
+Global styles target bare HTML selectors — anything not scoped to a single component. Use them for resets, base typography, anchor colors, or anything else you'd otherwise stuff into a top-level CSS file. Define them in a `.css.ts` file and export the result so the build picks them up:
 
 ```ts
 // /styles/global.css.ts
 import { defineGlobalStyles } from "@salty-css/core/factories";
 
-export default defineGlobalStyles({
+export const globalStyles = defineGlobalStyles({
   html: {
-    fontFamily: "Arial, sans-serif",
+    scrollBehavior: "smooth",
+    scrollPaddingTop: "5vh",
   },
   body: {
-    backgroundColor: "#fff",
     margin: 0,
+    fontFamily: "var(--font-family-main, helvetica, sans-serif)",
+    overflowY: "scroll",
   },
-  // Add more global styles as needed
+  a: {
+    color: "currentcolor",
+  },
+  // Nested objects work — selectors compose with the parent.
+  "pre:has(code)": {
+    background: "{theme.terminalBackground}",
+    overflow: "auto",
+    border: "1px solid {theme.altBackground}",
+    "& pre": {
+      padding: "0 1em",
+      border: "none",
+    },
+  },
 });
 ```
 
+Token references (`{theme.terminalBackground}`) and nested selectors (`& pre`) work here exactly as they do inside `styled` and `className`. The same options are also accepted by [`defineConfig({ global })`](/docs/api/config/#global) — pick whichever fits your project layout.
+
+For the built-in reset and how to opt out of it, see [`defineConfig.reset`](/docs/api/config/#reset).
+
 ## CSS Variables (Tokens)
 
-CSS variables create design tokens that can be reused throughout your application.
+CSS variables create design tokens that can be reused throughout your application. Salty CSS supports static, responsive (breakpoint-aware), and conditional (theme-aware) tokens — this section covers the static case; for the rest, see [Variables](/docs/variables/) and [Theming](/docs/theming/).
 
 ```ts
 // /styles/variables.css.ts
@@ -92,6 +110,11 @@ export default defineVariables({
       highlight: "#ff4081",
     },
   },
+  spacing: {
+    small: "8px",
+    medium: "16px",
+    large: "32px",
+  },
   fontFamily: {
     heading: "Arial, sans-serif",
     body: "Georgia, serif",
@@ -99,14 +122,24 @@ export default defineVariables({
 });
 ```
 
-Usage example:
+Reference tokens with `{path.to.token}` syntax from any style object:
 
 ```ts
 styled("span", {
   base: {
     fontFamily: "{fontFamily.heading}",
-    fontSize: "{fontSize.heading.regular}",
-    color: "{theme.textColor}",
+    color: "{colors.brand.main}",
+    padding: "{spacing.medium}",
   },
 });
 ```
+
+Token paths are validated at build time — typos surface as compiler output rather than as silent fallbacks in the browser.
+
+## Where to go next
+
+- [Variables](/docs/variables/) — responsive and conditional token scopes.
+- [Theming](/docs/theming/) — dark mode in a few lines.
+- [Fonts](/docs/fonts/) — register web fonts with `defineFont`.
+- [Imports](/docs/imports/) — pull in external CSS.
+- [Templates](/docs/templates/) — bundle reusable style patterns.

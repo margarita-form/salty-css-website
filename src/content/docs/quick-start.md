@@ -1,80 +1,212 @@
 ---
 title: Quick Start
-description: Bootstrap a Salty CSS project in one command and ship your first styled component.
+description: Set up Salty CSS in ~15 minutes — install with the CLI, write your first typed component, add variants, ship dark mode, and register a custom font.
 topic: Quick Start
 category: tutorial
-schemaType: TechArticle
-keywords: [quick start, getting started, install, cli, first component]
-intent: Bootstrap a Salty CSS project with the CLI and create your first styled component in minutes.
+schemaType: HowTo
+keywords: [Salty CSS quick start, getting started, install CSS-in-TS, TypeScript styled components, first component, add dark mode, defineFont, variants, npx salty-css init, Next.js setup, Vite setup, Astro setup]
+intent: Install Salty CSS, ship your first typed component, add variants, wire up dark mode, and register a custom font.
 proficiencyLevel: Beginner
 priority: 0.9
 ---
 
-# Get started
+# Quick Start
 
-Fastest way to get started with any framework is
+Goal: by the end of this page you have Salty CSS installed, a typed component on screen, prop-driven variants, dark mode that flips without a provider, and a custom font registered. Budget about 15 minutes.
+
+## 1. Install
+
+Inside any React, Next.js, Vite, or Astro project, run:
 
 ```bash
 npx salty-css init
 ```
 
-## Create components
+The CLI detects your framework, adds the right plugin (`@salty-css/next`, `@salty-css/vite`, `@salty-css/webpack`, or `@salty-css/astro`), drops a `salty.config.ts` in the project root, and wires up the build. If you'd rather wire it up yourself, see [Installation](/docs/installation/).
 
-### Styled function
+## 2. Your first component
 
-Styled function is the main way to use Salty CSS in {{frameworkRuntime}}. Styled function creates a {{componentNoun}} that then can be used {{usageContext}}. All styled functions must be created in `.css.ts` or `.css.tsx` files.
-
-→ [Read more about styled function](/docs/api/styled/)
+All Salty definitions live in files matching `*.css.ts`, `*.css.tsx`, `*.salty.ts`, `*.styled.ts`, or `*.styles.ts` — the suffix is how the compiler picks them up at build time.
 
 ```ts
-// /components/my-component.css.ts
+// /components/card.css.ts
 import { styled } from "{{styledImport}}";
 
-export const Component = styled("div", {
+export const Card = styled("section", {
   base: {
-    // Base styles that are always applied
-    display: "flex",
-    padding: "1rem",
-    backgroundColor: "#f5f5f5",
+    padding: "1.5rem",
+    borderRadius: "12px",
+    background: "{theme.background}",
+    color: "{theme.color}",
+    boxShadow: "0 1px 2px rgba(0, 0, 0, 0.06)",
+  },
+});
+```
+
+Use it like any other {{componentNoun}}:
+
+{{fw-snippet:component-render}}
+
+Note the `{theme.background}` / `{theme.color}` tokens — we'll define those in step 4.
+
+## 3. Add variants
+
+Variants turn props into typed style branches. Add a `size` axis and a `tone` axis:
+
+```ts
+// /components/card.css.ts
+import { styled } from "{{styledImport}}";
+
+export const Card = styled("section", {
+  defaultVariants: { size: "medium", tone: "neutral" },
+  base: {
+    padding: "1.5rem",
+    borderRadius: "12px",
+    background: "{theme.background}",
+    color: "{theme.color}",
   },
   variants: {
-    // Conditional styles based on props
     size: {
-      small: { padding: "0.5rem" },
-      large: { padding: "2rem" },
+      small: { padding: "1rem", borderRadius: "8px" },
+      medium: { padding: "1.5rem" },
+      large: { padding: "2.5rem", borderRadius: "16px" },
     },
-    color: {
-      primary: { backgroundColor: "blue", color: "white" },
-      secondary: { backgroundColor: "gray", color: "black" },
+    tone: {
+      neutral: {},
+      brand: { background: "{theme.highlight}", color: "{theme.background}" },
+      muted: { background: "{theme.altBackground}" },
     },
   },
   compoundVariants: [
-    // Styles applied when multiple variant conditions are met
+    { size: "large", tone: "brand", css: { fontWeight: 600 } },
+  ],
+});
+```
+
+`size` and `tone` are now typed props. Render with:
+
+{{fw-snippet:variants-render}}
+
+For more on variants — including `anyOfVariants` for "any of these branches matches" rules — see [Variants](/docs/variants/).
+
+## 4. Add design tokens and dark mode
+
+Salty themes are CSS variables under the hood. You declare two (or more) value sets under `conditional.theme`, and the active set is picked by an attribute on an ancestor — usually `<html>`. No provider, no context.
+
+```ts
+// /styles/themes.css.ts
+import { defineVariables } from "@salty-css/core/factories";
+
+export const palette = defineVariables({
+  colors: {
+    ink: "#0d1117",
+    paper: "#ffffff",
+    sand: "#f5f1e8",
+    coral: "#ff6b5a",
+  },
+});
+
+export const themes = defineVariables({
+  conditional: {
+    theme: {
+      light: {
+        background: "{colors.paper}",
+        altBackground: "{colors.sand}",
+        color: "{colors.ink}",
+        highlight: "{colors.coral}",
+      },
+      dark: {
+        background: "{colors.ink}",
+        altBackground: "#1c2128",
+        color: "{colors.paper}",
+        highlight: "{colors.coral}",
+      },
+    },
+  },
+});
+```
+
+Activate a theme by setting the attribute on any ancestor — usually the root:
+
+```html
+<html data-theme="dark">
+  ...
+</html>
+```
+
+That's the whole switch. Every `{theme.background}` / `{theme.color}` reference in your styles now reads the dark values. Flip the attribute back to `light` and it all updates again. For a working toggle that persists the choice in `localStorage` and avoids the first-paint flash:
+
+{{fw-snippet:theme-toggle}}
+
+See [Theming](/docs/theming/) for the deeper guide (system preference, multiple independent groups, deriving shades with `color()`).
+
+## 5. Register a custom font
+
+`defineFont` registers a font and gives you back something you can use as a `font-family` value, a CSS variable, a class name, or a `style` spread.
+
+```ts
+// /styles/fonts.css.ts
+import { defineFont } from "@salty-css/core/factories";
+
+export const display = defineFont({
+  name: "Mona Sans",
+  fallback: "system-ui, -apple-system, sans-serif",
+  variants: [
     {
-      size: "small",
-      color: "primary",
-      css: { borderRadius: "4px" },
+      src: "/fonts/Mona-Sans.woff2",
+      weight: "200 900",
+      style: "normal",
+      display: "swap",
     },
   ],
 });
 ```
 
-## Using Components
+Use it in a styled component:
 
-{{fw-snippet:component-render}}
+```ts
+import { styled } from "{{styledImport}}";
+import { display } from "../styles/fonts.css";
+
+export const Title = styled("h1", {
+  base: {
+    fontFamily: display,
+    fontSize: "clamp(2rem, 4vw, 3.5rem)",
+    color: "{theme.color}",
+  },
+});
+```
+
+`display` stringifies to its `font-family` value, so it works inline. You can also read `display.variable` (the CSS custom property), `display.className`, or `display.style` (an object you can spread onto a `style` prop). See [Fonts](/docs/fonts/) for remote fonts (`import`) and per-variant overrides.
+
+## What you have now
+
+A typed component with variants, a theme that flips on a single attribute, and a custom font registered through `defineFont`. That's the everyday Salty CSS surface.
+
+## Where to go next
+
+- **Variants in depth** → [Variants](/docs/variants/) (compound, `anyOfVariants`, defaults).
+- **Reusable style bundles** → [Templates](/docs/templates/).
+- **Fluid type / spacing** → [Viewport clamp](/docs/viewport-clamp/).
+- **Media queries and breakpoints** → [Media queries](/docs/media-queries/).
+- **Full reference** → [`styled`](/docs/api/styled/), [`className`](/docs/api/classname/), [`defineConfig`](/docs/api/config/).
 
 ## Use the CLI
 
-- Create component: `npx salty-css generate [filePath]`
-- Build: `npx salty-css build [directory]`
-- Update Salty CSS packages: `npx salty-css up`
+- Scaffold a component: `npx salty-css generate [filePath]`
+- Force a CSS build: `npx salty-css build [directory]`
+- Bump packages: `npx salty-css up`
 
 ## Good to know
 
-1. All Salty CSS functions (`styled`, `classNames`, `keyframes`, etc.) must be created in `*.css.ts` or `*.css.tsx` files. This is to ensure best build performance.
-2. Salty CSS components created with styled function can extend non Salty CSS components (`export const CustomLink = styled(ThirdPartyLink, { ... });`) but those components must take in `className` prop for styles to apply. See [Overrides](/docs/overrides/) for framework-specific examples.
-3. Among common types like `string` and `number`, CSS-in-JS properties in Salty CSS do support `functions` and `promises` as values (`styled('span', { base: { color: async () => 'red' } });`) but running asynchronous tasks or importing heavy 3rd party libraries into `*.css.ts` or `*.css.tsx` files can cause longer build times.
+1. All Salty CSS definitions (`styled`, `className`, `keyframes`, `defineFont`, etc.) must live in `*.css.ts` / `*.css.tsx` (or `.salty.ts`, `.styled.ts`, `.styles.ts`). The suffix is the contract — that's how the compiler knows to evaluate the file.
+2. `styled` can extend non-Salty components (`styled(ThirdPartyLink, { ... })`), but the wrapped component must accept a `className` prop. See [Overrides](/docs/overrides/).
+3. CSS-in-JS values can be `string`, `number`, **function**, or **promise** — but importing heavy runtime libraries into a `*.css.ts` file will slow your build (and may crash if the library assumes a browser). Keep these files style-focused.
+
+## If something didn't work
+
+→ [Troubleshooting](/docs/troubleshooting/). The most common cause (a wrong filename suffix) is the very first entry.
 
 ## Get support
 
-To get help with problems, [Join Salty CSS Discord server](https://discord.gg/R6kr4KxMhP).
+Stuck? Drop into the [Salty CSS Discord](https://discord.gg/R6kr4KxMhP) and someone will untangle it with you.

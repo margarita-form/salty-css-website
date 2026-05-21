@@ -93,6 +93,27 @@ As another example, `fhdClamp(96, 42, 240)` with `42` as min override and `240` 
 
 Hint: If you want to override `max` but not `min` you can pass `undefined` for the min value like this: `fhdClamp(96, undefined, 240)`
 
+### Worked example
+
+For `fhdClamp` defined with `screenSize: 1920, minMultiplier: 0.5, maxMultiplier: 1.25`, calling `fhdClamp(96)` produces approximately `clamp(48px, 5vw, 120px)`. The resolved size at a few common viewport widths:
+
+| Viewport width | Linear value (5vw of viewport) | After `clamp(48, …, 120)` |
+| -------------- | ------------------------------ | ------------------------- |
+| 480px          | 24px                           | **48px** (min)            |
+| 1024px         | 51.2px                         | **51.2px**                |
+| 1366px         | 68.3px                         | **68.3px**                |
+| 1920px         | 96px                           | **96px** (reference)      |
+| 2560px         | 128px                          | **120px** (max)           |
+
+The value scales linearly between min and max, then clamps at both ends. The "reference" value (96px at 1920px in this example) is the point where the linear formula matches your input.
+
+### Edge cases
+
+- **Min greater than max.** If your multipliers (or explicit overrides) flip the order, the browser still respects `clamp(a, b, c)` semantics — the larger of the two ends wins. Salty doesn't reorder for you; double-check your multipliers.
+- **Reference size larger than common viewports.** If `screenSize: 1920` is bigger than every viewport your users have, the value is pinned to `min` everywhere — which is probably not what you want. Drop the `screenSize` to match the upper end of your target range instead.
+- **Negative multipliers.** Allowed (the value goes negative), useful for shifting an element off-screen, but rarely what you mean for sizes — start with `0` if you want the value to collapse to zero on small screens.
+- **Axis selection.** `axis: 'horizontal'` (default) uses `vw`; `axis: 'vertical'` uses `vh`. For mobile portrait layouts where height varies more than width, vertical is often the right choice.
+
 ## Configuration Options
 
 When creating a viewport clamp with `defineViewportClamp`, you can provide several options:

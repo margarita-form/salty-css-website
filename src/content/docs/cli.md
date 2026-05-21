@@ -47,6 +47,15 @@ Example:
 npx salty-css init
 ```
 
+**Generated artefacts.** After init you should find:
+
+- `salty.config.ts` next to your bundler config (`next.config.ts`, `vite.config.ts`, etc.).
+- The Salty packages added to `package.json` and installed.
+- The build plugin wired into your bundler config (e.g. `withSaltyCss(nextConfig)`).
+- An empty `saltygen/` directory (populated on first run).
+
+**Wrong framework picked up?** `init` reads your `package.json` to decide which framework helpers to install. If you're in a monorepo, run it from the package's own root, not the workspace root. If it already wrote the wrong config, delete `salty.config.ts` and re-run — the safe path is always a clean re-init rather than hand-editing the generated files.
+
 ### Generate Components
 
 ```bash
@@ -84,6 +93,14 @@ Example:
 ```bash
 npx salty-css build src
 ```
+
+**Generated artefacts.** A successful build produces, inside `saltygen/`:
+
+- `index.css` — the single bundled stylesheet imported at runtime (with `importStrategy: 'root'`) or referenced per-component (with `importStrategy: 'component'`).
+- `salty.config.js` — a compiled snapshot of your `salty.config.ts` used internally by the runtime.
+- Per-component `.css` files — only when `importStrategy: 'component'` is set.
+
+`saltygen/` is regenerated from scratch on every build, so it's safe (and recommended) to add it to `.gitignore`.
 
 ### Update Packages
 

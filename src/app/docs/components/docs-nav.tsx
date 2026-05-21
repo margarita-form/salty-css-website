@@ -77,6 +77,11 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/troubleshooting`}>
+                Troubleshooting
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/cli`}>
                 CLI
               </DocsNavigationItem>
@@ -98,6 +103,26 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/basics`}>
                 Component styles
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/variables`}>
+                Variables
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/theming`}>
+                Theming
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/fonts`}>
+                Fonts
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/imports`}>
+                Imports
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
@@ -149,6 +174,11 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
                 Color Function
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/modifiers`}>
+                Modifiers
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
           </DocsNavigationItems>
         </DocsNavigationGroup>
 
@@ -166,6 +196,16 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/api/classname`}>
                 Class Name Function
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/api/config`}>
+                defineConfig
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/api/define-factories`}>
+                define* factories
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>

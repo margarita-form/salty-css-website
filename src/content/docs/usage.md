@@ -16,7 +16,17 @@ This guide covers the basic usage of Salty CSS components and features across di
 
 ## Create components
 
-Create salty components with styled only inside files that end with `.css.ts`, `.css.tsx`, `.salty.ts`, `.styled.ts` or `.styles.ts`.
+Salty CSS only picks up files whose names end with one of these suffixes:
+
+| Suffix       | When to use it                                                       |
+| ------------ | -------------------------------------------------------------------- |
+| `.css.ts`    | Default for any style or component file. Works everywhere.           |
+| `.css.tsx`   | Same as `.css.ts`, but JSX is allowed in the file.                   |
+| `.salty.ts`  | Alias of `.css.ts` — pick whichever reads better in your project.    |
+| `.styled.ts` | Alias of `.css.ts`, conventionally used for `styled` factories.      |
+| `.styles.ts` | Alias of `.css.ts`, conventionally used for `defineTemplates` etc.   |
+
+A `.ts` file with the same content but missing the right suffix will type-check fine but produce **no CSS** at build time — this is the single most common "my styles aren't appearing" cause. See [Troubleshooting](/docs/troubleshooting/) if you hit it.
 
 ## Basic Component Structure
 
@@ -58,6 +68,28 @@ export const Component = styled("div", {
 ## Using Components
 
 {{fw-snippet:component-render}}
+
+## Naming components in DevTools
+
+In development builds, every styled component renders with a `data-component-name` attribute matching its export name. Search for `[data-component-name="Button"]` in the elements panel to jump straight to it. You can override the label with the `displayName` option on the styled definition:
+
+```ts
+export const PrimaryButton = styled("button", {
+  displayName: "PrimaryButton",
+  base: { /* … */ },
+});
+```
+
+In production builds the attribute is stripped, so it's a debugging aid only.
+
+## Where to go next
+
+- **Add prop-driven styles** → [Variants](/docs/variants/) (and [`anyOfVariants`](/docs/variants/#anyof-variants---or-logic) for OR-logic).
+- **Share style bundles across components** → [Templates](/docs/templates/).
+- **Add design tokens** → [Variables](/docs/variables/).
+- **Add dark mode** → [Theming](/docs/theming/).
+- **Extend a third-party component** → [Overrides](/docs/overrides/).
+- **API reference** → [`styled`](/docs/api/styled/) · [`className`](/docs/api/classname/) · [`defineConfig`](/docs/api/config/).
 
 ## Demo Projects
 
