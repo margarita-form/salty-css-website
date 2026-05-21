@@ -3,8 +3,18 @@
     "public": "out",
     "site": "salty-css",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "trailingSlash": "true",
     "redirects": [
-      { "source": "/docs/", "destination": "/docs/react/", "type": 301 },
+      {
+        "source": "/docs",
+        "destination": "/docs/react/",
+        "type": 301
+      },
+      {
+        "source": "/docs/",
+        "destination": "/docs/react/",
+        "type": 301
+      },
       {
         "source": "/docs/quick-start/",
         "destination": "/docs/react/quick-start/",
