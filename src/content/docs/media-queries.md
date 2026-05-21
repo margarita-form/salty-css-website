@@ -165,6 +165,35 @@ export const darkOrMobile = defineMediaQuery((media) =>
 );
 ```
 
+### Three or more conditions
+
+`and()` and `or()` chain — combine them freely for stricter matches:
+
+```ts
+// Mobile-sized device in portrait, with reduced-motion preference.
+export const mobileQuietPortrait = defineMediaQuery((media) =>
+  media
+    .maxWidth(640)
+    .and(media.orientation("portrait"))
+    .and(media.reducedMotion)
+);
+
+// Print OR small landscape (think: cheat-sheet layouts).
+export const printOrLandscapeMobile = defineMediaQuery((media) =>
+  media.print.or(media.maxWidth(640).and(media.orientation("landscape")))
+);
+```
+
+The right-hand side of `.and()` / `.or()` accepts any media expression — including nested `.and()` / `.or()` calls — so you can build truth tables of any depth without giving up named exports.
+
+## Container queries
+
+Container queries respond to the size of a nearby ancestor element rather than the viewport. Mark a container by setting `containerType` on it, then key off `@container (...)` inside its children's styles:
+
+{{snippet:media-container-query}}
+
+Container queries make a single component lay out differently in a sidebar vs. a main column without any JS measurement — handy for design-system primitives that live in many slots.
+
 ## Media Queries and Viewport Clamps
 
 Media queries work exceptionally well with viewport clamps for fully responsive designs:
@@ -194,3 +223,12 @@ export const ResponsiveText = styled("h1", {
 4. **Combine with responsive tokens or viewport clamps** for truly fluid responsive designs.
 5. **Be consistent** with your naming patterns (e.g., `smallDesktopDown`, `largeMobileDown`).
 6. **Test thoroughly** across different devices and screen sizes.
+
+## Why isn't my media query applying?
+
+If a `@mediaName` key isn't taking effect, run through these in order:
+
+1. **Is the file imported in the build graph?** A `defineMediaQuery` export needs to actually reach the bundler — re-export it from your styles barrel, or import it once from `salty.config.ts`.
+2. **Is the name spelled right at the call site?** Salty CSS doesn't fail on unknown `@xxx` keys; they're emitted as literal at-rules and silently never match. Match the export name verbatim.
+3. **Is another rule winning by specificity?** Inspect the element in DevTools — your `@mediaName` rule may be in the cascade but losing. Tighten the selector or bump `priority` on the styled component.
+4. **Are you nesting the media key inside the wrong scope?** `@mediaName` belongs as a key on a style object, not as a value: `{ "@tabletDown": { padding: "1rem" } }`, not `{ padding: "@tabletDown 1rem" }`.

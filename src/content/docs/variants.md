@@ -157,3 +157,61 @@ export const Button = styled("button", {
 ```
 
 With default variants, you don't need to specify these props every time, as they'll be applied automatically.
+
+## Boolean variants
+
+For toggle-style props, declare a variant whose values are `true` / `false`:
+
+```ts
+export const Button = styled("button", {
+  base: { padding: "0.5rem 1rem" },
+  variants: {
+    loading: {
+      true: { opacity: 0.6, pointerEvents: "none" },
+    },
+  },
+});
+```
+
+{{fw-snippet:boolean-variant-render}}
+
+The variant only needs entries for the values you want to style — there's no requirement to declare both `true` and `false`.
+
+## anyOf variants — OR logic
+
+`compoundVariants` requires **all** listed values to be active. `anyOfVariants` flips that to "any of these" — useful when several variants should share a small rule without duplicating the CSS.
+
+```ts
+export const Badge = styled("span", {
+  base: {
+    display: "inline-block",
+    padding: "2px 8px",
+    borderRadius: "999px",
+  },
+  variants: {
+    tone: {
+      success: { background: "#16a34a", color: "white" },
+      warning: { background: "#eab308", color: "black" },
+      danger: { background: "#dc2626", color: "white" },
+      neutral: { background: "#e5e7eb", color: "#111" },
+    },
+  },
+  anyOfVariants: [
+    { tone: "success", css: { fontWeight: 700 } },
+    { tone: "warning", css: { fontWeight: 700 } },
+    { tone: "danger", css: { fontWeight: 700 } },
+  ],
+});
+```
+
+`anyOfVariants` rules are generated with `:where()`, so they have **zero specificity**. A regular variant rule on the same property will win — by design. If you want the shared rule to override the per-variant one, move it into `compoundVariants` or `base`.
+
+{{fw-snippet:any-of-variants}}
+
+## Variant props on the rendered component
+
+Every variant name you declare becomes a typed prop on the component:
+
+{{fw-snippet:variant-props-render}}
+
+If the consumer omits a variant prop and you declared a `defaultVariants` entry for it, the default applies. Variant props are consumed by Salty and **do not** reach the underlying DOM element by default — see [`passProps`](/docs/overrides/#passprops) when you need them forwarded (e.g. wrapping a third-party link component).
