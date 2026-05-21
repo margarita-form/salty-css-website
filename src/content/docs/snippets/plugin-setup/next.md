@@ -28,4 +28,16 @@
 5. Build the `saltygen` directory by running your app once or via the CLI: `npx salty-css build [directory]`.
 6. Import global styles from `saltygen/index.css` in some global css file: `@import 'insert_path_to_index_css';`.
 
+### `withSaltyCss` options
+
+Both Webpack and Turbopack are supported; `withSaltyCss` auto-detects which one Next.js is running (`next dev --turbopack` sets `process.env.TURBOPACK=1`) and picks the matching integration. Pass a second argument to override:
+
+```ts
+withSaltyCss(nextConfig, {
+  bundler: "auto",     // 'auto' | 'webpack' | 'turbopack' — default 'auto'
+  mode: undefined,     // 'production' | 'development' — defaults to NODE_ENV
+  dir: undefined,      // project root for Turbopack; defaults to nextConfig.turbopack.root or process.cwd()
+});
+```
+
 > {{ssrNote}}

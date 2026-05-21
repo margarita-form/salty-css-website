@@ -14,12 +14,14 @@
 3. Add the Salty CSS integration to `astro.config.mjs`:
    ```ts
    import { defineConfig } from "astro/config";
-   import salty from "@salty-css/astro";
+   import saltyIntegration from "@salty-css/astro/integration";
 
    export default defineConfig({
-     integrations: [salty()],
+     integrations: [saltyIntegration()],
    });
    ```
+
+   `saltyIntegration` accepts `{ srcDir?: string; rootDir?: string }`. `srcDir` defaults to `'src'`; `rootDir` defaults to the Astro config root.
 4. Make sure that `salty.config.ts` and `astro.config.mjs` are in the same folder.
 5. Build the `saltygen` directory by running your app once or via the CLI: `npx salty-css build [directory]`.
 6. Import global styles from `saltygen/index.css` in your global stylesheet: `@import 'insert_path_to_index_css';`.

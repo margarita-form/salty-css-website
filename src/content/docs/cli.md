@@ -105,17 +105,27 @@ npx salty-css build src
 ### Update Packages
 
 ```bash
-npx salty-css up [version]
+npx salty-css update [version]
 ```
+
+`update` has the alias `up` — `npx salty-css up` does the same thing.
 
 This command updates all Salty CSS packages in your project to the specified version.
 
 Options:
 
 - `version`: Version to update to (defaults to "latest")
+- `--dir <dir>`: Project directory to rebuild after updating
+- `-y, --yes`: Skip confirmation prompts
+- `--legacy-peer-deps`: Pass `--legacy-peer-deps` to npm (not recommended)
 
 Example:
 
 ```bash
-npx salty-css up
+npx salty-css update         # equivalent to: npx salty-css up
+npx salty-css update 1.2.3   # pin to a specific version
 ```
+
+## Linting
+
+Beyond the CLI, Salty CSS ships an ESLint plugin and config that catch two common mistakes the compiler can't warn you about — unexported `styled` / `className` / `keyframes` / `defineX` calls, and `variants` mistakenly nested inside `base`. Setup and rule reference: [ESLint](/docs/eslint/).
