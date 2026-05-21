@@ -27,7 +27,8 @@ export default async function Home() {
           New recipe for styling your components just dropped
         </HeadingLarge>
         <BodyLarge>
-          Start by adding a pintch of Salty CSS to your app.
+          Start by adding a pinch of Salty CSS to your project and enjoy the
+          benefits of a build time CSS-in-JS
         </BodyLarge>
 
         <Button href="/docs">
