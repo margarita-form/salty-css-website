@@ -9,5 +9,9 @@ export const syntaxHighlightStyles = defineGlobalStyles({
     backgroundColor: "{theme.terminalBackground}",
     border: "1px solid {theme.altBackground}",
     fontFamily: "monospace",
+    textDecoration: "none !important",
+  },
+  "a:has(code)": {
+    textDecoration: "none !important",
   },
 });
