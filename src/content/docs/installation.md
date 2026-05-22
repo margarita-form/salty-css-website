@@ -33,7 +33,7 @@ If `salty-css init` picks the wrong framework, can't find your bundler config, o
    - React + Vite: `npm i @salty-css/vite @salty-css/core @salty-css/react`
    - React + Webpack: `npm i @salty-css/webpack @salty-css/core @salty-css/react`
    - Astro: `npm i @salty-css/astro @salty-css/core`
-2. **Wire the bundler plugin.** `withSaltyCss(nextConfig)` for Next.js, `saltyPlugin(__dirname)` for Vite, the loader/plugin pair for Webpack, the integration for Astro.
+2. **Wire the bundler plugin.** `withSaltyCss(nextConfig)` for Next.js, `saltyPlugin(__dirname)` for Vite, `saltyPlugin(config, __dirname)` in `webpack.config.js` for Webpack, the integration for Astro.
 3. **Create `salty.config.ts`** in the same directory as your bundler config (e.g. next to `next.config.ts` or `vite.config.ts`):
    ```ts
    import { defineConfig } from "{{configImport}}";

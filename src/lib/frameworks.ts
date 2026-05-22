@@ -8,6 +8,7 @@ export interface FrameworkData {
   keyframesImport: string;
   configImport: string;
   helpersImport: string;
+  runtimeImport: string;
   // Framework-aware prose tokens used in docs markdown.
   componentNoun: string;
   frameworkRuntime: string;
@@ -22,6 +23,7 @@ const reactSubpaths = {
   keyframesImport: "@salty-css/react/keyframes",
   configImport: "@salty-css/react/config",
   helpersImport: "@salty-css/react/helpers",
+  runtimeImport: "@salty-css/react/runtime",
 } as const;
 
 const astroSubpaths = {
@@ -31,6 +33,7 @@ const astroSubpaths = {
   keyframesImport: "@salty-css/astro/keyframes",
   configImport: "@salty-css/astro/config",
   helpersImport: "@salty-css/astro/helpers",
+  runtimeImport: "@salty-css/astro/runtime",
 } as const;
 
 export type FrameworkFamily = "react" | "astro";

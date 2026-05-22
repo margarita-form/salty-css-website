@@ -196,6 +196,8 @@ Salty CSS uses `@layer` internally to make the cascade predictable:
 
 Range is 0–8. Bumping `priority` is the right tool when a wrapping component should override a wrapped one (and it happens automatically for `styled(Component, …)`); it doesn't fix specificity issues caused by overly broad selectors.
 
+For worked examples of setting `priority` manually, equal-specificity tie-breaking, and how `!important` and inline `style` interact with the layer system, see [Overrides → Priority & cascade in depth](/docs/overrides/#priority--cascade-in-depth).
+
 ### `className`
 
 Appends one or more custom class names to the generated hash. Useful for:

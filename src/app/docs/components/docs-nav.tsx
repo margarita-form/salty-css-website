@@ -205,12 +205,17 @@ export const DocsNavigation = ({ framework }: DocsNavProps) => {
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/api/config`}>
-                defineConfig
+                Config
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
             <DocsNavigationItemWrapper>
               <DocsNavigationItem href={`${prefix}/api/define-factories`}>
-                define* factories
+                Define factories
+              </DocsNavigationItem>
+            </DocsNavigationItemWrapper>
+            <DocsNavigationItemWrapper>
+              <DocsNavigationItem href={`${prefix}/api/runtime`}>
+                Runtime Styles
               </DocsNavigationItem>
             </DocsNavigationItemWrapper>
           </DocsNavigationItems>

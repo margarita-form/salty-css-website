@@ -88,6 +88,7 @@ const reactSubpaths = {
   keyframesImport: "@salty-css/react/keyframes",
   configImport: "@salty-css/react/config",
   helpersImport: "@salty-css/react/helpers",
+  runtimeImport: "@salty-css/react/runtime",
 };
 
 const astroSubpaths = {
@@ -97,6 +98,7 @@ const astroSubpaths = {
   keyframesImport: "@salty-css/astro/keyframes",
   configImport: "@salty-css/astro/config",
   helpersImport: "@salty-css/astro/helpers",
+  runtimeImport: "@salty-css/astro/runtime",
 };
 
 const FRAMEWORKS = [
@@ -162,6 +164,7 @@ const DOC_ORDER = [
   "api/classname",
   "api/config",
   "api/define-factories",
+  "api/runtime",
 ];
 
 const DEFAULT_PRIORITIES = {
@@ -190,6 +193,7 @@ const DEFAULT_PRIORITIES = {
   "api/classname": 0.7,
   "api/config": 0.7,
   "api/define-factories": 0.6,
+  "api/runtime": 0.6,
 };
 
 const frameworkData = (id) => {

@@ -175,3 +175,58 @@ export const Panel = styled("section", {
 ```
 
 The `--panel-accent` variable resolves to whatever `{theme.highlight}` is at runtime, so child elements can read `var(--panel-accent)` without re-resolving the theme themselves.
+
+## Priority & cascade in depth
+
+Salty CSS settles override conflicts through CSS cascade layers, not source order or selector specificity tricks. Every component rule lands in a layer named `lN` where `N` is the component's priority; the declared order is `imports, reset, global, templates, fonts, l0, l1, …, l8`, so a higher layer always wins regardless of selector specificity. See the [layer table](/docs/api/styled/#priority) in the `styled` API reference for what lives where.
+
+### Setting `priority` manually
+
+Most components stay at the default `priority: 0` (layer `l0`). Raise it when you want a rule to win against other rules that share its selector specificity — for example a utility component meant to override the components it sits on:
+
+{{fw-snippet:priority-manual}}
+
+Setting `priority` explicitly turns off the auto-bump that `styled(Component, …)` would otherwise apply. If you write `styled(Button, { priority: 0, base: {…} })`, the wrapper now lives in `l0` alongside `Button` and will not automatically win the tie. Set `priority` only when you mean to override the default.
+
+### Equal-specificity tie-breaking
+
+When two Salty rules target the same property with the same selector specificity, the one in the higher layer wins. This is the only tie-break Salty applies — source order does not matter, and `styled(...)` does not generate more specific selectors to force overrides.
+
+{{fw-snippet:priority-tiebreak}}
+
+If you find yourself wanting "just a bit more" specificity, wrap the component (auto-bump) or set `priority` — don't add chained class selectors or `!important`.
+
+### `!important` is preserved verbatim
+
+Salty CSS does not strip, warn on, or rewrite `!important`. Whatever you put in a value string is what ends up in the emitted CSS:
+
+{{fw-snippet:overrides-important}}
+
+Prefer raising `priority`. Inside CSS cascade layers, `!important` declarations follow an inverted layer order (earlier layers win over later ones), which interacts badly with the layered priority system Salty already gives you.
+
+### Inline `style` always wins
+
+The `style` prop generates an inline declaration on the element, and inline declarations sit above all stylesheet rules in the CSS cascade — including the highest priority layer. A consumer's `style={{ color: "green" }}` will beat any Salty rule for the same property:
+
+{{fw-snippet:overrides-style-prop}}
+
+If you need an override path from outside the component without giving up the cascade, expose a CSS custom property (see [Custom Properties](#css-custom-properties) above) or bump `priority` on a wrapping component. Reach for `style` only when you actually want inline-wins-everything semantics.
+
+### Modifiers and the cascade
+
+[Modifiers](/docs/api/config/) declared in `defineConfig({ modifiers })` are value-transformation functions: when a pattern matches a value, the modifier can emit additional CSS blocks that are prepended to the component's declaration. The extra CSS lives in the **same layer** as the component that triggered it, so a wrapping component still wins against its modifiers via the auto-bump:
+
+```ts
+// Button — modifier-driven rules live in l0 alongside the base.
+export const Button = styled("button", {
+  base: { color: "red /* maybe rewritten by a modifier */" },
+});
+
+// PrimaryButton — auto-bumped to l1, so it wins against Button's
+// base and against any modifier-emitted rules attached to Button.
+export const PrimaryButton = styled(Button, {
+  base: { color: "blue" },
+});
+```
+
+Modifiers never change a component's effective priority. If you need a modifier-driven rule to win across the wrap boundary, raise the wrapping component's `priority` instead.

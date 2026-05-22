@@ -28,6 +28,7 @@ export const DOC_ORDER = [
   "api/classname",
   "api/config",
   "api/define-factories",
+  "api/runtime",
 ] as const;
 
 export type DocSlug = (typeof DOC_ORDER)[number];
@@ -61,4 +62,5 @@ export const DEFAULT_PRIORITIES: Record<string, number> = {
   "api/classname": 0.7,
   "api/config": 0.7,
   "api/define-factories": 0.6,
+  "api/runtime": 0.6,
 };

@@ -45,6 +45,7 @@ export const DOC_GROUPS = [
       "api/classname",
       "api/config",
       "api/define-factories",
+      "api/runtime",
     ],
   },
 ] as const;
