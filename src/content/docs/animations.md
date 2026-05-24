@@ -1,6 +1,14 @@
 ---
 title: Animations
 description: Define typed @keyframes and stagger sequences with the keyframes() function in Salty CSS.
+preHeadline:
+  react: Typed Keyframes and Stagger Sequences — Ergonomic Animation Hooks Compiled Ahead of Bundle Time
+  next: RSC-Safe @keyframes and Stagger Choreography — No FOUC on Hydration, Streamable From the Server
+  astro: Compile @keyframes Directly Into Island Components — No Client JS Cost for Pure CSS Motion
+visibleHeading:
+  react: Keyframes and Animations in React Components
+  next: Keyframes and Animations in Server and Client Components
+  astro: Keyframes and Animations in .astro Pages and Islands
 topic: Animations
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Define typed @keyframes and stagger animations using Salty CSS's build-t
 proficiencyLevel: Intermediate
 priority: 0.7
 ---
-
-# Keyframes & Animations
 
 Salty CSS provides a typed, ergonomic way to author CSS `@keyframes` and reuse them across styled components. Keyframes are defined with the `keyframes` function, which returns a value you can drop directly into the `animation` property of any styled component, class name, or `css` block.
 

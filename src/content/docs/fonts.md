@@ -1,6 +1,14 @@
 ---
 title: Fonts
 description: Register web fonts with defineFont — local files, remote stylesheets, and CSS-variable exports for Salty CSS styles.
+preHeadline:
+  react: Register Web Fonts With defineFont() — Local Files, Remote Stylesheets, Typed CSS-Variable Exports
+  next: Register Self-Hosted and Remote Fonts in App Router Layouts Without Render-Blocking Hydration
+  astro: defineFont() in .astro Pages — Embed Local Files or Google Fonts Without Client JS Penalty
+visibleHeading:
+  react: Web Fonts in React Apps
+  next: Web Fonts in App Router Layouts
+  astro: Web Fonts in .astro Pages
 topic: Fonts
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Register local and remote fonts with defineFont and reference them from 
 proficiencyLevel: Intermediate
 priority: 0.7
 ---
-
-# Fonts
 
 `defineFont` is a framework-agnostic way to register fonts inside Salty CSS. It writes the `@font-face` rules into your build output, exposes the font as a CSS custom property, and returns a small object that can be used as a class, a CSS variable, or an inline style.
 

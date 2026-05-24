@@ -1,6 +1,14 @@
 ---
 title: defineConfig API
 description: Full reference for defineConfig — variables, global, reset, templates, modifiers, importStrategy, externalModules, strict, and defaultUnit.
+preHeadline:
+  react: defineConfig for React Apps — Wire Variables, Templates, Modifiers, and Resets in salty.config.ts
+  next: defineConfig for Next.js — Set Up Tokens, Modifiers, and Strict Mode Once for Server and Client
+  astro: defineConfig in Astro Integration — Tokens, Modifiers, and Strict Mode for Compile-Time CSS
+visibleHeading:
+  react: defineConfig for React Apps
+  next: defineConfig for the Next.js App Router
+  astro: defineConfig for Astro Integration
 topic: defineConfig
 category: api-reference
 schemaType: APIReference
@@ -9,8 +17,6 @@ intent: Reference for defineConfig — every option that lives in salty.config.t
 proficiencyLevel: Expert
 priority: 0.7
 ---
-
-# `defineConfig` API reference
 
 `defineConfig` is the entry point for your project's Salty CSS configuration. It accepts a single config object and returns it unchanged — its only job is to give you TypeScript inference for every field. The file is conventionally named `salty.config.ts` and lives next to your bundler config (`next.config.ts`, `vite.config.ts`, `astro.config.mjs`).
 

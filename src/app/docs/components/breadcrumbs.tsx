@@ -6,12 +6,14 @@ import {
   BreadcrumbList,
   BreadcrumbNav,
   BreadcrumbText,
+  DocPreheading,
 } from "./breadcrumbs.css";
 
 interface BreadcrumbsProps {
   framework: FrameworkId;
   slug: string;
   topic: string;
+  preHeadline: string;
 }
 
 type Crumb =
@@ -20,7 +22,12 @@ type Crumb =
 
 const isLink = (c: Crumb): c is { label: string; href: string } => "href" in c;
 
-export const Breadcrumbs = ({ framework, slug, topic }: BreadcrumbsProps) => {
+export const Breadcrumbs = ({
+  framework,
+  slug,
+  topic,
+  preHeadline,
+}: BreadcrumbsProps) => {
   const fwLabel = frameworkLabel(framework);
   const group = slug ? findDocGroup(slug) : undefined;
   const isIndex = slug === "";
@@ -35,20 +42,25 @@ export const Breadcrumbs = ({ framework, slug, topic }: BreadcrumbsProps) => {
   if (!isIndex) crumbs.push({ label: topic, current: true });
 
   return (
-    <BreadcrumbNav aria-label="Breadcrumb">
-      <BreadcrumbList>
-        {crumbs.map((c, i) => (
-          <BreadcrumbItem key={i}>
-            {isLink(c) ? (
-              <BreadcrumbLink href={c.href}>{c.label}</BreadcrumbLink>
-            ) : (
-              <BreadcrumbText aria-current={c.current ? "page" : undefined}>
-                {c.label}
-              </BreadcrumbText>
-            )}
-          </BreadcrumbItem>
-        ))}
-      </BreadcrumbList>
-    </BreadcrumbNav>
+    <>
+      <BreadcrumbNav aria-label="Breadcrumb">
+        <BreadcrumbList>
+          {crumbs.map((c, i) => {
+            return (
+              <BreadcrumbItem key={i}>
+                {isLink(c) ? (
+                  <BreadcrumbLink href={c.href}>{c.label}</BreadcrumbLink>
+                ) : (
+                  <BreadcrumbText aria-current={c.current ? "page" : undefined}>
+                    {c.label}
+                  </BreadcrumbText>
+                )}
+              </BreadcrumbItem>
+            );
+          })}
+        </BreadcrumbList>
+      </BreadcrumbNav>
+      {<DocPreheading>{preHeadline}</DocPreheading>}
+    </>
   );
 };

@@ -211,6 +211,8 @@ const frameworkData = (id) => {
 const ALLOWED_KEYS = new Set([
   "title",
   "description",
+  "preHeadline",
+  "visibleHeading",
   "frameworks",
   "priority",
   "topic",
@@ -220,6 +222,51 @@ const ALLOWED_KEYS = new Set([
   "intent",
   "proficiencyLevel",
 ]);
+
+const BLOCK_SCALAR_INDICATORS = new Set([">", ">-", ">+", "|", "|-", "|+"]);
+
+const readBlockScalar = (indicator, lines, startIdx) => {
+  const collected = [];
+  let i = startIdx;
+  let baseIndent = null;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (line.trim() === "") {
+      collected.push("");
+      i += 1;
+      continue;
+    }
+    const indentMatch = line.match(/^(\s+)/);
+    if (!indentMatch) break;
+    const indent = indentMatch[1].length;
+    if (baseIndent === null) baseIndent = indent;
+    if (indent < baseIndent) break;
+    collected.push(line.slice(baseIndent));
+    i += 1;
+  }
+  while (collected.length && collected[collected.length - 1] === "") {
+    collected.pop();
+  }
+  const folded = indicator.startsWith(">");
+  let value;
+  if (folded) {
+    value = collected
+      .reduce((acc, line) => {
+        if (line === "") {
+          acc.push("\n");
+        } else if (acc.length === 0 || acc[acc.length - 1].endsWith("\n")) {
+          acc.push(line);
+        } else {
+          acc[acc.length - 1] += " " + line;
+        }
+        return acc;
+      }, [])
+      .join("");
+  } else {
+    value = collected.join("\n");
+  }
+  return { value: value.replace(/\n+$/, ""), nextIdx: i };
+};
 
 const stripQuotes = (value) => {
   const trimmed = value.trim();
@@ -246,7 +293,9 @@ const parseFrontmatter = (raw) => {
   const body = raw.slice(match[0].length);
   const data = {};
 
-  for (const line of block.split(/\r?\n/)) {
+  const lines = block.split(/\r?\n/);
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
     if (!line.trim() || line.trim().startsWith("#")) continue;
     const colonIdx = line.indexOf(":");
     if (colonIdx === -1) continue;
@@ -254,7 +303,36 @@ const parseFrontmatter = (raw) => {
     if (!ALLOWED_KEYS.has(key)) {
       throw new Error(`Unknown frontmatter key: ${key}`);
     }
-    const rawValue = line.slice(colonIdx + 1).trim();
+    let rawValue = line.slice(colonIdx + 1).trim();
+
+    if (BLOCK_SCALAR_INDICATORS.has(rawValue)) {
+      const { value, nextIdx } = readBlockScalar(rawValue, lines, i + 1);
+      rawValue = value;
+      i = nextIdx - 1;
+    }
+
+    // Empty inline value followed by indented lines = nested map (e.g.
+    // per-framework seoHeadline). The script doesn't consume these values;
+    // skip past the indented block without parsing it.
+    if (rawValue === "") {
+      let j = i + 1;
+      while (j < lines.length && lines[j].trim() === "") j += 1;
+      if (j < lines.length && /^\s/.test(lines[j])) {
+        const baseIndent = lines[j].match(/^(\s+)/)[1].length;
+        while (j < lines.length) {
+          const peek = lines[j];
+          if (peek.trim() === "") {
+            j += 1;
+            continue;
+          }
+          const m = peek.match(/^(\s+)/);
+          if (!m || m[1].length < baseIndent) break;
+          j += 1;
+        }
+        i = j - 1;
+        continue;
+      }
+    }
 
     if (key === "frameworks") {
       data.frameworks = parseInlineArray(rawValue).filter((id) =>

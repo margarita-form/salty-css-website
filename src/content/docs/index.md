@@ -1,6 +1,14 @@
 ---
 title: Documentation
 description: Salty CSS is a TypeScript-first, build-time CSS-in-TS library for React, Next.js, and Astro — typed styles, design tokens, theming, and zero runtime.
+preHeadline:
+  react: Typed Styled Components, Tokens, and Theming for React — Zero Runtime, No Provider, Tiny Bundle
+  next: CSS-in-TS That Works in RSC, SSR, SSG, and Static Export — No 'use client' Needed for Your Styles
+  astro: Compile-Step CSS-in-TS for .astro Pages and Island Components — Fits Zero-JS Default Without Trade-offs
+visibleHeading:
+  react: Salty CSS for React
+  next: Salty CSS for Next.js
+  astro: Salty CSS for Astro
 topic: Documentation
 category: overview
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Find everything you need to ship Salty CSS — styled and className APIs
 proficiencyLevel: Beginner
 priority: 0.9
 ---
-
-# Documentation
 
 Salty CSS is a build-time CSS-in-**TS** library for React, Next.js and Astro. You author styles in `.css.ts` files, the compiler turns them into real CSS, and your runtime ships with no styling engine attached. Meow.
 

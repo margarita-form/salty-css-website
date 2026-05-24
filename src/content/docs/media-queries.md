@@ -1,6 +1,14 @@
 ---
 title: Media Queries
 description: Use defineMediaQuery to author responsive styles and breakpoints in Salty CSS.
+preHeadline:
+  react: Author Custom Breakpoints With defineMediaQuery() and Reuse Them Across Every Typed React Component
+  next: Responsive Breakpoints That Stay Server-Renderable — defineMediaQuery() Helpers for App Router Pages
+  astro: Typed Breakpoints in .astro Files — defineMediaQuery() Compiled Into Static Stylesheet Output
+visibleHeading:
+  react: Media Queries and Breakpoints in React Styles
+  next: Media Queries for App Router Layouts
+  astro: Media Queries in .astro Components
 topic: Media Queries
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Author responsive styles with the defineMediaQuery helper and combine qu
 proficiencyLevel: Beginner
 priority: 0.8
 ---
-
-# Media Queries
 
 Media queries allow you to apply different styles based on device characteristics like screen size, device type, or orientation. Salty CSS provides a powerful and intuitive API for creating and using media queries.
 

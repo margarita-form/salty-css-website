@@ -1,6 +1,14 @@
 ---
 title: Variables
 description: Define design tokens with defineVariables — static, responsive, and conditional scopes for theming and responsive design.
+preHeadline:
+  react: Typed Design Tokens With defineVariables — Static, Responsive, and Conditional Scopes for React Apps
+  next: Design Tokens That Render Inside RSC Trees — defineVariables Conditional Scopes for Multi-Theme Layouts
+  astro: defineVariables Tokens Compiled Into .astro Stylesheet Output — Responsive, Conditional, Theme-Aware
+visibleHeading:
+  react: Design Tokens and Variables for React
+  next: Design Tokens for Server and Client Components
+  astro: Design Tokens for .astro Pages
 topic: Variables
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Define and use design tokens with defineVariables — including responsi
 proficiencyLevel: Beginner
 priority: 0.8
 ---
-
-# Variables
 
 `defineVariables` is how you register design tokens — colors, spacing, font sizes, anything you want to reuse — so the rest of your styles can reference them with `{token.path}` syntax. Tokens become CSS custom properties on `:root`, so you keep the runtime cost of regular CSS variables while writing them in TypeScript with autocomplete and build-time validation.
 

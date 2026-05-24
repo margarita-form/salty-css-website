@@ -1,6 +1,14 @@
 ---
 title: Classname Function API
 description: Full API reference for the className() function in Salty CSS — signature, options, and variants.
+preHeadline:
+  react: Typed className() Helper — Generate Reusable Class Strings for Any Hook-Driven Component
+  next: className() Without 'use client' — RSC-Safe Reusable Class Strings for App Router Components
+  astro: className() Strings for .astro Files and Island Components — No Wrapper Required
+visibleHeading:
+  react: className() API for React
+  next: className() in the App Router
+  astro: className() for .astro and .tsx
 topic: Classname Function
 category: api-reference
 schemaType: APIReference
@@ -9,8 +17,6 @@ intent: Reference for the className() function — signature, options, and the .
 proficiencyLevel: Expert
 priority: 0.7
 ---
-
-# `className` API reference
 
 `className` produces a reusable, build-time-generated CSS class for use with any element. It is a lightweight alternative to `styled` when you don't need a {{componentNoun}} wrapper — you just want a class string with variants, nesting, tokens, and the rest of Salty CSS's style features. The returned value behaves like a `string` (so it slots straight into a {{jsxClassAttr}}) but also exposes a `.variant()` method for chaining variant classes onto it.
 

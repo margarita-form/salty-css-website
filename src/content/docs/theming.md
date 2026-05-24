@@ -1,6 +1,14 @@
 ---
 title: Theming
 description: Add dark mode and multi-theme support to your app with conditional CSS variables — no React provider, no context, no flash on hydration. Just flip an attribute.
+preHeadline:
+  react: Dark Mode for React Without a Theme Provider — Conditional CSS Variables, No Context, No Hydration Flash
+  next: Dark Mode in App Router Without 'use client' or Context — Conditional Variables Set Before Hydration
+  astro: Multi-Theme Switching in .astro Pages — Conditional Variables Compiled Once, No Client Provider Needed
+visibleHeading:
+  react: Theming and Dark Mode in React Without a Provider
+  next: Theming Across the App Router Without 'use client'
+  astro: Theming for .astro Pages and Hydrated Islands
 topic: Theming
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Build dark mode and multi-theme support with conditional CSS variables, 
 proficiencyLevel: Intermediate
 priority: 0.8
 ---
-
-# Theming
 
 Salty CSS themes are plain CSS custom properties scoped to a parent selector. You declare two (or more) value sets under [`defineVariables`](/docs/variables/)' `conditional` scope, flip an attribute on an ancestor element (usually `<html>`), and every consumer of those tokens updates instantly.
 

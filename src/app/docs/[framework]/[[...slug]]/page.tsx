@@ -7,6 +7,7 @@ import {
   applicableFrameworks,
   loadDocSource,
   parseFrontmatter,
+  sourceFilenameFor,
 } from "@/lib/docs-content";
 import { docsParser } from "@/lib/docs-parser";
 import {
@@ -21,6 +22,7 @@ import { Breadcrumbs } from "../../components/breadcrumbs";
 import { DocsLayoutArticle } from "../../docs-layout.css";
 import {
   DEFAULT_OG_IMAGE,
+  assertPreHeadlineDivergent,
   buildAlternateLinks,
   buildDocDescription,
   buildDocKeywords,
@@ -29,9 +31,12 @@ import {
   canonicalUrlFor,
   resolveCategory,
   resolveIntent,
+  resolvePreHeadline,
   resolveTopic,
+  resolveVisibleHeading,
 } from "@/lib/docs-seo";
 import { DocStructuredData } from "@/components/seo/doc-structured-data";
+import { DocPageHeading } from "@/components/doc-page-heading";
 
 const loadSnippet = async (path: string): Promise<string> => {
   try {
@@ -50,7 +55,7 @@ export const generateStaticParams = async () => {
   for (const slug of DOC_ORDER) {
     for (const fw of FRAMEWORK_IDS) {
       const raw = await loadDocSource(slug, fw);
-      const { data } = parseFrontmatter(raw);
+      const { data } = parseFrontmatter(raw, sourceFilenameFor(slug, fw));
       if (!applicableFrameworks(data).includes(fw)) continue;
       out.push({ framework: fw, slug: slugSegments(slug) });
     }
@@ -70,7 +75,7 @@ export async function generateMetadata({
     throw new Error(`Unknown framework: ${framework}`);
   const slug = slugArray ? slugArray.join("/") : "";
   const raw = await loadDocSource(slug, framework);
-  const { data } = parseFrontmatter(raw);
+  const { data } = parseFrontmatter(raw, sourceFilenameFor(slug, framework));
   if (!data.title) throw new Error(`Missing frontmatter title for ${slug}`);
 
   const topic = resolveTopic(data);
@@ -121,7 +126,7 @@ const DocsPage = async ({ params }: DocsPageProps) => {
   const slug = slugArray ? slugArray.join("/") : "";
 
   const raw = await loadDocSource(slug, fw);
-  const { data, body } = parseFrontmatter(raw);
+  const { data, body } = parseFrontmatter(raw, sourceFilenameFor(slug, fw));
   if (!applicableFrameworks(data).includes(fw)) notFound();
 
   const { body: rendered } = await docsParser(
@@ -133,6 +138,19 @@ const DocsPage = async ({ params }: DocsPageProps) => {
   );
 
   const topic = resolveTopic(data);
+  const category = resolveCategory(data);
+  const metaTitle = buildDocTitle({ topic, category, framework: fw });
+  const fileLabel = sourceFilenameFor(slug, fw);
+  const preHeadline = resolvePreHeadline(data, fw, fileLabel);
+  const visibleHeading = resolveVisibleHeading(data, fw, fileLabel);
+  assertPreHeadlineDivergent(preHeadline, metaTitle, fileLabel);
+
+  if (/^\s*#\s+/.test(rendered)) {
+    throw new Error(
+      `${fileLabel}: leading "# Heading" in body is no longer supported — move to frontmatter "visibleHeading"`,
+    );
+  }
+
   const available = applicableFrameworks(data);
   const alternates = buildAlternateLinks({
     slug,
@@ -161,7 +179,16 @@ const DocsPage = async ({ params }: DocsPageProps) => {
       <DocsNavigation framework={framework} />
       <DocsLayoutArticle>
         <DocPageWrapper>
-          <Breadcrumbs framework={fw} slug={slug} topic={topic} />
+          <Breadcrumbs
+            framework={fw}
+            slug={slug}
+            topic={topic}
+            preHeadline={preHeadline}
+          />
+          <DocPageHeading
+            preHeadline={preHeadline}
+            visibleHeading={visibleHeading}
+          />
           <Markdown content={rendered} />
         </DocPageWrapper>
       </DocsLayoutArticle>

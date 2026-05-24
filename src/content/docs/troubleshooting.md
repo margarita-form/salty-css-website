@@ -1,6 +1,14 @@
 ---
 title: Troubleshooting
 description: Diagnose common Salty CSS issues — missing styles, build errors, framework-detection mistakes, and SSR caveats.
+preHeadline:
+  react: Fix Missing Styles, Vite or Webpack Plugin Errors, and Hydration Mismatches in React Apps
+  next: Fix RSC Boundary Warnings, Empty saltygen Output, and Static Export Edge Cases in Next.js
+  astro: Diagnose Empty saltygen Output, Missing Integration, or Stale Cache Issues in Astro Builds
+visibleHeading:
+  react: Troubleshooting Salty CSS in React Apps
+  next: Troubleshooting Salty CSS in Next.js Builds
+  astro: Troubleshooting Salty CSS in Astro Builds
 topic: Troubleshooting
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Diagnose common Salty CSS issues quickly and find the right fix or escap
 proficiencyLevel: Beginner
 priority: 0.7
 ---
-
-# Troubleshooting
 
 A short, opinionated checklist for the issues we see most often. If your symptom isn't here, the [Discord server](https://discord.gg/R6kr4KxMhP) is the fastest way to get unstuck.
 

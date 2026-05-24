@@ -1,6 +1,14 @@
 ---
 title: Installation
 description: Install Salty CSS and wire up the build-time plugin for your framework.
+preHeadline:
+  react: Install @salty-css/react Plus the Vite or Webpack Plugin — Ten Minutes From Empty Repo to First Style
+  next: Install @salty-css/next and withSaltyCss() — Wire the App Router and output: export Without Webpack Surgery
+  astro: Add @salty-css/astro Integration to astro.config.mjs — Compile Styles on Every Build With Zero Client Cost
+visibleHeading:
+  react: Install Salty CSS in a Vite or Webpack React App
+  next: Install Salty CSS in a Next.js App Router Project
+  astro: Add the Salty CSS Integration to an Astro Project
 topic: Installation
 category: tutorial
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Install the Salty CSS packages and register the build-time plugin for yo
 proficiencyLevel: Beginner
 priority: 0.8
 ---
-
-# Installation
 
 Fastest way to get started with any framework is:
 

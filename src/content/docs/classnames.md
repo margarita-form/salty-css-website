@@ -1,6 +1,14 @@
 ---
 title: Classnames
 description: Generate reusable Salty CSS class strings with the className function for any element.
+preHeadline:
+  react: Generate Class Strings Without Wrapping Plain Elements in a Typed styled() Factory
+  next: Class Strings That Work in RSC and Server Components Alike — No 'use client' Required
+  astro: Class Strings for .astro Markup and Island Components — Build-Step Composition Without Wrappers
+visibleHeading:
+  react: Class Name Strings in React
+  next: Class Name Strings in Server and Client Components
+  astro: Class Name Strings in .astro Markup
 topic: Classnames
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Use the className function to generate reusable CSS classes without wrap
 proficiencyLevel: Beginner
 priority: 0.7
 ---
-
-# Class Name Function
 
 The `className` function creates a reusable CSS class without rendering a {{componentNoun}}. It's the right tool when you want Salty CSS's variant system, nesting, tokens, and media queries, but you'd rather attach the class to your own markup than wrap an element with `styled`. The result behaves like a string, so it composes with `clsx`, template literals, or any class-combining utility you already use.
 

@@ -1,6 +1,14 @@
 ---
 title: defineRuntime API
 description: API reference for defineRuntime() in Salty CSS — turn arbitrary JSON-shaped style objects (CMS payloads, prop-derived overrides) into scoped CSS at request time, while staying inside the same parser as styled().
+preHeadline:
+  react: defineRuntime() — Convert CMS JSON Payloads Into Scoped Class Names From React Components
+  next: defineRuntime() for App Router — Emit Per-Request Scoped CSS From Server Components and Edge Routes
+  astro: defineRuntime() for SSR Astro Pages — Compile CMS JSON Into Scoped Class Names Per Request
+visibleHeading:
+  react: defineRuntime() for React
+  next: defineRuntime() in App Router Server Components
+  astro: defineRuntime() in Astro SSR Routes
 topic: Runtime Styles
 category: api-reference
 schemaType: APIReference
@@ -9,8 +17,6 @@ intent: Reference for the defineRuntime() function — signature, supported feat
 proficiencyLevel: Expert
 priority: 0.6
 ---
-
-# `defineRuntime` API reference
 
 `defineRuntime` turns a style object into a `{ className, css }` pair at request time. Unlike [`styled`](/docs/api/styled/) and [`className`](/docs/api/classname/), the input does not have to be known when the project compiles — it can come from a headless CMS, a database row, or props the server resolved on the request. The same parser the build-time compiler uses runs at the call site, so `{token}` references, `@media`, modifiers, and nested selectors all keep working.
 

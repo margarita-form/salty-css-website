@@ -1,6 +1,14 @@
 ---
 title: Modifiers
 description: Define custom value transformers with the modifiers config — pattern + transform function for shorthand syntaxes.
+preHeadline:
+  react: Add Custom Shorthand Syntax to Your Style Objects — Regex Patterns Plus Transform Functions for React
+  next: Shorthand Modifier Syntax That Runs at Compile Step — No Per-Request Cost in Server Components
+  astro: Custom Modifier Transforms Compiled Into Stylesheet Output — Shorthand Syntax for .astro Authors
+visibleHeading:
+  react: Custom Style Modifiers for React
+  next: Custom Style Modifiers in the App Router
+  astro: Custom Style Modifiers for .astro
 topic: Modifiers
 category: utility
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Define custom value transformers — a regex pattern plus a transform fu
 proficiencyLevel: Expert
 priority: 0.6
 ---
-
-# Modifiers
 
 Modifiers are custom value transformers. Each one is a `{ pattern, transform }` pair on [`defineConfig`](/docs/api/config/#modifiers): when Salty CSS sees a style value matching `pattern`, it runs `transform` and uses the returned value (and optional extra CSS) in place of the original.
 

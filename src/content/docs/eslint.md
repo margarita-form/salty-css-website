@@ -1,6 +1,14 @@
 ---
 title: ESLint
 description: Catch missing exports and misplaced variants in Salty CSS files with the official ESLint plugin and shareable config.
+preHeadline:
+  react: ESLint Plugin That Catches Missing Exports in .css.ts Files Across Your React Component Tree
+  next: ESLint Plugin for Next.js Codebases — Catch Misplaced Variants Before They Reach the App Router
+  astro: ESLint Rules That Spot Variants Outside the Right Block in .css.ts Files for Astro Projects
+visibleHeading:
+  react: ESLint Plugin for React Projects
+  next: ESLint Plugin for Next.js Codebases
+  astro: ESLint Plugin for Astro Projects
 topic: ESLint
 category: tutorial
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Install the Salty CSS ESLint plugin and shareable config so the linter c
 proficiencyLevel: Beginner
 priority: 0.7
 ---
-
-# ESLint
 
 Salty CSS ships a small ESLint plugin and a matching shareable config. Two rules; both are autofixable; both only run on Salty files (`.css.ts`, `.css.tsx`, `.salty.ts`, `.styles.ts`, `.styled.ts`).
 

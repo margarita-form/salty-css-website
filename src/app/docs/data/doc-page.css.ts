@@ -1,7 +1,7 @@
 import { styled } from "@salty-css/react/styled";
 import { HDClamp } from "../../../styles/helpers.css";
 
-export const DocPageWrapper = styled("div", {
+export const DocPageWrapper = styled("article", {
   base: {
     padding: "0 {spacing.large} {spacing.large}",
     lineHeight: "1.5em",
@@ -9,9 +9,6 @@ export const DocPageWrapper = styled("div", {
     maxWidth: HDClamp(960),
     "@smallDesktopDown": {
       padding: 0,
-    },
-    "h1:has(+ .heading)": {
-      marginBottom: "1em",
     },
     ".heading": {
       ":not(:first-child)": {

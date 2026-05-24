@@ -1,6 +1,14 @@
 ---
 title: Styled Function API
 description: API reference for styled() in Salty CSS — typed components with base styles, variants, anyOfVariants, defaultVariants, passProps, element override, and priority.
+preHeadline:
+  react: Typed styled() Components for React — Variants, Compounds, passProps, and Polymorphic Element Override
+  next: styled() Components for the Next.js App Router — Variant Props That Work in RSC Without 'use client'
+  astro: styled() for .astro Pages and Island Components — Typed Variants Compiled to Plain Class Names
+visibleHeading:
+  react: styled() API for React Components
+  next: styled() in App Router Server and Client Components
+  astro: styled() in .astro and .tsx Islands
 topic: Styled Function
 category: api-reference
 schemaType: APIReference
@@ -9,8 +17,6 @@ intent: Reference for the styled() function — signature, options, variant sema
 proficiencyLevel: Expert
 priority: 0.7
 ---
-
-# `styled` API reference
 
 `styled` is the main way to create a {{componentNoun}} with Salty CSS. It takes an HTML tag name **or** another component, plus a Salty options object, and returns a {{componentNoun}} you can use {{usageContext}}. All styled definitions must live in `*.css.ts`, `*.css.tsx`, `*.salty.ts`, `*.styled.ts`, or `*.styles.ts` files so the build-time compiler can pick them up.
 
@@ -78,6 +84,10 @@ export const Heading = styled("div", {
 ```
 
 For semantic flexibility at the call site, consumers can pass the `as` prop on the rendered component to override `element` per instance.
+
+### Prop tokens (`css-*` props)
+
+Any `{props.X}` token used inside `base` or `variants` exposes a typed `css-X` JSX prop on the rendered component. Token names are camelCase (`{props.bgColor}`); the matching JSX prop is the dash-cased equivalent (`css-bg-color`), and Salty writes the value to the element's inline `style` as `--props-bg-color` — the same variable name your generated CSS already references via `var(--props-bg-color)`. See [Overrides → Typed prop tokens](/docs/overrides/#typed-prop-tokens-css--props) for a worked example.
 
 ### Extending a component (`styled(Component, …)`)
 
@@ -235,6 +245,7 @@ The component returned by `styled` accepts:
 - `className` — appended to the generated class.
 - `style` — inline overrides, merged onto the element.
 - `as` — per-instance element override (analogous to the `element` option).
+- `css-*` — typed per-instance values for any [prop tokens](#prop-tokens-css--props) declared in `base`/`variants`. Bridged to `--props-*` inline style entries and stripped from the forwarded DOM props.
 - `children` — as usual.
 
 {{fw-snippet:ref-forwarding}}

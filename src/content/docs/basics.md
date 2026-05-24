@@ -1,6 +1,14 @@
 ---
 title: Styling Basics
 description: Understand styled components, className, tokens, and global styles in Salty CSS.
+preHeadline:
+  react: Styled, className, Tokens, and Globals — Four Building Blocks of Ergonomic Client-Side Authoring
+  next: Styled, className, Tokens, and Globals — Four Building Blocks That Work in RSC and Server Components
+  astro: Styled, className, Tokens, and Globals — Four Concepts for Authoring Island-Friendly Components
+visibleHeading:
+  react: Salty CSS Basics for React
+  next: Salty CSS Basics for the Next.js App Router
+  astro: Salty CSS Basics for Astro
 topic: Styling Basics
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Learn the fundamental building blocks of Salty CSS — styled, className
 proficiencyLevel: Beginner
 priority: 0.8
 ---
-
-# Basic Concepts
 
 This guide explains the fundamental concepts of styling with Salty CSS.
 

@@ -1,6 +1,14 @@
 ---
 title: Templates
 description: Build reusable style patterns with defineTemplates for cross-component consistency in Salty CSS.
+preHeadline:
+  react: Compose Reusable Style Patterns With defineTemplates — Share Compound Tokens Across Typed React Components
+  next: Define Shared Style Recipes Once, Reuse Across RSC and Client Components — defineTemplates Patterns
+  astro: Share Compound Style Templates Between .astro Markup and Hydrated Island Components
+visibleHeading:
+  react: Reusable Style Templates for React
+  next: Reusable Style Templates Across Server and Client
+  astro: Reusable Style Templates for .astro and Islands
 topic: Templates
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Define reusable style templates with defineTemplates to share patterns a
 proficiencyLevel: Intermediate
 priority: 0.8
 ---
-
-# Templates
 
 Templates allow you to create reusable style patterns that can be applied across multiple components, promoting consistency and reducing repetition in your codebase.
 

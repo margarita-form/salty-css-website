@@ -1,6 +1,14 @@
 ---
 title: Color Function
 description: Chain color transforms — lighten, darken, alpha, mix — with the Salty CSS color helper.
+preHeadline:
+  react: Chain Lighten, Darken, Alpha, and Mix on a Single Color Helper — No Runtime Cost in React
+  next: Color Transforms Compiled Ahead of Render — Lighten, Darken, Mix, and Alpha for Server Components
+  astro: Color Helper for .astro and Island Components — Lighten, Darken, Mix Compiled at Build Step
+visibleHeading:
+  react: Color Helper for React Styles
+  next: Color Helper Across Server and Client Components
+  astro: Color Helper for .astro Components
 topic: Color Function
 category: utility
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Manipulate colors with the chainable color helper — lighten, darken, a
 proficiencyLevel: Intermediate
 priority: 0.6
 ---
-
-# Color Function
 
 The Color utility provides a powerful way to manipulate colors in your Salty CSS styles. It allows you to transform, adjust, and derive new colors from existing ones without having to calculate color values manually.
 

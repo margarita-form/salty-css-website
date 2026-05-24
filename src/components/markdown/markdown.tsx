@@ -26,9 +26,10 @@ export const Markdown = ({ content }: MarkdownProps) => {
     <ReactMarkdown
       remarkPlugins={[remarkGfm]}
       components={{
-        h1: (props) => {
-          const id = getID(props.children);
-          return <HeadingRegular element="h1" id={id} {...props} />;
+        h1: () => {
+          throw new Error(
+            'Markdown body cannot contain "# Heading" — move it to frontmatter "visibleHeading".',
+          );
         },
         h2: (props) => {
           const id = getID(props.children);

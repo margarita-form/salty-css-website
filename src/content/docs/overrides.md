@@ -1,6 +1,14 @@
 ---
 title: Overrides
 description: Extend styled components, swap elements, and override styles with props in Salty CSS.
+preHeadline:
+  react: Extend Typed Components, Swap Elements, and Pass Style Props Through Third-Party React Libraries
+  next: Override Styles in Server Components Without 'use client' — Element Swap and Style-Prop Passthrough
+  astro: Extend Styled Primitives in .astro and .tsx Islands — Element Override Plus Style-Prop Passthrough
+visibleHeading:
+  react: Extending React Styled Components
+  next: Extending Styled Components in Server and Client Routes
+  astro: Extending Styled Components in .astro Islands
 topic: Overrides
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Extend Salty CSS components, override styles, integrate third-party comp
 proficiencyLevel: Intermediate
 priority: 0.7
 ---
-
-# Extending and Overriding
 
 Salty CSS offers powerful ways to extend components and override styles, allowing you to build complex component systems while maintaining consistency.
 
@@ -119,7 +125,7 @@ You can pass CSS styles directly via props to override the base styles:
 
 ## CSS Custom Properties
 
-CSS custom properties (variables) give consumers a way to override individual styles per-instance without needing a variant for every knob.
+CSS custom properties (variables) give consumers a way to override individual styles per-instance without needing a variant for every knob. The framework-native way to set them is the React `style` prop (or the `style` attribute in Astro/HTML): any `--foo: value` you put there lands as an inline declaration on the element and can be read from styled rules via `var(--foo)`. If you'd rather expose a typed, discoverable API instead of asking consumers to know the variable name, see [Typed prop tokens](#typed-prop-tokens-css--props) below.
 
 ### A themeable surface
 
@@ -175,6 +181,33 @@ export const Panel = styled("section", {
 ```
 
 The `--panel-accent` variable resolves to whatever `{theme.highlight}` is at runtime, so child elements can read `var(--panel-accent)` without re-resolving the theme themselves.
+
+### Typed prop tokens (`css-*` props)
+
+When you want a per-instance knob that is **typed and discoverable** — without asking consumers to remember the underlying variable name — reach for a prop token. Reference the value in your styles as `{props.X}` and the compiler registers the key at build time, exposing a `css-X` prop on the rendered component. At render time Salty intercepts that prop and writes its value to the element's inline `style` as `--props-X`, which your generated CSS already references via `var(--props-X)`.
+
+```ts
+// /components/box.css.ts
+import { styled } from "{{styledImport}}";
+
+export const Box = styled("div", {
+  base: {
+    padding: "1rem",
+    color: "{props.color}",
+    backgroundColor: "{props.bgColor}",
+  },
+});
+```
+
+{{fw-snippet:prop-tokens}}
+
+A few rules worth knowing:
+
+- Tokens are authored in camelCase (`{props.bgColor}`); the JSX prop is the dash-cased equivalent (`css-bg-color`), and the resulting CSS variable on the element is `--props-bg-color`.
+- An unset prop writes nothing — pair the token with a fallback (`var(--props-color, currentColor)`) when you need a default.
+- `css-*` props are stripped before forwarding, so they never leak to the DOM as unknown attributes.
+
+Reach for prop tokens when the component owns the contract and wants type-checked overrides at the call site. Stick with the plain `style={{ "--foo": … }}` pattern from the previous section when the variable name itself is the contract — e.g. theming variables that several components share, or values set by a parent wrapper rather than the component's own consumer.
 
 ## Priority & cascade in depth
 

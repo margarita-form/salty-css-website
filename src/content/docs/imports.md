@@ -1,6 +1,14 @@
 ---
 title: Imports
 description: Pull external CSS into your Salty CSS build with defineImport — relative paths, npm packages, public assets, and URLs.
+preHeadline:
+  react: Pull Third-Party CSS Into Your Vite or Webpack Build With defineImport() Helpers
+  next: defineImport() for the Next.js App Router — npm Packages, Public Assets, and Remote Stylesheet URLs
+  astro: Pull External CSS Files Into Astro's Compile Step — npm Packages, Public Folders, Remote URLs
+visibleHeading:
+  react: External CSS Imports in React Projects
+  next: External CSS Imports in the App Router
+  astro: External CSS Imports in Astro Projects
 topic: Imports
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Add external CSS to your build with defineImport — local files, npm pa
 proficiencyLevel: Intermediate
 priority: 0.6
 ---
-
-# Imports
 
 `defineImport` lets you pull external CSS into your Salty CSS build — a third-party reset, a vendor stylesheet, a print stylesheet, or anything else that lives outside your `.css.ts` files. The imports land in their own `@layer imports` block at the very top of the cascade, so they always lose to anything you write in Salty.
 

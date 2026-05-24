@@ -1,6 +1,14 @@
 ---
 title: Quick Start
 description: Set up Salty CSS in ~15 minutes — install with the CLI, write your first typed component, add variants, ship dark mode, and register a custom font.
+preHeadline:
+  react: Ship a Typed Component, Variants, Dark Mode, and a Custom Font in Your First React Session
+  next: Bootstrap @salty-css/next in App Router — First Variants, Dark Mode, and a Font in Twenty Minutes
+  astro: First Typed Variants and Dark Mode in an Astro Project — Zero Client JS Added to Your Bundle
+visibleHeading:
+  react: Quick Start for React
+  next: Quick Start for the Next.js App Router
+  astro: Quick Start for Astro
 topic: Quick Start
 category: tutorial
 schemaType: HowTo
@@ -9,8 +17,6 @@ intent: Install Salty CSS, ship your first typed component, add variants, wire u
 proficiencyLevel: Beginner
 priority: 0.9
 ---
-
-# Quick Start
 
 Goal: by the end of this page you have Salty CSS installed, a typed component on screen, prop-driven variants, dark mode that flips without a provider, and a custom font registered. Budget about 15 minutes.
 

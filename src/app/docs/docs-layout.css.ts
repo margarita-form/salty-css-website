@@ -1,7 +1,7 @@
 import { styled } from "@salty-css/react/styled";
 import { HDClamp } from "../../styles/helpers.css";
 
-export const DocsLayoutWrapper = styled("div", {
+export const DocsLayoutWrapper = styled("main", {
   base: {
     display: "grid",
     "--side-size": HDClamp(260),

@@ -1,6 +1,14 @@
 ---
 title: Usage
 description: Build and consume Salty CSS components inside your application code.
+preHeadline:
+  react: Author Components in .css.ts Files Co-Located With React Source — Typed Props and Variants Included
+  next: Build Components in .css.ts Files That Work Across Server and Client — No 'use client' Needed
+  astro: Co-Locate .css.ts Source With .astro and .tsx Components — Compiled to Plain Stylesheets at Build Step
+visibleHeading:
+  react: Using Salty CSS in React Components
+  next: Using Salty CSS in App Router Server Components
+  astro: Using Salty CSS in .astro and .tsx Files
 topic: Usage
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Author components in .css.ts files with Salty CSS and use them across yo
 proficiencyLevel: Beginner
 priority: 0.8
 ---
-
-# Usage
 
 This guide covers the basic usage of Salty CSS components and features across different frameworks.
 

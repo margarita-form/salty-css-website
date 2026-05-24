@@ -1,6 +1,14 @@
 ---
 title: Viewport Clamp
 description: Generate fluid responsive sizes with defineViewportClamp in Salty CSS — no media-query stair-steps.
+preHeadline:
+  react: Fluid Responsive Sizes That Scale Smoothly With the Viewport — No Media-Query Stair-Steps in React Apps
+  next: Fluid Viewport Scaling Compiled at Build — No Hydration Re-Layout, RSC-Friendly Across App Router
+  astro: Fluid Sizes for .astro Pages Without Media-Query Stair-Steps — defineViewportClamp() Compiled Helpers
+visibleHeading:
+  react: Viewport Clamp for Fluid Sizing in React
+  next: Viewport Clamp Across App Router Layouts
+  astro: Viewport Clamp in .astro Pages
 topic: Viewport Clamp
 category: utility
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Generate fluid responsive sizes that scale with the viewport using defin
 proficiencyLevel: Intermediate
 priority: 0.7
 ---
-
-# Viewport Clamp
 
 The Viewport Clamp utility creates responsive sizing values that scale smoothly with the viewport size, producing more fluid responsive designs without requiring multiple breakpoints.
 

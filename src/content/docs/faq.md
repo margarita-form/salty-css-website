@@ -1,6 +1,14 @@
 ---
 title: Frequently Asked Questions
 description: Short answers about Salty CSS — what it is, how the build works, theming without a provider, React Server Components, fonts, TypeScript, and incremental adoption.
+preHeadline:
+  react: Zero Runtime CSS-in-TS Without a Provider — Common Questions From React Teams and Library Authors
+  next: Does Salty Work in RSC? Will It Hydrate? Honest Answers About Next.js Compatibility and Performance
+  astro: How Does Build-Time CSS-in-TS Fit Astro's Zero-JS Default? Common Questions From Island Adopters
+visibleHeading:
+  react: Common Questions From React Teams
+  next: Common Questions From Next.js Teams
+  astro: Common Questions From Astro Teams
 topic: FAQ
 category: faq
 schemaType: FAQPage
@@ -9,8 +17,6 @@ intent: Read the most common questions about Salty CSS — what it is, how it co
 proficiencyLevel: Beginner
 priority: 0.7
 ---
-
-# Frequently Asked Questions
 
 ## About Salty CSS
 

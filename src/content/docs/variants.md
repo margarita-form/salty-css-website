@@ -1,6 +1,14 @@
 ---
 title: Variants
 description: Compose variant, compound, and default styles to build adaptable components in Salty CSS.
+preHeadline:
+  react: Prop-Driven Variants and Compound Variants for Typed React Components — Default Variants Included
+  next: RSC-Safe Variants for the App Router — Prop-Driven Style Branching Without 'use client' Boundaries
+  astro: Compose Variant Styles in .astro and .tsx Components — Compound Variants Compiled at Build Step
+visibleHeading:
+  react: Variants for React Components
+  next: Variants in the App Router
+  astro: Variants in .astro and .tsx Components
 topic: Variants
 category: guide
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Add prop-driven variants, compound variants, and default variants to you
 proficiencyLevel: Intermediate
 priority: 0.7
 ---
-
-# Variant Styles
 
 Variants in Salty CSS allow you to create components with conditional styling based on props. This is a powerful way to build versatile UI components.
 

@@ -1,6 +1,14 @@
 ---
 title: CLI
 description: Use the salty-css command-line interface to scaffold, generate, and build your project.
+preHeadline:
+  react: salty-css Init for React Apps — Scaffold a Vite or Webpack Project Wired With Typed Styles
+  next: salty-css Generate Helpers for Next.js — Scaffold Components, Tokens, and salty.config.ts Automatically
+  astro: salty-css Commands for Astro Projects — Init, Generate, and Compile All Styles Ahead of Deploy
+visibleHeading:
+  react: salty-css CLI for React Projects
+  next: salty-css CLI for Next.js Projects
+  astro: salty-css CLI for Astro Projects
 topic: CLI
 category: tutorial
 schemaType: TechArticle
@@ -9,8 +17,6 @@ intent: Drive Salty CSS from the command line with the init, generate, build, an
 proficiencyLevel: Beginner
 priority: 0.7
 ---
-
-# Salty CSS CLI
 
 Salty CSS comes with a powerful command-line interface (CLI) that helps you initialize projects, generate components, update packages, and build files.
 

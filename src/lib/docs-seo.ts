@@ -10,8 +10,6 @@ import type {
   ProficiencyLevel,
   SchemaType,
 } from "./docs-content";
-import { findDocGroup } from "@/app/docs/data/docs-groups";
-
 export const SITE_ORIGIN = "https://salty-css.dev";
 export const DEFAULT_OG_IMAGE = `${SITE_ORIGIN}/assets/banners/salty-css-meta-default.jpg`;
 const REPO_URL = "https://github.com/margarita-form/salty-css";
@@ -58,11 +56,99 @@ export const resolveProficiency = (
   data: DocFrontmatter,
 ): ProficiencyLevel => data.proficiencyLevel ?? "Beginner";
 
+const resolvePerFrameworkText = (
+  value: DocFrontmatter["preHeadline"],
+  framework: FrameworkId,
+  fieldName: string,
+  fileLabel: string,
+): string => {
+  if (typeof value === "string") return value;
+  const perFramework = value[framework];
+  if (!perFramework || !perFramework.trim()) {
+    throw new Error(
+      `${fileLabel}: ${fieldName} is a per-framework map but no value for "${framework}". ` +
+        `Add a hand-crafted ${fieldName}.${framework} entry to the frontmatter.`,
+    );
+  }
+  return perFramework;
+};
+
+export const resolvePreHeadline = (
+  data: DocFrontmatter,
+  framework: FrameworkId,
+  fileLabel: string,
+): string =>
+  resolvePerFrameworkText(data.preHeadline, framework, "preHeadline", fileLabel);
+
+export const resolveVisibleHeading = (
+  data: DocFrontmatter,
+  framework: FrameworkId,
+  fileLabel: string,
+): string =>
+  resolvePerFrameworkText(
+    data.visibleHeading,
+    framework,
+    "visibleHeading",
+    fileLabel,
+  );
+
 interface TemplateArgs {
   topic: string;
   category: DocCategory;
   framework: FrameworkId;
 }
+
+const PRE_HEADLINE_STOPWORDS = new Set([
+  "a",
+  "an",
+  "and",
+  "at",
+  "build",
+  "by",
+  "css",
+  "for",
+  "from",
+  "in",
+  "is",
+  "of",
+  "on",
+  "or",
+  "salty",
+  "the",
+  "time",
+  "to",
+  "with",
+]);
+
+const preHeadlineTokens = (str: string): Set<string> => {
+  const out = new Set<string>();
+  for (const raw of str.toLowerCase().split(/[^a-z0-9]+/)) {
+    if (!raw) continue;
+    if (PRE_HEADLINE_STOPWORDS.has(raw)) continue;
+    out.add(raw);
+  }
+  return out;
+};
+
+export const assertPreHeadlineDivergent = (
+  preHeadline: string,
+  metaTitle: string,
+  fileLabel: string,
+): void => {
+  const pre = preHeadlineTokens(preHeadline);
+  const meta = preHeadlineTokens(metaTitle);
+  const unique: string[] = [];
+  for (const token of pre) {
+    if (!meta.has(token)) unique.push(token);
+  }
+  if (unique.length < 2) {
+    throw new Error(
+      `${fileLabel}: preHeadline must differ from the meta title by ≥2 substantive words. ` +
+        `Meta title: "${metaTitle}". preHeadline: "${preHeadline}". ` +
+        `Unique tokens in preHeadline: [${unique.join(", ")}]`,
+    );
+  }
+};
 
 export const buildDocTitle = ({
   topic,
@@ -468,13 +554,10 @@ export const buildBreadcrumbJsonLd = ({
 }): Record<string, unknown> => {
   const label = frameworkLabel(framework);
   const docsUrl = `${SITE_ORIGIN}/docs/${framework}/`;
-  const group = slug ? findDocGroup(slug) : undefined;
-  const items: Array<{ name: string; item?: string }> = [
+  const items: Array<{ name: string; item: string }> = [
     { name: "Home", item: `${SITE_ORIGIN}/` },
-    { name: "Docs", item: docsUrl },
-    { name: label, item: docsUrl },
+    { name: `Docs ${label}`, item: docsUrl },
   ];
-  if (group) items.push({ name: group.label });
   if (slug) {
     items.push({ name: topic, item: canonicalUrlFor(framework, slug) });
   }
@@ -485,7 +568,7 @@ export const buildBreadcrumbJsonLd = ({
       "@type": "ListItem",
       position: idx + 1,
       name: it.name,
-      ...(it.item ? { item: it.item } : {}),
+      item: it.item,
     })),
   };
 };

@@ -1,6 +1,14 @@
 ---
 title: define* factories index
 description: One-page index of every define* helper in Salty CSS — signature, role, and links to the deep-dive.
+preHeadline:
+  react: Every define* Helper for React Projects — Variables, Fonts, Templates, Imports, Keyframes, Globals
+  next: All define* Factories for Next.js — Tokens, Fonts, Modifiers, Imports, and RSC-Safe Globals
+  astro: define* Helpers Used in Astro Integration — Tokens, Fonts, Imports, and Build-Step Globals
+visibleHeading:
+  react: define* Factories for React Projects
+  next: define* Factories for Next.js
+  astro: define* Factories for Astro
 topic: define factories
 category: api-reference
 schemaType: APIReference
@@ -9,8 +17,6 @@ intent: Look up the signature, purpose, and deep-dive link for every Salty CSS d
 proficiencyLevel: Expert
 priority: 0.6
 ---
-
-# `define*` factories — index
 
 Salty CSS's public surface is a handful of small factories. Each one returns a typed configuration object that the build picks up automatically when it's exported (or passed to `defineConfig`).
 
