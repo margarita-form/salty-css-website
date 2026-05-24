@@ -4,6 +4,9 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   output: "export",
   trailingSlash: true,
+  experimental: {
+    inlineCss: true,
+  },
   webpack: (config) => {
     config.module.rules.push({
       test: /\.md/,
