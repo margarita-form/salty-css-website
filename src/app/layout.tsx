@@ -27,8 +27,13 @@ export default function RootLayout({
         />
         <FrameworkProvider>
           <WarningBox data-nosnippet>
-            Some features documented here might be available only with `dev`
-            version tag in NPM
+            Version 0.1.0 just released! Check out the release notes from{" "}
+            <a
+              href="https://github.com/margarita-form/salty-css/releases/tag/v0.1.0"
+              target="_blank"
+            >
+              GitHub
+            </a>
           </WarningBox>
           <Header />
           {children}
