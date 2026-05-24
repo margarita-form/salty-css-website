@@ -9,8 +9,8 @@
 // All outputs are gitignored. The script is invoked via `predev` and
 // `prebuild`. It does not watch — restart dev to refresh.
 
-import { readFile, writeFile, mkdir, stat } from "node:fs/promises";
-import { execFileSync } from "node:child_process";
+import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { createHash } from "node:crypto";
 import { fileURLToPath } from "node:url";
 import { dirname, join, resolve } from "node:path";
 
@@ -21,6 +21,7 @@ const SNIPPETS_DIR = join(CONTENT_DIR, "snippets");
 const INDEX_OUT = join(REPO_ROOT, "src/app/docs/data/docs-index.json");
 const SITEMAP_OUT = join(REPO_ROOT, "public/sitemap.xml");
 const LLMS_OUT = join(REPO_ROOT, "public/llms.txt");
+const HASH_MANIFEST = join(REPO_ROOT, ".next/cache/sitemap-hashes.json");
 const SITE_ORIGIN = "https://salty-css.dev";
 
 // Mirrors `export const metadata` in src/app/{,react,next,astro}/page.tsx.
@@ -31,26 +32,36 @@ const TOP_LEVEL_PAGES = [
     title: "Salty CSS",
     description:
       "Build time CSS-in-JS library compatible with React, Next.js, Vite and React Server Components built with TypeScript.",
+    sourceFile: join(REPO_ROOT, "src/app/page.tsx"),
   },
   {
     path: "/react/",
     title: "Salty CSS for React",
     description:
       "Sprinkle Salty CSS on your React app — build-time CSS-in-TS that ships zero runtime.",
+    sourceFile: join(REPO_ROOT, "src/app/react/page.tsx"),
   },
   {
     path: "/next/",
     title: "Salty CSS for Next.js",
     description:
       "Salty CSS served fresh from the App Router — zero-runtime styles that work with React Server Components.",
+    sourceFile: join(REPO_ROOT, "src/app/next/page.tsx"),
   },
   {
     path: "/astro/",
     title: "Salty CSS for Astro",
     description:
       "Astro plus a pinch of salt — the same styled API in .astro files and React islands, extracted to plain CSS at build time.",
+    sourceFile: join(REPO_ROOT, "src/app/astro/page.tsx"),
   },
 ];
+
+const DOCS_INDEX_PAGE = {
+  path: "/docs/",
+  priority: 0.9,
+  sourceFile: join(REPO_ROOT, "src/app/docs/data/docs-order.ts"),
+};
 
 const LLMS_EXTERNAL_LINKS = [
   {
@@ -483,36 +494,45 @@ const stripMarkdown = (rendered) => {
     .trim();
 };
 
-// --- git mtime ----------------------------------------------------------------
+// --- content-hash manifest ---------------------------------------------------
+// Detects whether a URL's *rendered output* changed since the last build.
+// Persisted in .next/cache/ so Vercel and most CI providers preserve it
+// between builds without extra configuration.
 
-let gitAvailable = true;
-const gitLastMod = async (files) => {
-  let latest = 0;
-  for (const file of files) {
-    let ts = 0;
-    if (gitAvailable) {
-      try {
-        const out = execFileSync(
-          "git",
-          ["log", "-1", "--format=%ct", "--", file],
-          { encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] },
-        ).trim();
-        if (out) ts = Number(out) * 1000;
-      } catch {
-        gitAvailable = false;
-      }
-    }
-    if (!ts) {
-      try {
-        const s = await stat(file);
-        ts = s.mtimeMs;
-      } catch {
-        /* missing file — skip */
-      }
-    }
-    if (ts > latest) latest = ts;
+const MANIFEST_VERSION = 1;
+
+const contentHash = (parts) => {
+  const h = createHash("sha256");
+  h.update(parts.join("\n"));
+  return h.digest("hex").slice(0, 16);
+};
+
+const readPriorManifest = async () => {
+  try {
+    const raw = await readFile(HASH_MANIFEST, "utf8");
+    const parsed = JSON.parse(raw);
+    if (parsed?.version === MANIFEST_VERSION && parsed.urls) return parsed.urls;
+  } catch {
+    /* fall through */
   }
-  return latest > 0 ? new Date(latest).toISOString() : new Date().toISOString();
+  console.warn(
+    `[sitemap] no prior hash manifest at ${HASH_MANIFEST} — stamping all URLs as changed`,
+  );
+  return {};
+};
+
+const writeManifest = async (urls) => {
+  await mkdir(dirname(HASH_MANIFEST), { recursive: true });
+  await writeFile(
+    HASH_MANIFEST,
+    JSON.stringify({ version: MANIFEST_VERSION, urls }, null, 2),
+  );
+};
+
+const resolveLastmod = (loc, hash, prior, nowIso) => {
+  const previous = prior[loc];
+  if (previous?.hash === hash) return previous.lastmod;
+  return nowIso;
 };
 
 // --- llms.txt rendering -------------------------------------------------------
@@ -623,25 +643,55 @@ const renderSitemap = (urls) => {
 
 // --- main ---------------------------------------------------------------------
 
+const hashTopLevelPage = async (page) => {
+  const source = await readFile(page.sourceFile, "utf8");
+  return contentHash([page.path, page.title ?? "", page.description ?? "", source]);
+};
+
 const main = async () => {
+  const priorManifest = await readPriorManifest();
+  const nowIso = new Date().toISOString();
+  const newManifest = {};
+
   const entries = [];
   const docsByFramework = Object.fromEntries(FRAMEWORK_IDS.map((id) => [id, []]));
-  const urls = [
-    {
-      loc: `${SITE_ORIGIN}/`,
-      lastmod: new Date().toISOString(),
-      priority: 1.0,
-    },
-    {
-      loc: `${SITE_ORIGIN}/docs/`,
-      lastmod: new Date().toISOString(),
-      priority: 0.9,
-    },
-  ];
+  const urls = [];
+
+  const rootLoc = `${SITE_ORIGIN}/`;
+  const rootPage = TOP_LEVEL_PAGES.find((p) => p.path === "/");
+  const rootHash = await hashTopLevelPage(rootPage);
+  const rootLastmod = resolveLastmod(rootLoc, rootHash, priorManifest, nowIso);
+  newManifest[rootLoc] = { hash: rootHash, lastmod: rootLastmod };
+  urls.push({ loc: rootLoc, lastmod: rootLastmod, priority: 1.0 });
+
+  const docsIndexLoc = `${SITE_ORIGIN}${DOCS_INDEX_PAGE.path}`;
+  const docsIndexSource = await readFile(DOCS_INDEX_PAGE.sourceFile, "utf8");
+  const docsIndexHash = contentHash([DOCS_INDEX_PAGE.path, docsIndexSource]);
+  const docsIndexLastmod = resolveLastmod(
+    docsIndexLoc,
+    docsIndexHash,
+    priorManifest,
+    nowIso,
+  );
+  newManifest[docsIndexLoc] = { hash: docsIndexHash, lastmod: docsIndexLastmod };
+  urls.push({
+    loc: docsIndexLoc,
+    lastmod: docsIndexLastmod,
+    priority: DOCS_INDEX_PAGE.priority,
+  });
+
+  for (const page of TOP_LEVEL_PAGES) {
+    if (page.path === "/") continue;
+    const loc = `${SITE_ORIGIN}${page.path}`;
+    const hash = await hashTopLevelPage(page);
+    const lastmod = resolveLastmod(loc, hash, priorManifest, nowIso);
+    newManifest[loc] = { hash, lastmod };
+    urls.push({ loc, lastmod, priority: 0.8 });
+  }
 
   for (const slug of DOC_ORDER) {
     for (const fw of FRAMEWORK_IDS) {
-      const { raw, files } = await loadDocSource(slug, fw);
+      const { raw } = await loadDocSource(slug, fw);
       const { data, body } = parseFrontmatter(raw);
       if (!applicableFrameworks(data).includes(fw)) continue;
 
@@ -663,19 +713,24 @@ const main = async () => {
         body: plain,
       });
 
-      const url = `${SITE_ORIGIN}/docs/${fw}/${slug ? `${slug}/` : ""}`;
+      const loc = `${SITE_ORIGIN}/docs/${fw}/${slug ? `${slug}/` : ""}`;
       const priority = data.priority ?? DEFAULT_PRIORITIES[slug] ?? 0.5;
-      urls.push({
-        loc: url,
-        lastmod: await gitLastMod([...files, ...snippetFiles]),
-        priority,
-      });
+      const hash = contentHash([
+        data.title ?? "",
+        data.description ?? "",
+        String(priority),
+        rendered,
+        headings.join("|"),
+      ]);
+      const lastmod = resolveLastmod(loc, hash, priorManifest, nowIso);
+      newManifest[loc] = { hash, lastmod };
+      urls.push({ loc, lastmod, priority });
       docsByFramework[fw].push({
         slug,
         title: data.title,
         description: data.description,
         priority,
-        url,
+        url: loc,
       });
     }
   }
@@ -687,6 +742,7 @@ const main = async () => {
   await writeFile(SITEMAP_OUT, renderSitemap(urls));
   const llmsTxt = renderLlmsTxt(TOP_LEVEL_PAGES, docsByFramework);
   await writeFile(LLMS_OUT, llmsTxt);
+  await writeManifest(newManifest);
 
   const llmsLinkCount = (llmsTxt.match(/^- \[/gm) ?? []).length;
   console.log(

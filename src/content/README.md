@@ -192,7 +192,18 @@ If you change variables, templating semantics, or the slug list, update
 **both** sides. The build will surface drift quickly because rendered HTML
 and the search index will disagree.
 
-`lastmod` in the sitemap comes from
-`git log -1 --format=%ct <file>` over the canonical doc, any override, and
-every snippet the page references — so editing a snippet correctly bumps
-the mod-time of every consuming page.
+`lastmod` in the sitemap is content-hash based: each URL's rendered output
+(post-template, after snippets/variables/`fw-snippet` fallbacks resolve) is
+hashed and compared against the prior build's manifest at
+`.next/cache/sitemap-hashes.json`. Matching hash → previous `lastmod` is
+reused. Differing hash → `lastmod` stamps the current build time. Any change
+that affects what a visitor sees — a snippet edit, a `frameworks.ts`
+variable change, a new override file being picked up — bumps `lastmod`;
+unrelated commits that don't change rendered output do not.
+
+The manifest lives under `.next/cache/` so Vercel and most CI providers
+preserve it between builds automatically. On a cold build (missing or
+unparseable manifest) every URL stamps `lastmod = now` and a warning prints;
+the next build self-heals. Top-level routes (`/`, `/react/`, `/next/`,
+`/astro/`, `/docs/`) hash their `page.tsx` source (or `docs-order.ts` for
+`/docs/`), which catches direct edits but not deep import-graph changes.
