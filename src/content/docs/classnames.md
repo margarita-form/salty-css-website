@@ -16,6 +16,18 @@ keywords: [classname, class names, classes, clsx, composition]
 intent: Use the className function to generate reusable CSS classes without wrapping elements in styled components.
 proficiencyLevel: Beginner
 priority: 0.7
+apiReferences: [api/classname, api/config]
+externalLinks:
+  react:
+    MDN · Class selectors: https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors
+    NPM · clsx: https://www.npmjs.com/package/clsx
+  next:
+    MDN · Class selectors: https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors
+    NPM · clsx: https://www.npmjs.com/package/clsx
+  astro:
+    MDN · Class selectors: https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors
+    NPM · clsx: https://www.npmjs.com/package/clsx
+    Astro · class list: https://docs.astro.build/en/reference/directives-reference/#classlist
 ---
 
 The `className` function creates a reusable CSS class without rendering a {{componentNoun}}. It's the right tool when you want Salty CSS's variant system, nesting, tokens, and media queries, but you'd rather attach the class to your own markup than wrap an element with `styled`. The result behaves like a string, so it composes with `clsx`, template literals, or any class-combining utility you already use.

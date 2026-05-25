@@ -16,6 +16,16 @@ keywords: [installation, install, setup, plugin, configuration]
 intent: Install the Salty CSS packages and register the build-time plugin for your framework.
 proficiencyLevel: Beginner
 priority: 0.8
+externalLinks:
+  react:
+    Vite · Getting Started: https://vitejs.dev/guide/
+    npm · Installing packages: https://docs.npmjs.com/downloading-and-installing-packages-locally
+  next:
+    Next.js · Installation: https://nextjs.org/docs/app/getting-started/installation
+    npm · Installing packages: https://docs.npmjs.com/downloading-and-installing-packages-locally
+  astro:
+    Astro · Installation and Setup: https://docs.astro.build/en/install-and-setup
+    npm · Installing packages: https://docs.npmjs.com/downloading-and-installing-packages-locally
 ---
 
 Fastest way to get started with any framework is:
@@ -41,6 +51,7 @@ If `salty-css init` picks the wrong framework, can't find your bundler config, o
    - Astro: `npm i @salty-css/astro @salty-css/core`
 2. **Wire the bundler plugin.** `withSaltyCss(nextConfig)` for Next.js, `saltyPlugin(__dirname)` for Vite, `saltyPlugin(config, __dirname)` in `webpack.config.js` for Webpack, the integration for Astro.
 3. **Create `salty.config.ts`** in the same directory as your bundler config (e.g. next to `next.config.ts` or `vite.config.ts`):
+
    ```ts
    import { defineConfig } from "{{configImport}}";
 
@@ -48,6 +59,7 @@ If `salty-css init` picks the wrong framework, can't find your bundler config, o
      // Add variables, templates, modifiers as you grow.
    });
    ```
+
 4. **Import the generated stylesheet.** With the default `importStrategy: 'root'`, Salty CSS expects one stylesheet to be imported at your app root. Most framework plugins do this for you on first run; if not, add `@import "../saltygen/index.css";` (or the appropriate path) to your global CSS.
 5. **Build once.** Run your dev server (or `npx salty-css build`) so `saltygen/` exists before the first render.
 
@@ -55,14 +67,14 @@ If `salty-css init` picks the wrong framework, can't find your bundler config, o
 
 You'll need:
 
-| Package         | Version              | Notes                                                            |
-| --------------- | -------------------- | ---------------------------------------------------------------- |
-| `node`          | 18 or newer          | Required for the build pipeline (esbuild + ESM).                 |
-| `typescript`    | 5.x                  | Needed because `.css.ts` files are evaluated through TypeScript. |
-| `react`         | 18 or 19 (when using React/Next) | The `@salty-css/react` runtime targets modern React.  |
-| `next`          | 13 (App Router) or newer | For `@salty-css/next`.                                       |
-| `vite`          | 5 or newer           | For `@salty-css/vite`.                                           |
-| `astro`         | 4 or newer           | For `@salty-css/astro`.                                          |
+| Package      | Version                                       | Notes                                                                      |
+| ------------ | --------------------------------------------- | -------------------------------------------------------------------------- |
+| `node`       | 18 or newer                                   | Required for the build pipeline (esbuild + ESM).                           |
+| `typescript` | 5.x                                           | Needed because `.css.ts` files are evaluated through TypeScript.           |
+| `react`      | 18 or 19 (when using React/Next)              | The `@salty-css/react` runtime targets modern React.                       |
+| `next`       | 13 (App Router) or newer; tested through 16.2 | For `@salty-css/next`. Webpack and Turbopack both work via `withSaltyCss`. |
+| `vite`       | 5 or newer                                    | For `@salty-css/vite`.                                                     |
+| `astro`      | 4 or newer                                    | For `@salty-css/astro`.                                                    |
 
 The exact ranges live in each package's `peerDependencies` — check `package.json` if you're on a fringe version.
 

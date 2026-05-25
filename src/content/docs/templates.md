@@ -16,6 +16,9 @@ keywords: [templates, defineTemplates, design system, reuse]
 intent: Define reusable style templates with defineTemplates to share patterns across components.
 proficiencyLevel: Intermediate
 priority: 0.8
+apiReferences: [api/styled, api/classname, api/define-factories]
+externalLinks:
+  MDN · CSS Nesting: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_nesting/Using_CSS_nesting
 ---
 
 Templates allow you to create reusable style patterns that can be applied across multiple components, promoting consistency and reducing repetition in your codebase.

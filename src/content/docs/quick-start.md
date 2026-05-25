@@ -12,10 +12,32 @@ visibleHeading:
 topic: Quick Start
 category: tutorial
 schemaType: HowTo
-keywords: [Salty CSS quick start, getting started, install CSS-in-TS, TypeScript styled components, first component, add dark mode, defineFont, variants, npx salty-css init, Next.js setup, Vite setup, Astro setup]
+keywords:
+  [
+    Salty CSS quick start,
+    getting started,
+    install CSS-in-TS,
+    TypeScript styled components,
+    first component,
+    add dark mode,
+    defineFont,
+    variants,
+    npx salty-css init,
+    Next.js setup,
+    Vite setup,
+    Astro setup,
+  ]
 intent: Install Salty CSS, ship your first typed component, add variants, wire up dark mode, and register a custom font.
 proficiencyLevel: Beginner
 priority: 0.9
+apiReferences: [api/styled, api/define-factories, api/config]
+externalLinks:
+  react:
+    Vite · Getting Started: https://vitejs.dev/guide/
+  next:
+    Next.js · Installation: https://nextjs.org/docs/app/getting-started/installation
+  astro:
+    Astro · Installation and Setup: https://docs.astro.build/en/install-and-setup/
 ---
 
 Goal: by the end of this page you have Salty CSS installed, a typed component on screen, prop-driven variants, dark mode that flips without a provider, and a custom font registered. Budget about 15 minutes.

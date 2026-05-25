@@ -16,6 +16,9 @@ keywords: [eslint, lint, plugin, config, must-be-exported, no-variants-in-base, 
 intent: Install the Salty CSS ESLint plugin and shareable config so the linter catches missing exports and misplaced variants in `.css.ts` files.
 proficiencyLevel: Beginner
 priority: 0.7
+externalLinks:
+  ESLint · Configure: https://eslint.org/docs/latest/use/configure/
+  typescript-eslint · Getting Started: https://typescript-eslint.io/getting-started/
 ---
 
 Salty CSS ships a small ESLint plugin and a matching shareable config. Two rules; both are autofixable; both only run on Salty files (`.css.ts`, `.css.tsx`, `.salty.ts`, `.styles.ts`, `.styled.ts`).

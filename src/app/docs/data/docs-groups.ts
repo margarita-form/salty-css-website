@@ -54,3 +54,6 @@ export type DocGroup = (typeof DOC_GROUPS)[number];
 
 export const findDocGroup = (slug: string): DocGroup | undefined =>
   DOC_GROUPS.find((g) => (g.slugs as readonly string[]).includes(slug));
+
+export const findDocGroupById = (id: string): DocGroup | undefined =>
+  DOC_GROUPS.find((g) => g.id === id);

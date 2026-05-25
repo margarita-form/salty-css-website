@@ -16,6 +16,13 @@ keywords: [cli, commands, init, generate, build, up]
 intent: Drive Salty CSS from the command line with the init, generate, build, and up commands.
 proficiencyLevel: Beginner
 priority: 0.7
+externalLinks:
+  react:
+    Vite · Documentation: https://vitejs.dev/
+  next:
+    Next.js · Documentation: https://nextjs.org/docs
+  astro:
+    Astro · Getting Started: https://docs.astro.build/en/getting-started/
 ---
 
 Salty CSS comes with a powerful command-line interface (CLI) that helps you initialize projects, generate components, update packages, and build files.

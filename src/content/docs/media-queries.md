@@ -16,6 +16,12 @@ keywords: [media queries, breakpoints, responsive, defineMediaQuery]
 intent: Author responsive styles with the defineMediaQuery helper and combine queries for breakpoints.
 proficiencyLevel: Beginner
 priority: 0.8
+apiReferences: [api/styled, api/classname, api/define-factories]
+externalLinks:
+  MDN · Media queries: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries
+  MDN · @media: https://developer.mozilla.org/en-US/docs/Web/CSS/@media
+  MDN · prefers-color-scheme: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
+  MDN · Container Queries: https://developer.mozilla.org/en-US/docs/Web/CSS/Guides/Containment/Container_queries
 ---
 
 Media queries allow you to apply different styles based on device characteristics like screen size, device type, or orientation. Salty CSS provides a powerful and intuitive API for creating and using media queries.
@@ -34,18 +40,18 @@ export const smallMobileDown = defineMediaQuery((media) => media.maxWidth(400));
 
 // Desktop breakpoints
 export const mediumDesktopDown = defineMediaQuery((media) =>
-  media.maxWidth(1440)
+  media.maxWidth(1440),
 );
 export const smallDesktopDown = defineMediaQuery((media) =>
-  media.maxWidth(1100)
+  media.maxWidth(1100),
 );
 
 // Feature-based media queries
 export const darkMode = defineMediaQuery((media) =>
-  media.prefersColorScheme("dark")
+  media.prefersColorScheme("dark"),
 );
 export const lightMode = defineMediaQuery((media) =>
-  media.prefersColorScheme("light")
+  media.prefersColorScheme("light"),
 );
 ```
 
@@ -162,12 +168,12 @@ export const tabletPortrait = defineMediaQuery((media) =>
   media
     .minWidth(768)
     .and(media.maxWidth(1024))
-    .and(media.orientation("portrait"))
+    .and(media.orientation("portrait")),
 );
 
 // Match either condition (dark mode OR mobile)
 export const darkOrMobile = defineMediaQuery((media) =>
-  media.prefersColorScheme("dark").or(media.maxWidth(480))
+  media.prefersColorScheme("dark").or(media.maxWidth(480)),
 );
 ```
 
@@ -181,12 +187,12 @@ export const mobileQuietPortrait = defineMediaQuery((media) =>
   media
     .maxWidth(640)
     .and(media.orientation("portrait"))
-    .and(media.reducedMotion)
+    .and(media.reducedMotion),
 );
 
 // Print OR small landscape (think: cheat-sheet layouts).
 export const printOrLandscapeMobile = defineMediaQuery((media) =>
-  media.print.or(media.maxWidth(640).and(media.orientation("landscape")))
+  media.print.or(media.maxWidth(640).and(media.orientation("landscape"))),
 );
 ```
 

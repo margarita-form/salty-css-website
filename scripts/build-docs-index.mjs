@@ -5,6 +5,7 @@
 //   src/app/docs/data/docs-index.json   -> consumed by the search modal
 //   public/sitemap.xml                  -> sitemap derived from the same matrix
 //   public/llms.txt                     -> llms.txt summary for AI agents
+//   public/llms-full.txt                -> full rendered docs for LLM ingestion
 //
 // All outputs are gitignored. The script is invoked via `predev` and
 // `prebuild`. It does not watch — restart dev to refresh.
@@ -21,6 +22,7 @@ const SNIPPETS_DIR = join(CONTENT_DIR, "snippets");
 const INDEX_OUT = join(REPO_ROOT, "src/app/docs/data/docs-index.json");
 const SITEMAP_OUT = join(REPO_ROOT, "public/sitemap.xml");
 const LLMS_OUT = join(REPO_ROOT, "public/llms.txt");
+const LLMS_FULL_OUT = join(REPO_ROOT, "public/llms-full.txt");
 const HASH_MANIFEST = join(REPO_ROOT, ".next/cache/sitemap-hashes.json");
 const SITE_ORIGIN = "https://salty-css.dev";
 
@@ -151,12 +153,14 @@ const FRAMEWORK_IDS = FRAMEWORKS.map((f) => f.id);
 
 const DOC_ORDER = [
   "",
+  "getting-started",
   "quick-start",
   "installation",
   "usage",
   "troubleshooting",
   "faq",
   "cli",
+  "styling",
   "basics",
   "variables",
   "theming",
@@ -166,11 +170,13 @@ const DOC_ORDER = [
   "classnames",
   "overrides",
   "animations",
-  "color-function",
   "templates",
-  "modifiers",
   "media-queries",
+  "utilities",
+  "color-function",
+  "modifiers",
   "viewport-clamp",
+  "api",
   "api/styled",
   "api/classname",
   "api/config",
@@ -205,6 +211,10 @@ const DEFAULT_PRIORITIES = {
   "api/config": 0.7,
   "api/define-factories": 0.6,
   "api/runtime": 0.6,
+  "getting-started": 0.7,
+  styling: 0.7,
+  utilities: 0.7,
+  api: 0.7,
 };
 
 const frameworkData = (id) => {
@@ -232,6 +242,10 @@ const ALLOWED_KEYS = new Set([
   "keywords",
   "intent",
   "proficiencyLevel",
+  "nextPage",
+  "previousPage",
+  "apiReferences",
+  "externalLinks",
 ]);
 
 const BLOCK_SCALAR_INDICATORS = new Set([">", ">-", ">+", "|", "|-", "|+"]);
@@ -629,6 +643,76 @@ const renderLlmsTxt = (topLevel, docsByFramework) => {
   return out.join("\n");
 };
 
+// --- llms-full.txt rendering --------------------------------------------------
+
+// Bump each ATX heading level by one (capped at H6) so a synthesized page-title
+// H1 can sit above the rendered body without colliding with the body's own H1.
+const demoteHeadings = (md) => {
+  const lines = md.split(/\r?\n/);
+  let inCode = false;
+  for (let i = 0; i < lines.length; i += 1) {
+    const line = lines[i];
+    if (line.startsWith("```") || line.startsWith("~~~")) {
+      inCode = !inCode;
+      continue;
+    }
+    if (inCode) continue;
+    const m = line.match(/^(#{1,6})(\s+.+?)\s*#*\s*$/);
+    if (!m) continue;
+    const hashes = m[1].length >= 6 ? m[1] : `#${m[1]}`;
+    lines[i] = `${hashes}${m[2]}`;
+  }
+  return lines.join("\n");
+};
+
+const renderLlmsFull = (bodiesByFramework, nowIso) => {
+  const out = [];
+  out.push("# Salty CSS");
+  out.push("");
+  out.push(
+    "> Build-time CSS-in-TS for React, Next.js and Astro. Compiles `styled(...)` calls",
+  );
+  out.push(
+    "> in `*.css.ts` files to plain CSS at build time — zero runtime cost, with full",
+  );
+  out.push(
+    "> TypeScript autocomplete on design tokens, themes, variants and media queries.",
+  );
+  out.push("> Works with React Server Components.");
+  out.push("");
+  out.push(
+    "This file contains the full rendered documentation for Salty CSS, concatenated",
+  );
+  out.push(
+    "for LLM ingestion. Three framework variants (React, Next.js, Astro) are included",
+  );
+  out.push(
+    "in order — they are translations of the same docs with framework-specific install",
+  );
+  out.push("commands, imports, and code snippets.");
+  out.push("");
+  out.push(
+    `Source: ${SITE_ORIGIN}/llms-full.txt — Generated: ${nowIso.slice(0, 10)}`,
+  );
+  out.push(`Companion index: ${SITE_ORIGIN}/llms.txt`);
+  out.push("");
+
+  for (const fwId of FRAMEWORK_IDS) {
+    const bodies = bodiesByFramework[fwId] ?? [];
+    for (const doc of bodies) {
+      out.push("---");
+      out.push("");
+      out.push(`# ${doc.title} — ${FRAMEWORK_LABEL[fwId]}`);
+      out.push("");
+      out.push(`Source: ${doc.url}`);
+      out.push("");
+      out.push(demoteHeadings(doc.rendered).trimEnd());
+      out.push("");
+    }
+  }
+  return out.join("\n");
+};
+
 // --- sitemap rendering --------------------------------------------------------
 
 const renderSitemap = (urls) => {
@@ -655,6 +739,9 @@ const main = async () => {
 
   const entries = [];
   const docsByFramework = Object.fromEntries(FRAMEWORK_IDS.map((id) => [id, []]));
+  const bodiesByFramework = Object.fromEntries(
+    FRAMEWORK_IDS.map((id) => [id, []]),
+  );
   const urls = [];
 
   const rootLoc = `${SITE_ORIGIN}/`;
@@ -732,6 +819,12 @@ const main = async () => {
         priority,
         url: loc,
       });
+      bodiesByFramework[fw].push({
+        slug,
+        title: data.title,
+        rendered,
+        url: loc,
+      });
     }
   }
 
@@ -742,11 +835,17 @@ const main = async () => {
   await writeFile(SITEMAP_OUT, renderSitemap(urls));
   const llmsTxt = renderLlmsTxt(TOP_LEVEL_PAGES, docsByFramework);
   await writeFile(LLMS_OUT, llmsTxt);
+  const llmsFullTxt = renderLlmsFull(bodiesByFramework, nowIso);
+  await writeFile(LLMS_FULL_OUT, llmsFullTxt);
   await writeManifest(newManifest);
 
   const llmsLinkCount = (llmsTxt.match(/^- \[/gm) ?? []).length;
+  const llmsFullPageCount = Object.values(bodiesByFramework).reduce(
+    (acc, list) => acc + list.length,
+    0,
+  );
   console.log(
-    `docs-index: ${entries.length} entries -> ${INDEX_OUT}\nsitemap:    ${urls.length} urls    -> ${SITEMAP_OUT}\nllms.txt:   ${llmsLinkCount} links   -> ${LLMS_OUT}`,
+    `docs-index: ${entries.length} entries -> ${INDEX_OUT}\nsitemap:    ${urls.length} urls    -> ${SITEMAP_OUT}\nllms.txt:   ${llmsLinkCount} links   -> ${LLMS_OUT}\nllms-full:  ${llmsFullPageCount} pages   -> ${LLMS_FULL_OUT}`,
   );
 };
 

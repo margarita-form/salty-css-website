@@ -16,6 +16,19 @@ keywords: [fonts, defineFont, font-face, web fonts, typography]
 intent: Register local and remote fonts with defineFont and reference them from Salty CSS styles.
 proficiencyLevel: Intermediate
 priority: 0.7
+apiReferences: [api/styled, api/define-factories]
+externalLinks:
+  react:
+    MDN · @font-face: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+    MDN · @import: https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+  next:
+    MDN · @font-face: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+    MDN · @import: https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+    Next.js · Font Optimization: https://nextjs.org/docs/app/getting-started/fonts
+  astro:
+    MDN · @font-face: https://developer.mozilla.org/en-US/docs/Web/CSS/@font-face
+    MDN · @import: https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+    Astro · Fonts: https://docs.astro.build/en/guides/fonts/
 ---
 
 `defineFont` is a framework-agnostic way to register fonts inside Salty CSS. It writes the `@font-face` rules into your build output, exposes the font as a CSS custom property, and returns a small object that can be used as a class, a CSS variable, or an inline style.
@@ -74,7 +87,8 @@ import { defineFont } from "@salty-css/core/factories";
 export const outfit = defineFont({
   name: "Outfit",
   fallback: "system-ui, sans-serif",
-  import: "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap",
+  import:
+    "https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap",
 });
 ```
 
@@ -86,12 +100,12 @@ Salty CSS emits an `@import url(...)` at the top of the stylesheet (above any `@
 
 Calling `defineFont(...)` returns an object with four members. Use whichever fits the situation:
 
-| Member        | Type                       | Use when…                                                                                                |
-| ------------- | -------------------------- | -------------------------------------------------------------------------------------------------------- |
-| `.fontFamily` | `string`                   | You want the raw `font-family` value (with the fallback already appended).                               |
-| `.variable`   | `string` (e.g. `--font-inter-abc123`) | You want to read it from `var(--font-inter-…)` so it can be themed or overridden downstream.  |
-| `.className`  | `string` (e.g. `font-inter`)         | You want to apply the font to a subtree by toggling a class.                                  |
-| `.style`      | `Record<string, string>`   | You want to set the font inline on a single element (spread onto a `style` prop).                        |
+| Member        | Type                                  | Use when…                                                                                    |
+| ------------- | ------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `.fontFamily` | `string`                              | You want the raw `font-family` value (with the fallback already appended).                   |
+| `.variable`   | `string` (e.g. `--font-inter-abc123`) | You want to read it from `var(--font-inter-…)` so it can be themed or overridden downstream. |
+| `.className`  | `string` (e.g. `font-inter`)          | You want to apply the font to a subtree by toggling a class.                                 |
+| `.style`      | `Record<string, string>`              | You want to set the font inline on a single element (spread onto a `style` prop).            |
 
 It also stringifies to `.fontFamily`, so you can drop the object straight into a style object:
 
@@ -157,29 +171,29 @@ Swap fonts later by changing the variable definition — every call site updates
 
 The full option shape (see [`define-font.ts`](https://github.com/margarita-form/salty-css) for the type):
 
-| Option     | Type                                                | Description                                                                                                                                          |
-| ---------- | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `name`     | `string`                                            | Required. The CSS `font-family` value users will see in styles.                                                                                      |
-| `fallback` | `string`                                            | Optional. One or more fallback family names appended after `name` (e.g. `"system-ui, sans-serif"`).                                                  |
-| `variable` | `string`                                            | Optional. CSS variable name (accepts `--font-inter` or `font-inter`). Defaults to a deterministic `--font-<name>-<hash>` derived from your config.   |
-| `display`  | `'auto' \| 'block' \| 'swap' \| 'fallback' \| 'optional'` | Optional. Default `font-display` for variants that don't set their own. Defaults to `'swap'`.                                                  |
-| `variants` | `FontVariant[]`                                     | Either this or `import` is required. One entry per `@font-face`. See _Variant shape_ below.                                                          |
-| `import`   | `string`                                            | Either this or `variants` is required. URL of a remote stylesheet — emitted as `@import url(...)`.                                                   |
+| Option     | Type                                                      | Description                                                                                                                                        |
+| ---------- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `name`     | `string`                                                  | Required. The CSS `font-family` value users will see in styles.                                                                                    |
+| `fallback` | `string`                                                  | Optional. One or more fallback family names appended after `name` (e.g. `"system-ui, sans-serif"`).                                                |
+| `variable` | `string`                                                  | Optional. CSS variable name (accepts `--font-inter` or `font-inter`). Defaults to a deterministic `--font-<name>-<hash>` derived from your config. |
+| `display`  | `'auto' \| 'block' \| 'swap' \| 'fallback' \| 'optional'` | Optional. Default `font-display` for variants that don't set their own. Defaults to `'swap'`.                                                      |
+| `variants` | `FontVariant[]`                                           | Either this or `import` is required. One entry per `@font-face`. See _Variant shape_ below.                                                        |
+| `import`   | `string`                                                  | Either this or `variants` is required. URL of a remote stylesheet — emitted as `@import url(...)`.                                                 |
 
 ### Variant shape
 
-| Field             | Type                                  | Notes                                                                                                            |
-| ----------------- | ------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `src`             | `string \| FontSrc \| (string \| FontSrc)[]` | One or more sources. Strings are URLs; format is auto-detected from the file extension when possible.     |
-| `weight`          | `number \| string`                    | `font-weight` for this variant.                                                                                  |
-| `style`           | `'normal' \| 'italic' \| 'oblique' \| string` | `font-style`.                                                                                            |
-| `stretch`         | `string`                              | `font-stretch`.                                                                                                  |
-| `display`         | `FontDisplay`                         | Per-variant override of `display`.                                                                               |
-| `unicodeRange`    | `string`                              | `unicode-range`.                                                                                                 |
-| `ascentOverride`  | `string`                              | `ascent-override`.                                                                                               |
-| `descentOverride` | `string`                              | `descent-override`.                                                                                              |
-| `lineGapOverride` | `string`                              | `line-gap-override`.                                                                                             |
-| `sizeAdjust`      | `string`                              | `size-adjust`.                                                                                                   |
+| Field             | Type                                          | Notes                                                                                                 |
+| ----------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| `src`             | `string \| FontSrc \| (string \| FontSrc)[]`  | One or more sources. Strings are URLs; format is auto-detected from the file extension when possible. |
+| `weight`          | `number \| string`                            | `font-weight` for this variant.                                                                       |
+| `style`           | `'normal' \| 'italic' \| 'oblique' \| string` | `font-style`.                                                                                         |
+| `stretch`         | `string`                                      | `font-stretch`.                                                                                       |
+| `display`         | `FontDisplay`                                 | Per-variant override of `display`.                                                                    |
+| `unicodeRange`    | `string`                                      | `unicode-range`.                                                                                      |
+| `ascentOverride`  | `string`                                      | `ascent-override`.                                                                                    |
+| `descentOverride` | `string`                                      | `descent-override`.                                                                                   |
+| `lineGapOverride` | `string`                                      | `line-gap-override`.                                                                                  |
+| `sizeAdjust`      | `string`                                      | `size-adjust`.                                                                                        |
 
 `FontSrc` is `{ url: string; format?: FontFormat; tech?: string }`.
 

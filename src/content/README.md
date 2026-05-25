@@ -113,7 +113,7 @@ that one framework genuinely diverges from its family.
   label: "Next.js",
   data: {
     installCli:      "npm i @salty-css/next @salty-css/react",
-    bundler:         "Webpack (Turbopack not yet)",
+    bundler:         "Webpack or Turbopack",
     ssrNote:         "Next App Router supports RSC out of the box.",
     packageRoot:     "@salty-css/react",
     styledImport:    "@salty-css/react/styled",

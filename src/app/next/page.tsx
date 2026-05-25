@@ -86,8 +86,9 @@ export default function NextMarketingPage() {
             <CodeBlock code={snippet} lang="ts" />
           </CodeBlockWrapper>
           <BodyRegular>
-            Heads up: Salty&apos;s Next.js plugin runs on Webpack today.
-            Turbopack support is on the menu.
+            Works on Next.js 15 and 16 with either Webpack or Turbopack —{" "}
+            <code>withSaltyCss</code> auto-detects which one your dev server is
+            using.
           </BodyRegular>
         </SectionInner>
       </PageSection>

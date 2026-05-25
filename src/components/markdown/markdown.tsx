@@ -31,39 +31,46 @@ export const Markdown = ({ content }: MarkdownProps) => {
             'Markdown body cannot contain "# Heading" — move it to frontmatter "visibleHeading".',
           );
         },
-        h2: (props) => {
+        h2: ({ node, ...props }) => {
+          void node;
           const id = getID(props.children);
           return <HeadingRegular element="h2" id={id} {...props} />;
         },
-        h3: (props) => {
+        h3: ({ node, ...props }) => {
+          void node;
           const id = getID(props.children);
           return <HeadingSmall element="h3" id={id} {...props} />;
         },
-        h4: (props) => {
+        h4: ({ node, ...props }) => {
+          void node;
           const id = getID(props.children);
           return <HeadingSmall element="h4" id={id} {...props} />;
         },
-        p: (props) => <BodyRegular element="p" {...props} />,
+        p: ({ node, ...props }) => { void node; return <BodyRegular element="p" {...props} />; },
 
         // Lists
-        ul: (props) => <Ul {...props} />,
-        ol: (props) => <Ol {...props} />,
-        li: (props) => <Li {...props} />,
+        ul: ({ node, ...props }) => { void node; return <Ul {...props} />; },
+        ol: ({ node, ...props }) => { void node; return <Ol {...props} />; },
+        li: ({ node, ...props }) => { void node; return <Li {...props} />; },
 
         // Table components
-        table: (props) => (
-          <TableWrapper>
-            <MarkdownTable {...props} />
-          </TableWrapper>
-        ),
-        thead: (props) => <thead {...props} />,
-        tbody: (props) => <tbody {...props} />,
-        tr: (props) => <tr {...props} />,
-        th: (props) => <th {...props} />,
-        td: (props) => <td {...props} />,
+        table: ({ node, ...props }) => {
+          void node;
+          return (
+            <TableWrapper>
+              <MarkdownTable {...props} />
+            </TableWrapper>
+          );
+        },
+        thead: ({ node, ...props }) => { void node; return <thead {...props} />; },
+        tbody: ({ node, ...props }) => { void node; return <tbody {...props} />; },
+        tr: ({ node, ...props }) => { void node; return <tr {...props} />; },
+        th: ({ node, ...props }) => { void node; return <th {...props} />; },
+        td: ({ node, ...props }) => { void node; return <td {...props} />; },
 
         // Code
-        code: ({ className, children, ...props }) => {
+        code: ({ className, children, node, ...props }) => {
+          void node;
           const match = /language-(\w+)/.exec(className || "");
           const language = match ? match[1] : "";
 

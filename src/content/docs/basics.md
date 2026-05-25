@@ -16,6 +16,16 @@ keywords: [basics, styled, classname, tokens, globals]
 intent: Learn the fundamental building blocks of Salty CSS — styled, className, tokens, and global styles.
 proficiencyLevel: Beginner
 priority: 0.8
+apiReferences: [api/styled, api/classname, api/config]
+externalLinks:
+  react:
+    MDN · CSS Syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax
+    React docs · Tutorial: https://react.dev/learn/tutorial-tic-tac-toe
+  next:
+    MDN · CSS Syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax
+    Next.js · CSS-in-JS: https://nextjs.org/docs/app/guides/css-in-js
+  astro:
+    MDN · CSS Syntax: https://developer.mozilla.org/en-US/docs/Web/CSS/Syntax
 ---
 
 This guide explains the fundamental concepts of styling with Salty CSS.

@@ -47,6 +47,7 @@ saltygen
 # generated docs artifacts (built by scripts/build-docs-index.mjs)
 public/sitemap.xml
 public/llms.txt
+public/llms-full.txt
 src/app/docs/data/docs-index.json
 
 .env

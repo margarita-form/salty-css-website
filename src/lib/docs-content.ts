@@ -27,6 +27,15 @@ export const PROFICIENCY_LEVELS = [
 export type ProficiencyLevel = (typeof PROFICIENCY_LEVELS)[number];
 
 export type PerFrameworkText = string | Partial<Record<FrameworkId, string>>;
+export type PerFrameworkList =
+  | string[]
+  | Partial<Record<FrameworkId, string[]>>;
+export type PerFrameworkLinkMap =
+  | Record<string, string>
+  | Partial<Record<FrameworkId, Record<string, string>>>;
+
+export const NEXT_PAGE_END = "end";
+export const PREVIOUS_PAGE_NONE = "none";
 
 export interface DocFrontmatter {
   title: string;
@@ -41,6 +50,10 @@ export interface DocFrontmatter {
   keywords?: string[];
   intent?: string;
   proficiencyLevel?: ProficiencyLevel;
+  nextPage?: PerFrameworkText | typeof NEXT_PAGE_END;
+  previousPage?: PerFrameworkText | typeof PREVIOUS_PAGE_NONE;
+  apiReferences?: PerFrameworkList;
+  externalLinks?: PerFrameworkLinkMap;
 }
 
 export interface ParsedDoc {
@@ -61,11 +74,17 @@ const ALLOWED_KEYS = new Set<keyof DocFrontmatter>([
   "keywords",
   "intent",
   "proficiencyLevel",
+  "nextPage",
+  "previousPage",
+  "apiReferences",
+  "externalLinks",
 ]);
 
 const PER_FRAMEWORK_KEYS = new Set<keyof DocFrontmatter>([
   "preHeadline",
   "visibleHeading",
+  "nextPage",
+  "previousPage",
 ]);
 
 const VISIBLE_HEADING_MAX_LENGTH = 100;
@@ -192,6 +211,112 @@ const readNestedMap = (
       i = nextIdx;
     }
     result[subkey] = stripQuotes(subValue);
+  }
+  return { value: result, nextIdx: i };
+};
+
+const firstInnerKeyIsPerFramework = (
+  lines: string[],
+  startIdx: number,
+): boolean => {
+  for (let j = startIdx; j < lines.length; j++) {
+    const line = lines[j];
+    if (line.trim() === "") continue;
+    if (!/^\s/.test(line)) return false;
+    const trimmed = line.trim();
+    const colonIdx = trimmed.indexOf(":");
+    if (colonIdx === -1) return false;
+    const key = trimmed.slice(0, colonIdx).trim();
+    return isFrameworkId(key);
+  }
+  return false;
+};
+
+const parseInlineArrayValue = (rawValue: string): string[] | null => {
+  const trimmed = rawValue.trim();
+  if (!trimmed.startsWith("[") || !trimmed.endsWith("]")) return null;
+  return parseInlineArray(trimmed).filter(Boolean);
+};
+
+const readNestedMapOfArrays = (
+  lines: string[],
+  startIdx: number,
+  fieldName: string,
+): { value: Partial<Record<FrameworkId, string[]>>; nextIdx: number } => {
+  const { value: rawMap, nextIdx } = readNestedMap(lines, startIdx);
+  const result: Partial<Record<FrameworkId, string[]>> = {};
+  for (const [k, v] of Object.entries(rawMap)) {
+    if (!isFrameworkId(k)) {
+      throw new Error(
+        `Unknown framework in ${fieldName} map: ${k} (expected one of ${FRAMEWORK_IDS.join(", ")})`,
+      );
+    }
+    const arr = parseInlineArrayValue(v);
+    if (!arr) {
+      throw new Error(
+        `${fieldName}.${k} must be an inline array like [slug-a, slug-b]; got: ${v}`,
+      );
+    }
+    result[k] = arr;
+  }
+  return { value: result, nextIdx };
+};
+
+const readNestedNestedMap = (
+  lines: string[],
+  startIdx: number,
+  fieldName: string,
+): {
+  value: Partial<Record<FrameworkId, Record<string, string>>>;
+  nextIdx: number;
+} => {
+  const result: Partial<Record<FrameworkId, Record<string, string>>> = {};
+  let i = startIdx;
+  let baseIndent: number | null = null;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (line.trim() === "") {
+      i += 1;
+      continue;
+    }
+    const indentMatch = line.match(/^(\s+)/);
+    if (!indentMatch) break;
+    const indent = indentMatch[1].length;
+    if (baseIndent === null) baseIndent = indent;
+    if (indent < baseIndent) break;
+    if (indent > baseIndent) {
+      throw new Error(
+        `Unexpected indentation in ${fieldName} at line ${i + 1}: ${line}`,
+      );
+    }
+    const trimmed = line.slice(baseIndent);
+    const colonIdx = trimmed.indexOf(":");
+    if (colonIdx === -1) {
+      throw new Error(
+        `${fieldName} entry missing colon at line ${i + 1}: ${line}`,
+      );
+    }
+    const subkey = trimmed.slice(0, colonIdx).trim();
+    const subValue = trimmed.slice(colonIdx + 1).trim();
+    if (!isFrameworkId(subkey)) {
+      throw new Error(
+        `Unknown framework in ${fieldName} map: ${subkey} (expected one of ${FRAMEWORK_IDS.join(", ")})`,
+      );
+    }
+    if (subValue !== "") {
+      throw new Error(
+        `${fieldName}.${subkey} must be a nested map of "Label: URL" entries, not an inline value`,
+      );
+    }
+    i += 1;
+    const { value: innerMap, nextIdx } = readNestedMap(lines, i);
+    if (Object.keys(innerMap).length === 0) {
+      throw new Error(
+        `${fieldName}.${subkey} is empty; add at least one "Label: URL" entry`,
+      );
+    }
+    result[subkey] = innerMap;
+    i = nextIdx;
   }
   return { value: result, nextIdx: i };
 };
@@ -356,6 +481,42 @@ export const parseFrontmatter = (
       if (!isProficiencyLevel(v))
         throw new Error(`Unknown proficiencyLevel: ${v}`);
       data.proficiencyLevel = v;
+    } else if (key === "apiReferences") {
+      const inline = parseInlineArrayValue(rawValue);
+      if (inline) {
+        data.apiReferences = inline;
+      } else if (rawValue === "" && nextNonBlankIsIndented(lines, i + 1)) {
+        const { value, nextIdx } = readNestedMapOfArrays(
+          lines,
+          i + 1,
+          "apiReferences",
+        );
+        data.apiReferences = value;
+        if (nextIdx > i + 1) i = nextIdx - 1;
+      } else {
+        throw new Error(
+          `apiReferences must be an inline array [slug-a, slug-b] or a per-framework map; got: ${rawValue}`,
+        );
+      }
+    } else if (key === "externalLinks") {
+      if (rawValue !== "" || !nextNonBlankIsIndented(lines, i + 1)) {
+        throw new Error(
+          `externalLinks must be a nested map; either "Label: URL" entries or per-framework groups`,
+        );
+      }
+      if (firstInnerKeyIsPerFramework(lines, i + 1)) {
+        const { value, nextIdx } = readNestedNestedMap(
+          lines,
+          i + 1,
+          "externalLinks",
+        );
+        data.externalLinks = value;
+        if (nextIdx > i + 1) i = nextIdx - 1;
+      } else {
+        const { value, nextIdx } = readNestedMap(lines, i + 1);
+        data.externalLinks = value;
+        if (nextIdx > i + 1) i = nextIdx - 1;
+      }
     } else if (PER_FRAMEWORK_KEYS.has(key)) {
       const { value, nextIdx } = parsePerFrameworkValue(
         key,
@@ -389,6 +550,10 @@ export const parseFrontmatter = (
       keywords: data.keywords,
       intent: data.intent,
       proficiencyLevel: data.proficiencyLevel,
+      nextPage: data.nextPage,
+      previousPage: data.previousPage,
+      apiReferences: data.apiReferences,
+      externalLinks: data.externalLinks,
     },
     body,
   };

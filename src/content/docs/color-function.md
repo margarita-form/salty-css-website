@@ -16,6 +16,11 @@ keywords: [color, lighten, darken, alpha, color manipulation]
 intent: Manipulate colors with the chainable color helper — lighten, darken, alpha, mix, and more.
 proficiencyLevel: Intermediate
 priority: 0.6
+apiReferences: [api/styled, api/classname]
+externalLinks:
+  MDN · <color>: https://developer.mozilla.org/en-US/docs/Web/CSS/color_value
+  MDN · color-mix(): https://developer.mozilla.org/en-US/docs/Web/CSS/color_value/color-mix
+  Color library by Qix: https://github.com/Qix-/color
 ---
 
 The Color utility provides a powerful way to manipulate colors in your Salty CSS styles. It allows you to transform, adjust, and derive new colors from existing ones without having to calculate color values manually.

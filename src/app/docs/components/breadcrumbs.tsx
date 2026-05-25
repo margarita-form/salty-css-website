@@ -1,5 +1,6 @@
 import { frameworkLabel, type FrameworkId } from "@/lib/frameworks";
-import { findDocGroup } from "../data/docs-groups";
+import { findDocGroup, findDocGroupById } from "../data/docs-groups";
+import { isCategoryIndexSlug } from "../data/docs-order";
 import {
   BreadcrumbItem,
   BreadcrumbLink,
@@ -29,8 +30,13 @@ export const Breadcrumbs = ({
   preHeadline,
 }: BreadcrumbsProps) => {
   const fwLabel = frameworkLabel(framework);
-  const group = slug ? findDocGroup(slug) : undefined;
   const isIndex = slug === "";
+  const isCategoryIndex = isCategoryIndexSlug(slug);
+  const group = slug
+    ? isCategoryIndex
+      ? findDocGroupById(slug)
+      : findDocGroup(slug)
+    : undefined;
 
   const crumbs: Crumb[] = [
     { label: "Docs", href: `/docs/${framework}/` },
@@ -38,8 +44,19 @@ export const Breadcrumbs = ({
       ? { label: fwLabel, current: true }
       : { label: fwLabel, href: `/${framework}/` },
   ];
-  if (group) crumbs.push({ label: group.label });
-  if (!isIndex) crumbs.push({ label: topic, current: true });
+  if (group) {
+    if (isCategoryIndex) {
+      crumbs.push({ label: group.label, current: true });
+    } else {
+      crumbs.push({
+        label: group.label,
+        href: `/docs/${framework}/${group.id}/`,
+      });
+    }
+  }
+  if (!isIndex && !isCategoryIndex) {
+    crumbs.push({ label: topic, current: true });
+  }
 
   return (
     <>

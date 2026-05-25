@@ -34,7 +34,7 @@ Salty CSS is published on npm and used in production. The package is pre-1.0 (al
 
 ### Which frameworks are supported?
 
-- **Next.js** — App Router and Pages Router, with React Server Component support and full static-export (`output: "export"`) compatibility, via `@salty-css/next`.
+- **Next.js** — App Router and Pages Router (15 and 16 supported, Webpack or Turbopack), with React Server Component support and full static-export (`output: "export"`) compatibility, via `@salty-css/next`.
 - **React + Vite** — via `@salty-css/vite`.
 - **React + Webpack** — via `@salty-css/webpack`.
 - **Astro** — via `@salty-css/astro`.

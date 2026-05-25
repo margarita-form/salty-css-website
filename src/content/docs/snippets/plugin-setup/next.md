@@ -12,7 +12,7 @@
    ```
 2. Create `salty.config.ts` in your app directory.
 3. Wire the plugin into your Next config:
-   - **Next.js 15** — in `next.config.ts`:
+   - **Next.js 15 and newer (incl. 16.2)** — in `next.config.ts`:
      ```ts
      import { withSaltyCss } from "@salty-css/next";
 

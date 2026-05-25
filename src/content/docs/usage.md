@@ -16,6 +16,14 @@ keywords: [usage, components, styled, css.ts]
 intent: Author components in .css.ts files with Salty CSS and use them across your app.
 proficiencyLevel: Beginner
 priority: 0.8
+apiReferences: [api/styled, api/classname, api/config]
+externalLinks:
+  react:
+    React docs · Your First Component: https://react.dev/learn/your-first-component
+  next:
+    Next.js · Server and Client Components: https://nextjs.org/docs/app/getting-started/server-and-client-components
+  astro:
+    Astro · Components: https://docs.astro.build/en/basics/astro-components/
 ---
 
 This guide covers the basic usage of Salty CSS components and features across different frameworks.
@@ -24,13 +32,13 @@ This guide covers the basic usage of Salty CSS components and features across di
 
 Salty CSS only picks up files whose names end with one of these suffixes:
 
-| Suffix       | When to use it                                                       |
-| ------------ | -------------------------------------------------------------------- |
-| `.css.ts`    | Default for any style or component file. Works everywhere.           |
-| `.css.tsx`   | Same as `.css.ts`, but JSX is allowed in the file.                   |
-| `.salty.ts`  | Alias of `.css.ts` — pick whichever reads better in your project.    |
-| `.styled.ts` | Alias of `.css.ts`, conventionally used for `styled` factories.      |
-| `.styles.ts` | Alias of `.css.ts`, conventionally used for `defineTemplates` etc.   |
+| Suffix       | When to use it                                                     |
+| ------------ | ------------------------------------------------------------------ |
+| `.css.ts`    | Default for any style or component file. Works everywhere.         |
+| `.css.tsx`   | Same as `.css.ts`, but JSX is allowed in the file.                 |
+| `.salty.ts`  | Alias of `.css.ts` — pick whichever reads better in your project.  |
+| `.styled.ts` | Alias of `.css.ts`, conventionally used for `styled` factories.    |
+| `.styles.ts` | Alias of `.css.ts`, conventionally used for `defineTemplates` etc. |
 
 A `.ts` file with the same content but missing the right suffix will type-check fine but produce **no CSS** at build time — this is the single most common "my styles aren't appearing" cause. See [Troubleshooting](/docs/troubleshooting/) if you hit it.
 
@@ -82,7 +90,9 @@ In development builds, every styled component renders with a `data-component-nam
 ```ts
 export const PrimaryButton = styled("button", {
   displayName: "PrimaryButton",
-  base: { /* … */ },
+  base: {
+    /* … */
+  },
 });
 ```
 

@@ -12,10 +12,24 @@ visibleHeading:
 topic: Styled Function
 category: api-reference
 schemaType: APIReference
-keywords: [styled, api reference, TypeScript styled components, typed variants, anyOfVariants, defaultVariants, passProps, element override, polymorphic component, CSS-in-TS, build-time CSS]
+keywords:
+  [
+    styled,
+    api reference,
+    TypeScript styled components,
+    typed variants,
+    anyOfVariants,
+    defaultVariants,
+    passProps,
+    element override,
+    polymorphic component,
+    CSS-in-TS,
+    build-time CSS,
+  ]
 intent: Reference for the styled() function — signature, options, variant semantics, extension behaviour, and edge cases.
 proficiencyLevel: Expert
 priority: 0.7
+apiReferences: [api/classname, api/define-factories, api/config]
 ---
 
 `styled` is the main way to create a {{componentNoun}} with Salty CSS. It takes an HTML tag name **or** another component, plus a Salty options object, and returns a {{componentNoun}} you can use {{usageContext}}. All styled definitions must live in `*.css.ts`, `*.css.tsx`, `*.salty.ts`, `*.styled.ts`, or `*.styles.ts` files so the build-time compiler can pick them up.
@@ -53,18 +67,18 @@ styled(tag: string | ComponentType, params: StyledParams): StyledComponent
 
 ## Options
 
-| Key                | Type                                     | Description                                                                                                                                                                                       |
-| ------------------ | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `base`             | `CSSinJS`                                | Base styles applied to every instance. Full Salty style-object syntax — pseudos, nested selectors, media queries, tokens, templates, modifiers, function values.                                  |
-| `variants`         | `{ [name]: { [value]: CSSinJS } }`       | Named, prop-driven style branches. Each variant becomes a prop on the rendered component.                                                                                                          |
-| `compoundVariants` | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied only when **all** listed variant values are active.                                                                                                                           |
-| `anyOfVariants`    | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied when **any** listed variant value is active. Generated with `:where()` — zero specificity, loses to regular variant rules.                                                    |
-| `defaultVariants`  | `{ [name]: value }`                      | Default values for variant props. Used automatically at render time when the consumer doesn't pass that prop.                                                                                       |
-| `defaultProps`     | `Record<string, unknown>`                | Default HTML attributes / DOM props (`id`, `type`, `target`, …). Differs from `defaultVariants` — these are passed straight through to the underlying element, not consumed as variant lookups.   |
-| `element`          | `string`                                 | Override the rendered HTML tag while keeping the styling. Useful for semantic swaps (`element: 'section'` on a `styled('div', { … })`).                                                            |
-| `passProps`        | `boolean \| string \| string[]`          | Forward variant props to the underlying element/component. Required when wrapping components that consume specific props (e.g. `next/link`'s `href`). See below.                                   |
-| `className`        | `string \| string[]`                     | Custom class name(s) appended to the generated hash. Handy for stable selectors and DevTools visibility.                                                                                            |
-| `displayName`      | `string`                                 | Label used by the build output and `data-component-name` dev attribute.                                                                                                                            |
+| Key                | Type                                     | Description                                                                                                                                                                                                                                                                              |
+| ------------------ | ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `base`             | `CSSinJS`                                | Base styles applied to every instance. Full Salty style-object syntax — pseudos, nested selectors, media queries, tokens, templates, modifiers, function values.                                                                                                                         |
+| `variants`         | `{ [name]: { [value]: CSSinJS } }`       | Named, prop-driven style branches. Each variant becomes a prop on the rendered component.                                                                                                                                                                                                |
+| `compoundVariants` | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied only when **all** listed variant values are active.                                                                                                                                                                                                                 |
+| `anyOfVariants`    | `Array<{ [name]: value, css: CSSinJS }>` | Extra styles applied when **any** listed variant value is active. Generated with `:where()` — zero specificity, loses to regular variant rules.                                                                                                                                          |
+| `defaultVariants`  | `{ [name]: value }`                      | Default values for variant props. Used automatically at render time when the consumer doesn't pass that prop.                                                                                                                                                                            |
+| `defaultProps`     | `Record<string, unknown>`                | Default HTML attributes / DOM props (`id`, `type`, `target`, …). Differs from `defaultVariants` — these are passed straight through to the underlying element, not consumed as variant lookups.                                                                                          |
+| `element`          | `string`                                 | Override the rendered HTML tag while keeping the styling. Useful for semantic swaps (`element: 'section'` on a `styled('div', { … })`).                                                                                                                                                  |
+| `passProps`        | `boolean \| string \| string[]`          | Forward variant props to the underlying element/component. Required when wrapping components that consume specific props (e.g. `next/link`'s `href`). See below.                                                                                                                         |
+| `className`        | `string \| string[]`                     | Custom class name(s) appended to the generated hash. Handy for stable selectors and DevTools visibility.                                                                                                                                                                                 |
+| `displayName`      | `string`                                 | Label used by the build output and `data-component-name` dev attribute.                                                                                                                                                                                                                  |
 | `priority`         | `number` (0–8)                           | CSS layer priority. Higher numbers land later in the cascade and win conflicts at equal specificity. Defaults to `0` for a plain `styled('div', …)`; **extending another component (`styled(Component, …)`) bumps it by 1** automatically so the wrapper always wins over what it wraps. |
 
 ### `element`
@@ -119,12 +133,12 @@ For third-party components, see [Overrides](/docs/overrides/#extending-third-par
 
 Variant props (anything declared under `variants`) are consumed by Salty by default — they don't reach the underlying DOM element. `passProps` opts them back into the forwarded set:
 
-| Value             | Behaviour                                                                       |
-| ----------------- | ------------------------------------------------------------------------------- |
-| `false` (default) | Variant props stay with Salty; only native HTML attributes reach the element.   |
-| `true`            | All variant props are also forwarded to the underlying element/component.       |
-| `'href'`          | Only the named prop is forwarded (others are consumed normally).                 |
-| `['href', 'target']` | Forward the listed props.                                                    |
+| Value                | Behaviour                                                                     |
+| -------------------- | ----------------------------------------------------------------------------- |
+| `false` (default)    | Variant props stay with Salty; only native HTML attributes reach the element. |
+| `true`               | All variant props are also forwarded to the underlying element/component.     |
+| `'href'`             | Only the named prop is forwarded (others are consumed normally).              |
+| `['href', 'target']` | Forward the listed props.                                                     |
 
 The common case is extending a component that **needs** specific props to function — `next/link`'s `href`, a router-link's `to`, an `<input>`'s `value`:
 
@@ -195,13 +209,13 @@ If a variant name collides with an HTML attribute name (e.g. a variant called `d
 
 Salty CSS uses `@layer` internally to make the cascade predictable:
 
-| Layer        | Typical contents                                                                          |
-| ------------ | ----------------------------------------------------------------------------------------- |
-| `imports`    | Anything pulled in via [`defineImport`](/docs/imports/).                                  |
-| `reset`      | Built-in reset or your `defineConfig({ reset })`.                                         |
-| `globals`    | `defineGlobalStyles` declarations.                                                        |
-| `templates`  | `defineTemplates` bundles.                                                                |
-| `components` | Base `className` / `styled` rules (`priority: 0`).                                        |
+| Layer        | Typical contents                                                                           |
+| ------------ | ------------------------------------------------------------------------------------------ |
+| `imports`    | Anything pulled in via [`defineImport`](/docs/imports/).                                   |
+| `reset`      | Built-in reset or your `defineConfig({ reset })`.                                          |
+| `globals`    | `defineGlobalStyles` declarations.                                                         |
+| `templates`  | `defineTemplates` bundles.                                                                 |
+| `components` | Base `className` / `styled` rules (`priority: 0`).                                         |
 | `priorities` | Anything with `priority > 0` — your explicit overrides and auto-bumped extension wrappers. |
 
 Range is 0–8. Bumping `priority` is the right tool when a wrapping component should override a wrapped one (and it happens automatically for `styled(Component, …)`); it doesn't fix specificity issues caused by overly broad selectors.

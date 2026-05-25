@@ -19,6 +19,21 @@ export default function RootLayout({
     <html lang="en" className={fonts}>
       <head>
         <link rel="icon" type="image/png" href="/favicon.png" />
+        {process.env.NODE_ENV === "production" && (
+          <>
+            <link rel="preconnect" href="https://plausible.io" />
+            <script
+              async
+              src="https://plausible.io/js/pa-1lfMWNPBAwBTBjaG9aOUq.js"
+            />
+            <script
+              dangerouslySetInnerHTML={{
+                __html:
+                  "window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};plausible.init();",
+              }}
+            />
+          </>
+        )}
       </head>
       <body className="theme-dark theme-current">
         <script
@@ -32,7 +47,7 @@ export default function RootLayout({
               href="https://github.com/margarita-form/salty-css/releases/tag/v0.1.0"
               target="_blank"
             >
-              GitHub
+              GitHub Releases
             </a>
           </WarningBox>
           <Header />

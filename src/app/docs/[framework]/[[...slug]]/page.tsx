@@ -2,7 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { Markdown } from "@/components/markdown/markdown";
 import { DocPageWrapper } from "../../data/doc-page.css";
-import { DOC_ORDER } from "../../data/docs-order";
+import {
+  CATEGORY_INDEX_SLUGS,
+  DOC_ORDER,
+  isCategoryIndexSlug,
+} from "../../data/docs-order";
 import {
   applicableFrameworks,
   loadDocSource,
@@ -19,6 +23,8 @@ import {
 import { DocsAside } from "../../components/docs-aside";
 import { DocsNavigation } from "../../components/docs-nav";
 import { Breadcrumbs } from "../../components/breadcrumbs";
+import { CategoryIndexList } from "../../components/category-index-list";
+import { PageTrail } from "../../components/page-trail";
 import { DocsLayoutArticle } from "../../docs-layout.css";
 import {
   DEFAULT_OG_IMAGE,
@@ -52,7 +58,8 @@ const slugSegments = (slug: string): string[] =>
 
 export const generateStaticParams = async () => {
   const out: { framework: string; slug: string[] }[] = [];
-  for (const slug of DOC_ORDER) {
+  const allSlugs: readonly string[] = [...DOC_ORDER, ...CATEGORY_INDEX_SLUGS];
+  for (const slug of allSlugs) {
     for (const fw of FRAMEWORK_IDS) {
       const raw = await loadDocSource(slug, fw);
       const { data } = parseFrontmatter(raw, sourceFilenameFor(slug, fw));
@@ -190,6 +197,15 @@ const DocsPage = async ({ params }: DocsPageProps) => {
             visibleHeading={visibleHeading}
           />
           <Markdown content={rendered} />
+          {isCategoryIndexSlug(slug) && (
+            <CategoryIndexList framework={fw} groupId={slug} />
+          )}
+          <PageTrail
+            framework={fw}
+            currentSlug={slug}
+            data={data}
+            fileLabel={fileLabel}
+          />
         </DocPageWrapper>
       </DocsLayoutArticle>
       <DocsAside />

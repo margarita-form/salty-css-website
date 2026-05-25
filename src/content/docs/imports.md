@@ -16,6 +16,10 @@ keywords: [imports, defineImport, css imports, third-party css, layer imports]
 intent: Add external CSS to your build with defineImport — local files, npm packages, and remote stylesheets.
 proficiencyLevel: Intermediate
 priority: 0.6
+apiReferences: [api/define-factories, api/config]
+externalLinks:
+  MDN · @import: https://developer.mozilla.org/en-US/docs/Web/CSS/@import
+  MDN · @layer: https://developer.mozilla.org/en-US/docs/Web/CSS/@layer
 ---
 
 `defineImport` lets you pull external CSS into your Salty CSS build — a third-party reset, a vendor stylesheet, a print stylesheet, or anything else that lives outside your `.css.ts` files. The imports land in their own `@layer imports` block at the very top of the cascade, so they always lose to anything you write in Salty.

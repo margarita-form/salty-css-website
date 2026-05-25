@@ -12,17 +12,35 @@ visibleHeading:
 topic: Theming
 category: guide
 schemaType: TechArticle
-keywords: [theming, dark mode, multi-theme, color scheme, conditional CSS variables, no theme provider, no context, data-theme attribute, prefers-color-scheme, no flash dark mode, Salty CSS dark mode]
+keywords:
+  [
+    theming,
+    dark mode,
+    multi-theme,
+    color scheme,
+    conditional CSS variables,
+    no theme provider,
+    no context,
+    data-theme attribute,
+    prefers-color-scheme,
+    no flash dark mode,
+    Salty CSS dark mode,
+  ]
 intent: Build dark mode and multi-theme support with conditional CSS variables, a theme toggle, and the OS preference — no provider, no flash on hydration.
 proficiencyLevel: Intermediate
 priority: 0.8
+apiReferences: [api/config, api/define-factories]
+externalLinks:
+  MDN · CSS Custom Properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+  MDN · prefers-color-scheme: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
+  MDN · where pseudo-class: https://developer.mozilla.org/en-US/docs/Web/CSS/:where
 ---
 
 Salty CSS themes are plain CSS custom properties scoped to a parent selector. You declare two (or more) value sets under [`defineVariables`](/docs/variables/)' `conditional` scope, flip an attribute on an ancestor element (usually `<html>`), and every consumer of those tokens updates instantly.
 
 That means **no theme provider, no React context, no `<ThemeProvider>` wrapper, no re-render on switch, and no flash on hydration** (with the inline-script pattern lower on this page). The same mechanism powers dark mode, high-contrast modes, brand themes — anything you can name with an attribute.
 
-> **Theming vs. variables:** In many CSS-in-JS libraries (Emotion, styled-components, Stitches) the word "theme" means the global design-token object — colors, spacing, typography. In Salty CSS, that concept is called [**variables**](/docs/variables/). *Theming* in Salty CSS specifically refers to the runtime system described here: swapping named token sets by toggling an attribute on an ancestor element.
+> **Theming vs. variables:** In many CSS-in-JS libraries (Emotion, styled-components, Stitches) the word "theme" means the global design-token object — colors, spacing, typography. In Salty CSS, that concept is called [**variables**](/docs/variables/). _Theming_ in Salty CSS specifically refers to the runtime system described here: swapping named token sets by toggling an attribute on an ancestor element.
 
 ## 1. Declare the themes
 

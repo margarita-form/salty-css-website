@@ -16,6 +16,11 @@ keywords: [viewport, clamp, fluid, responsive, defineViewportClamp]
 intent: Generate fluid responsive sizes that scale with the viewport using defineViewportClamp.
 proficiencyLevel: Intermediate
 priority: 0.7
+apiReferences: [api/styled, api/classname, api/define-factories]
+externalLinks:
+  MDN · clamp(): https://developer.mozilla.org/en-US/docs/Web/CSS/clamp
+  MDN · min()/max(): https://developer.mozilla.org/en-US/docs/Web/CSS/min
+  MDN · Responsive design: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_media_queries/Using_media_queries_for_accessibility
 ---
 
 The Viewport Clamp utility creates responsive sizing values that scale smoothly with the viewport size, producing more fluid responsive designs without requiring multiple breakpoints.

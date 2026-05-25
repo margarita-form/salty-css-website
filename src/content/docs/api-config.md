@@ -16,6 +16,7 @@ keywords: [defineConfig, salty.config, configuration, reset, modifiers, importSt
 intent: Reference for defineConfig — every option that lives in salty.config.ts.
 proficiencyLevel: Expert
 priority: 0.7
+apiReferences: [api/define-factories, api/styled, api/classname]
 ---
 
 `defineConfig` is the entry point for your project's Salty CSS configuration. It accepts a single config object and returns it unchanged — its only job is to give you TypeScript inference for every field. The file is conventionally named `salty.config.ts` and lives next to your bundler config (`next.config.ts`, `vite.config.ts`, `astro.config.mjs`).

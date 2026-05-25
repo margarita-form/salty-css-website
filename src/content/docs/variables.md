@@ -16,6 +16,17 @@ keywords: [variables, tokens, design tokens, defineVariables, theming, responsiv
 intent: Define and use design tokens with defineVariables — including responsive and conditional scopes.
 proficiencyLevel: Beginner
 priority: 0.8
+apiReferences: [api/config, api/define-factories]
+externalLinks:
+  react:
+    MDN · CSS Custom Properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+    React docs · Reusing styles: https://react.dev/learn/reusing-logic-with-custom-hooks
+  next:
+    MDN · CSS Custom Properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+    Next.js · CSS-in-JS: https://nextjs.org/docs/app/guides/css-in-js
+  astro:
+    MDN · CSS Custom Properties: https://developer.mozilla.org/en-US/docs/Web/CSS/Using_CSS_custom_properties
+    Astro · Styles & CSS: https://docs.astro.build/en/guides/styling/
 ---
 
 `defineVariables` is how you register design tokens — colors, spacing, font sizes, anything you want to reuse — so the rest of your styles can reference them with `{token.path}` syntax. Tokens become CSS custom properties on `:root`, so you keep the runtime cost of regular CSS variables while writing them in TypeScript with autocomplete and build-time validation.

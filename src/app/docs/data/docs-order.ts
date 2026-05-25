@@ -1,3 +1,5 @@
+import { DOC_GROUPS } from "./docs-groups";
+
 // Ordered list of doc slugs. Empty string represents the docs index page.
 // Titles, descriptions, and per-framework availability live in each MD
 // file's frontmatter; this file only owns ordering.
@@ -33,6 +35,30 @@ export const DOC_ORDER = [
 
 export type DocSlug = (typeof DOC_ORDER)[number];
 
+export const LAST_DOC_SLUG: string = DOC_ORDER[DOC_ORDER.length - 1];
+
+export const getPreviousSlug = (slug: string): string | null => {
+  const idx = (DOC_ORDER as readonly string[]).indexOf(slug);
+  if (idx <= 0) return null;
+  return DOC_ORDER[idx - 1];
+};
+
+export const getNextSlug = (slug: string): string | null => {
+  const idx = (DOC_ORDER as readonly string[]).indexOf(slug);
+  if (idx < 0 || idx >= DOC_ORDER.length - 1) return null;
+  return DOC_ORDER[idx + 1];
+};
+
+// Slugs of the category landing pages (Getting Started, Styling, Utilities,
+// API). Kept separate from DOC_ORDER so they're statically exported and
+// indexed but stay out of the linear prev/next walk used by PageTrail.
+export const CATEGORY_INDEX_SLUGS = DOC_GROUPS.map(
+  (g) => g.id,
+) as readonly string[];
+
+export const isCategoryIndexSlug = (slug: string): boolean =>
+  (CATEGORY_INDEX_SLUGS as readonly string[]).includes(slug);
+
 // Default sitemap priorities, derived from the previous hand-maintained
 // public/sitemap.xml. Frontmatter `priority:` overrides this per-page.
 export const DEFAULT_PRIORITIES: Record<string, number> = {
@@ -63,4 +89,8 @@ export const DEFAULT_PRIORITIES: Record<string, number> = {
   "api/config": 0.7,
   "api/define-factories": 0.6,
   "api/runtime": 0.6,
+  "getting-started": 0.7,
+  styling: 0.7,
+  utilities: 0.7,
+  api: 0.7,
 };

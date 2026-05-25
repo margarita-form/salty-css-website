@@ -1,4 +1,5 @@
 import { styled } from "@salty-css/react/styled";
+import { HDClamp } from "../../styles/helpers.css";
 
 export const CodeBlockWrapper = styled("pre", {
   base: {
@@ -32,6 +33,7 @@ export const StyledCopyButton = styled("button", {
 export const TableWrapper = styled("div", {
   base: {
     width: "100%",
+    maxWidth: "100%",
     overflowX: "auto",
     marginBlock: "0 {spacing.large}",
   },
@@ -41,6 +43,7 @@ export const MarkdownTable = styled("table", {
   base: {
     textStyle: "body.small",
     width: "100%",
+    minWidth: HDClamp(560),
     borderCollapse: "collapse",
     borderSpacing: 0,
     margin: "0",

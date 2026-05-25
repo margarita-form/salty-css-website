@@ -9,7 +9,7 @@ export const DocsLayoutWrapper = styled("main", {
     gap: "{spacing.large}",
     padding: "{spacing.large} {spacing.pageMargin}",
     "@mediumDesktopDown": {
-      gridTemplateColumns: "{side-size} 1fr",
+      gridTemplateColumns: "{side-size} minmax(0, 1fr)",
       paddingTop: "{spacing.medium}",
     },
     "@smallDesktopDown": {

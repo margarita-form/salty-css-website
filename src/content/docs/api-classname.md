@@ -16,6 +16,7 @@ keywords: [className, api reference, variants, css class]
 intent: Reference for the className() function — signature, options, and the .variant() chaining API.
 proficiencyLevel: Expert
 priority: 0.7
+apiReferences: [api/styled, api/define-factories]
 ---
 
 `className` produces a reusable, build-time-generated CSS class for use with any element. It is a lightweight alternative to `styled` when you don't need a {{componentNoun}} wrapper — you just want a class string with variants, nesting, tokens, and the rest of Salty CSS's style features. The returned value behaves like a `string` (so it slots straight into a {{jsxClassAttr}}) but also exposes a `.variant()` method for chaining variant classes onto it.

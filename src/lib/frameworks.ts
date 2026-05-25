@@ -62,7 +62,7 @@ export const FRAMEWORKS = [
     family: "react",
     data: {
       installCli: "npm i @salty-css/next @salty-css/react",
-      bundler: "Webpack (Turbopack not yet)",
+      bundler: "Webpack or Turbopack",
       ssrNote: "Next App Router supports RSC out of the box.",
       ...reactSubpaths,
       componentNoun: "React component",

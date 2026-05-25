@@ -16,6 +16,7 @@ keywords: [define, factories, defineVariables, defineFont, defineImport, defineT
 intent: Look up the signature, purpose, and deep-dive link for every Salty CSS define* factory in one place.
 proficiencyLevel: Expert
 priority: 0.6
+apiReferences: [api/config, api/styled, api/classname, api/runtime]
 ---
 
 Salty CSS's public surface is a handful of small factories. Each one returns a typed configuration object that the build picks up automatically when it's exported (or passed to `defineConfig`).

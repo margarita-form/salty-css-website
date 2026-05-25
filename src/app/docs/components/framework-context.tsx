@@ -78,6 +78,12 @@ export const FrameworkProvider = ({ children }: FrameworkProviderProps) => {
   }, [urlFramework]);
 
   useEffect(() => {
+    const _urlFramework = readUrlFramework(pathname);
+    if (_urlFramework) {
+      if (_urlFramework) return;
+      setFrameworkState(_urlFramework);
+      return;
+    }
     if (typeof window === "undefined") return;
     let saved: string | null = null;
     try {
@@ -85,21 +91,12 @@ export const FrameworkProvider = ({ children }: FrameworkProviderProps) => {
     } catch {
       saved = null;
     }
-    if (!saved || !isFrameworkId(saved)) return;
-    if (saved === urlFramework) return;
 
-    const urlHasFramework = pathname
-      ? isFrameworkId(pathname.split("/")[2] ?? "")
-      : false;
-
-    if (urlHasFramework && pathname) {
-      const next = swapFrameworkInPath(pathname, saved);
-      if (next !== pathname) router.replace(next, { scroll: false });
-    } else {
+    // Set framework from localStorage if URL doesn't have a valid framework
+    if (saved && isFrameworkId(saved)) {
       setFrameworkState(saved);
     }
-    // Only run on mount and when pathname changes.
-  }, [pathname, urlFramework, router]);
+  }, [pathname]);
 
   const setFramework = useCallback(
     (id: FrameworkId) => {

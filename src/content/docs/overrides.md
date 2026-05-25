@@ -16,6 +16,17 @@ keywords: [overrides, extend, style props, third-party]
 intent: Extend Salty CSS components, override styles, integrate third-party components, and use style props.
 proficiencyLevel: Intermediate
 priority: 0.7
+apiReferences: [api/styled, api/classname]
+externalLinks:
+  react:
+    MDN · @layer CSS at-rule: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer
+    React docs · Passing Props: https://react.dev/learn/passing-props-to-a-component
+  next:
+    MDN · @layer CSS at-rule: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer
+    Next.js · Server and Client Components: https://nextjs.org/docs/app/getting-started/server-and-client-components
+  astro:
+    MDN · @layer CSS at-rule: https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/At-rules/@layer
+    Astro · Components: https://docs.astro.build/en/basics/astro-components/
 ---
 
 Salty CSS offers powerful ways to extend components and override styles, allowing you to build complex component systems while maintaining consistency.
@@ -65,12 +76,12 @@ By default, variant props (anything you declare under `variants`) are **consumed
 
 `passProps` controls which variant-style props get forwarded:
 
-| Value                | Behaviour                                                              |
-| -------------------- | ---------------------------------------------------------------------- |
+| Value                | Behaviour                                                                |
+| -------------------- | ------------------------------------------------------------------------ |
 | `false` (default)    | Variant props stay with Salty; only native HTML attributes pass through. |
-| `true`               | All variant props are forwarded to the underlying element/component.   |
-| `'href'`             | Only the named prop is forwarded.                                       |
-| `['href', 'target']` | Forward the listed props.                                               |
+| `true`               | All variant props are forwarded to the underlying element/component.     |
+| `'href'`             | Only the named prop is forwarded.                                        |
+| `['href', 'target']` | Forward the listed props.                                                |
 
 {{fw-snippet:pass-props}}
 

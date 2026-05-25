@@ -16,6 +16,9 @@ keywords: [modifiers, shorthand, transform, custom values, defineConfig]
 intent: Define custom value transformers — a regex pattern plus a transform function — to add shorthand syntax to your styles.
 proficiencyLevel: Expert
 priority: 0.6
+apiReferences: [api/config, api/styled]
+externalLinks:
+  MDN · Regular expressions: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions
 ---
 
 Modifiers are custom value transformers. Each one is a `{ pattern, transform }` pair on [`defineConfig`](/docs/api/config/#modifiers): when Salty CSS sees a style value matching `pattern`, it runs `transform` and uses the returned value (and optional extra CSS) in place of the original.
@@ -24,11 +27,11 @@ Think of them as user-defined shorthand: write `padding: "space:3"` and have Sal
 
 ## When to reach for a modifier vs. an alternative
 
-| You want…                                              | Use…                                                                 |
-| ------------------------------------------------------ | -------------------------------------------------------------------- |
-| A reusable design token (one value, many call sites)   | [`defineVariables`](/docs/variables/) and `{token.path}` references. |
-| A reusable bundle of CSS properties                    | [`defineTemplates`](/docs/templates/).                               |
-| A new value syntax that rewrites into one or more CSS properties | Modifiers (this page).                                     |
+| You want…                                                        | Use…                                                                 |
+| ---------------------------------------------------------------- | -------------------------------------------------------------------- |
+| A reusable design token (one value, many call sites)             | [`defineVariables`](/docs/variables/) and `{token.path}` references. |
+| A reusable bundle of CSS properties                              | [`defineTemplates`](/docs/templates/).                               |
+| A new value syntax that rewrites into one or more CSS properties | Modifiers (this page).                                               |
 
 A token gives you `'{spacing.medium}'` → `'16px'`. A modifier gives you `'space:3'` → `'12px'`, plus the freedom to inject extra CSS alongside it.
 
@@ -83,9 +86,9 @@ At the call site:
 ```ts
 styled("div", {
   base: {
-    padding: "space:3",         // → 12px
-    boxShadow: "elevation:2",   // → 4px 8px 12px rgba(0,0,0,0.12)
-                                //   plus { transform: "translateZ(0)" }
+    padding: "space:3", // → 12px
+    boxShadow: "elevation:2", // → 4px 8px 12px rgba(0,0,0,0.12)
+    //   plus { transform: "translateZ(0)" }
   },
 });
 ```

@@ -16,6 +16,11 @@ keywords: [animations, keyframes, stagger, transitions]
 intent: Define typed @keyframes and stagger animations using Salty CSS's build-time keyframes() function.
 proficiencyLevel: Intermediate
 priority: 0.7
+apiReferences: [api/styled, api/classname]
+externalLinks:
+  MDN · @keyframes: https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes
+  MDN · CSS animations: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_animations/Using_CSS_animations
+  Web.dev · CSS transitions: https://web.dev/learn/css/animations
 ---
 
 Salty CSS provides a typed, ergonomic way to author CSS `@keyframes` and reuse them across styled components. Keyframes are defined with the `keyframes` function, which returns a value you can drop directly into the `animation` property of any styled component, class name, or `css` block.

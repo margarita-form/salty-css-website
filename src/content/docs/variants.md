@@ -16,6 +16,10 @@ keywords: [variants, compound variants, default variants, props]
 intent: Add prop-driven variants, compound variants, and default variants to your styled components.
 proficiencyLevel: Intermediate
 priority: 0.7
+apiReferences: [api/styled, api/classname]
+externalLinks:
+  MDN · CSS selectors: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_selectors
+  MDN · Pseudo-classes: https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes
 ---
 
 Variants in Salty CSS allow you to create components with conditional styling based on props. This is a powerful way to build versatile UI components.
